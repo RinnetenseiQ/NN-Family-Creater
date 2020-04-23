@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace NN_Family_Creater
 {
@@ -154,6 +155,23 @@ namespace NN_Family_Creater
         public int GetOutputNumb(string path)
         {
             return Directory.GetDirectories(path).Length;
+        }
+
+
+        public static void WriteConvNetworkConfig(List<ConvolutionalNetwork> eliteConvNets)
+        {
+            using (StreamWriter sw = new StreamWriter("cNetwork.json"))
+            {
+                sw.WriteLine(JsonConvert.SerializeObject(eliteConvNets));
+            }
+        }
+
+        public static void ReadConvNetworkConfig(List<ConvolutionalNetwork> eliteConvNets)
+        {
+            using (StreamReader sr = new StreamReader("cNetwork.json"))
+            {
+                eliteConvNets = JsonConvert.DeserializeObject<List<ConvolutionalNetwork>>(sr.ReadLine());
+            }
         }
     }
 }
