@@ -40,9 +40,9 @@
             this.label1.Font = new System.Drawing.Font("Monotype Corsiva", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(767, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 66);
+            this.label1.Size = new System.Drawing.Size(79, 82);
             this.label1.TabIndex = 0;
-            this.label1.Text = " Created by \r\nRinnetenseiQ, \r\n       C++ \r\n      and @";
+            this.label1.Text = " Created by \r\nRinnetenseiQ, \r\n       C++\r\n   SeanWoo \r\n      and @";
             // 
             // label2
             // 
