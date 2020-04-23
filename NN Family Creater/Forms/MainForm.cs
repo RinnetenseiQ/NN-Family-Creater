@@ -417,7 +417,7 @@ namespace NN_Family_Creater
             }
 
             //Support.insertLineToFile(@"C:\keras\Directory\scripts\convolutional\genetic\temp_convolution.py", 73, Support.code_2);
-            MessageBox.Show("Записано!!");
+            MessageBox.Show("Записано!!"); /// cjmment
         } ///Test it
 
         private void pauseQueryBtn_Click(object sender, EventArgs e)
