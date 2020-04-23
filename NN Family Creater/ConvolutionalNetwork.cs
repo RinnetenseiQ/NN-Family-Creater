@@ -15,7 +15,10 @@ namespace NN_Family_Creater
         public List<int> denseActivationIndexes;
         public List<int> neurons;
         public List<int> denseDropoutIndexes;
-        public List<int> dropoutRates;
+        public List<int> denseDropoutRates;
+
+        public List<int> convDropoutIndexes;
+        public List<int> convDropoutRates;
 
         public ConvolutionalNetwork(Chromosome chromosome)
         {
@@ -25,12 +28,20 @@ namespace NN_Family_Creater
             denseActivationIndexes = new List<int>();
             neurons = new List<int>();
             denseDropoutIndexes = new List<int>();
-            dropoutRates = new List<int>();
+            denseDropoutRates = new List<int>();
+            convDropoutIndexes = new List<int>();
+            convDropoutRates = new List<int>();
+
             for (int i = 0; i < chromosome.convPart.convLayers.Count; i++)
             {
                 slidingWindows.Add(new int[2] { chromosome.convPart.convLayers[i].slidingWindow[0], chromosome.convPart.convLayers[i].slidingWindow[1] });
                 convActivationIndexes.Add(chromosome.convPart.convLayers[i].activationIndex);
                 filters.Add(chromosome.convPart.convLayers[i].neurons);
+                if (chromosome.convPart.convLayers[i].dropoutExist)
+                {
+                    convDropoutIndexes.Add(i);
+                    convDropoutRates.Add(chromosome.convPart.convLayers[i].dropoutRate);
+                }
             }
 
             for (int i = 0; i < chromosome.densePart.denseLayer.Count; i++)
@@ -40,7 +51,7 @@ namespace NN_Family_Creater
                 if (chromosome.densePart.denseLayer[i].dropoutExist)
                 {
                     denseDropoutIndexes.Add(i);
-                    dropoutRates.Add(chromosome.densePart.denseLayer[i].dropoutRate);
+                    denseDropoutRates.Add(chromosome.densePart.denseLayer[i].dropoutRate);
                 }
             }
         }
@@ -122,7 +133,7 @@ namespace NN_Family_Creater
                 {
                     if (network.denseDropoutIndexes[dropoutCounter] == i)  ///////// error за пределами массива
                     {
-                        code += "model.add(Dropout(" + ((float)network.dropoutRates[dropoutCounter] / 100).ToString() + "))" + Environment.NewLine;
+                        code += "model.add(Dropout(" + ((float)network.denseDropoutRates[dropoutCounter] / 100).ToString() + "))" + Environment.NewLine;
 
                         if((network.denseDropoutIndexes.Count - 1) != dropoutCounter)dropoutCounter++;
                     }

@@ -58,6 +58,14 @@ namespace NN_Family_Creater
 
         }
 
+
+        
+        public Chromosome(ConvolutionalNetwork cNet) // для адекватной работы генетических алгоритмов для объектов этого конструктора в список параметров необходимо добавить также границы для параметров сети для всех вложенных классов
+        {
+            convPart = new ConvStructure(cNet.slidingWindows, cNet.convActivationIndexes, cNet.filters, cNet.convDropoutIndexes, cNet.convDropoutRates);
+            densePart = new DenseStructure(cNet.denseActivationIndexes, cNet.neurons, cNet.denseDropoutIndexes, cNet.denseDropoutRates);
+        } // конструктор для создания хромосомы из полей описательного класса ConvolutionalNetwork для последующего использования в генетических алгоритмах (например, для поиска лучшего варианта чем текущий)
+
         public void MutateConvolutional(int mutateRate)
         {
             if(random.Next(100) < mutateRate)

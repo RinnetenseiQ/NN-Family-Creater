@@ -48,6 +48,29 @@ namespace NN_Family_Creater
 
         }
 
+        public DenseStructure(List<int> denseActivationIndexes, List<int> neurons, List<int> denseDropoutIndexes, List<int> dropoutRates)
+        {
+            denseLayer = new List<DenseLayer>();
+            denseLayersNumb = denseActivationIndexes.Count;
+            for(int i = 0, counter = 0; i < denseLayersNumb; i++)
+            {
+                bool dropoutExist = false;
+                int dropoutRate = 0;
+                if(i == denseDropoutIndexes[counter])
+                {
+                    dropoutExist = true;
+                    dropoutRate = dropoutRates[counter];
+                    counter++;
+                }
+                else
+                {
+                    dropoutExist = false;
+                    dropoutRate = 0;
+                }
+                denseLayer.Add(new DenseLayer(denseActivationIndexes[i], neurons[i], dropoutExist, dropoutRate));
+            }
+        } // конструктор для инициализации объекта DenseStructure по полям объекта ConvolutionalNetwork
+
         public void MutateLayersNumb(int denseLayerNumbRange, int mutateRate, int activationsIndexesRange, int dropoutRateRange)
         {
             if (random.Next(100) < mutateRate) denseLayersNumb = random.Next(1, denseLayerNumbRange);

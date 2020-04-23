@@ -24,10 +24,18 @@ namespace NN_Family_Creater
             this.neurons = neurons;
         }
 
+        public DenseLayer(int activationIndex, int neurons, bool dropoutExist, int dropoutRate)
+        {
+            this.activationIndex = activationIndex;
+            this.neurons = neurons;
+            this.dropoutExist = dropoutExist;
+            this.dropoutRate = dropoutRate;
+        } // псевдокопирующий конструктор
+
         public void MutateActivation(int activationsIndexesRange, int mutateRate)
         {
            if(random.Next(100) < mutateRate) activationIndex = random.Next(activationsIndexesRange);
-            // поменять переменную sameActivations в другом классе
+            // поменять переменную sameActivations в другом классе(классе выше)
         }
 
         public void MutateDropout(int dropoutRange, int mutateRate)

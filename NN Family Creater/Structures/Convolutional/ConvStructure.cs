@@ -75,6 +75,28 @@ namespace NN_Family_Creater
             this.convLayersNumb = CSToCopy.convLayersNumb;
         }
 
+        public ConvStructure(List<int[]> slidingWindows, List<int> convActivationIndexes, List<int> filters, List<int> convDropoutIndexes, List<int> dropoutRates)
+        {
+            convLayers = new List<ConvLayer>();
+            convLayersNumb = convActivationIndexes.Count;
+            for(int i = 0, counter = 0; i < convLayersNumb; i++)
+            {
+                bool dropoutExist = false;
+                int dropoutRate = 0;
+                if(i == convDropoutIndexes[counter])
+                {
+                    dropoutExist = true;
+                    dropoutRate = dropoutRates[counter];
+                    counter++;
+                }
+                else
+                {
+                    dropoutExist = false;
+                    dropoutRate = 0;
+                }
+                convLayers.Add(new ConvLayer(convActivationIndexes[i], slidingWindows[i], dropoutExist, dropoutRate));
+            }
+        } // создание объекта по ConvolutionalNetwork
 
         public void MutateLayersNumb(int convLayerNumbRange, int mutateRate, int dropoutRateRange,
                                      int[] slidingWindowRange, int activationsIndexesRange)

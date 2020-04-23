@@ -48,12 +48,20 @@ namespace NN_Family_Creater
 
         public ConvLayer(ConvLayer cLayerToCopy)
         {
-            this.activationIndex = cLayerToCopy.activationIndex;
-            this.slidingWindow = cLayerToCopy.slidingWindow;
-            this.dropoutExist = cLayerToCopy.dropoutExist;
-            this.dropoutRate = cLayerToCopy.dropoutRate;
-            this.maxPullingExist = cLayerToCopy.maxPullingExist;
-        }
+            activationIndex = cLayerToCopy.activationIndex;
+            slidingWindow = cLayerToCopy.slidingWindow;
+            dropoutExist = cLayerToCopy.dropoutExist;
+            dropoutRate = cLayerToCopy.dropoutRate;
+            maxPullingExist = cLayerToCopy.maxPullingExist;
+        } // копирующий конструктор, хз зачем, но уже написал, не удалять же. Может потом пригодится х)
+
+        public ConvLayer(int activationIndex, int[] slidingWindow, bool dropoutExist, int dropoutRate)
+        {
+            this.activationIndex = activationIndex;
+            this.slidingWindow = slidingWindow;
+            this.dropoutExist = dropoutExist;
+            this.dropoutRate = dropoutRate;
+        } // для создания объекта по описательному
 
         public void MutateWindow(int[] slidingWindowRange, int mutateRate)
         {
