@@ -49,7 +49,7 @@
             this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.geneticGB = new System.Windows.Forms.GroupBox();
             this.createScriptsBtn = new System.Windows.Forms.Button();
             this.testButton = new System.Windows.Forms.Button();
             this.label51 = new System.Windows.Forms.Label();
@@ -187,6 +187,35 @@
             this.label48 = new System.Windows.Forms.Label();
             this.ganWithoutGB = new System.Windows.Forms.GroupBox();
             this.label49 = new System.Windows.Forms.Label();
+            this.upgradePopulationChB = new System.Windows.Forms.CheckBox();
+            this.UpdateGeneticsGB = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.label55 = new System.Windows.Forms.Label();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
+            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
+            this.label66 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
@@ -194,7 +223,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchSizeNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
-            this.groupBox3.SuspendLayout();
+            this.geneticGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maxMemoryNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).BeginInit();
@@ -225,6 +254,16 @@
             this.lstmWithoutGB.SuspendLayout();
             this.percWithoutGB.SuspendLayout();
             this.ganWithoutGB.SuspendLayout();
+            this.UpdateGeneticsGB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             this.SuspendLayout();
             // 
             // trackBar1
@@ -435,52 +474,52 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(920, 28);
+            this.label16.Location = new System.Drawing.Point(920, 29);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(57, 17);
             this.label16.TabIndex = 56;
             this.label16.Text = "Genetic";
             // 
-            // groupBox3
+            // geneticGB
             // 
-            this.groupBox3.Controls.Add(this.createScriptsBtn);
-            this.groupBox3.Controls.Add(this.testButton);
-            this.groupBox3.Controls.Add(this.label51);
-            this.groupBox3.Controls.Add(this.maxMemoryNUD);
-            this.groupBox3.Controls.Add(this.label50);
-            this.groupBox3.Controls.Add(this.textBox10);
-            this.groupBox3.Controls.Add(this.button9);
-            this.groupBox3.Controls.Add(this.label38);
-            this.groupBox3.Controls.Add(this.label35);
-            this.groupBox3.Controls.Add(this.label34);
-            this.groupBox3.Controls.Add(this.predsBtn);
-            this.groupBox3.Controls.Add(this.memPriorityNUD);
-            this.groupBox3.Controls.Add(this.accPriorityNUD);
-            this.groupBox3.Controls.Add(this.label33);
-            this.groupBox3.Controls.Add(this.label31);
-            this.groupBox3.Controls.Add(this.numericUpDown20);
-            this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Controls.Add(this.label25);
-            this.groupBox3.Controls.Add(this.textBox4);
-            this.groupBox3.Controls.Add(this.label24);
-            this.groupBox3.Controls.Add(this.label23);
-            this.groupBox3.Controls.Add(this.label22);
-            this.groupBox3.Controls.Add(this.label21);
-            this.groupBox3.Controls.Add(this.label20);
-            this.groupBox3.Controls.Add(this.textBox3);
-            this.groupBox3.Controls.Add(this.numericUpDown18);
-            this.groupBox3.Controls.Add(this.numericUpDown17);
-            this.groupBox3.Controls.Add(this.numericUpDown16);
-            this.groupBox3.Controls.Add(this.numericUpDown12);
-            this.groupBox3.Controls.Add(this.label19);
-            this.groupBox3.Controls.Add(this.label18);
-            this.groupBox3.Controls.Add(this.numericUpDown14);
-            this.groupBox3.Controls.Add(this.label17);
-            this.groupBox3.Location = new System.Drawing.Point(808, 53);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(296, 439);
-            this.groupBox3.TabIndex = 57;
-            this.groupBox3.TabStop = false;
+            this.geneticGB.Controls.Add(this.createScriptsBtn);
+            this.geneticGB.Controls.Add(this.testButton);
+            this.geneticGB.Controls.Add(this.label51);
+            this.geneticGB.Controls.Add(this.maxMemoryNUD);
+            this.geneticGB.Controls.Add(this.label50);
+            this.geneticGB.Controls.Add(this.textBox10);
+            this.geneticGB.Controls.Add(this.button9);
+            this.geneticGB.Controls.Add(this.label38);
+            this.geneticGB.Controls.Add(this.label35);
+            this.geneticGB.Controls.Add(this.label34);
+            this.geneticGB.Controls.Add(this.predsBtn);
+            this.geneticGB.Controls.Add(this.memPriorityNUD);
+            this.geneticGB.Controls.Add(this.accPriorityNUD);
+            this.geneticGB.Controls.Add(this.label33);
+            this.geneticGB.Controls.Add(this.label31);
+            this.geneticGB.Controls.Add(this.numericUpDown20);
+            this.geneticGB.Controls.Add(this.button1);
+            this.geneticGB.Controls.Add(this.label25);
+            this.geneticGB.Controls.Add(this.textBox4);
+            this.geneticGB.Controls.Add(this.label24);
+            this.geneticGB.Controls.Add(this.label23);
+            this.geneticGB.Controls.Add(this.label22);
+            this.geneticGB.Controls.Add(this.label21);
+            this.geneticGB.Controls.Add(this.label20);
+            this.geneticGB.Controls.Add(this.textBox3);
+            this.geneticGB.Controls.Add(this.numericUpDown18);
+            this.geneticGB.Controls.Add(this.numericUpDown17);
+            this.geneticGB.Controls.Add(this.numericUpDown16);
+            this.geneticGB.Controls.Add(this.numericUpDown12);
+            this.geneticGB.Controls.Add(this.label19);
+            this.geneticGB.Controls.Add(this.label18);
+            this.geneticGB.Controls.Add(this.numericUpDown14);
+            this.geneticGB.Controls.Add(this.label17);
+            this.geneticGB.Location = new System.Drawing.Point(808, 53);
+            this.geneticGB.Name = "geneticGB";
+            this.geneticGB.Size = new System.Drawing.Size(296, 439);
+            this.geneticGB.TabIndex = 57;
+            this.geneticGB.TabStop = false;
             // 
             // createScriptsBtn
             // 
@@ -1944,6 +1983,359 @@
             this.label49.TabIndex = 0;
             this.label49.Text = "      TO DO!!!!!!!\r\nGAN Without Genetic";
             // 
+            // upgradePopulationChB
+            // 
+            this.upgradePopulationChB.AutoSize = true;
+            this.upgradePopulationChB.Location = new System.Drawing.Point(809, 27);
+            this.upgradePopulationChB.Name = "upgradePopulationChB";
+            this.upgradePopulationChB.Size = new System.Drawing.Size(85, 21);
+            this.upgradePopulationChB.TabIndex = 90;
+            this.upgradePopulationChB.Text = "Upgrade";
+            this.upgradePopulationChB.UseVisualStyleBackColor = true;
+            this.upgradePopulationChB.CheckedChanged += new System.EventHandler(this.upgradePopulationChB_CheckedChanged);
+            // 
+            // UpdateGeneticsGB
+            // 
+            this.UpdateGeneticsGB.Controls.Add(this.label55);
+            this.UpdateGeneticsGB.Controls.Add(this.numericUpDown4);
+            this.UpdateGeneticsGB.Controls.Add(this.label57);
+            this.UpdateGeneticsGB.Controls.Add(this.label58);
+            this.UpdateGeneticsGB.Controls.Add(this.label59);
+            this.UpdateGeneticsGB.Controls.Add(this.numericUpDown5);
+            this.UpdateGeneticsGB.Controls.Add(this.numericUpDown6);
+            this.UpdateGeneticsGB.Controls.Add(this.label60);
+            this.UpdateGeneticsGB.Controls.Add(this.label61);
+            this.UpdateGeneticsGB.Controls.Add(this.numericUpDown7);
+            this.UpdateGeneticsGB.Controls.Add(this.label62);
+            this.UpdateGeneticsGB.Controls.Add(this.label63);
+            this.UpdateGeneticsGB.Controls.Add(this.label64);
+            this.UpdateGeneticsGB.Controls.Add(this.label65);
+            this.UpdateGeneticsGB.Controls.Add(this.numericUpDown8);
+            this.UpdateGeneticsGB.Controls.Add(this.numericUpDown9);
+            this.UpdateGeneticsGB.Controls.Add(this.numericUpDown11);
+            this.UpdateGeneticsGB.Controls.Add(this.label66);
+            this.UpdateGeneticsGB.Controls.Add(this.numericUpDown3);
+            this.UpdateGeneticsGB.Controls.Add(this.label56);
+            this.UpdateGeneticsGB.Controls.Add(this.label54);
+            this.UpdateGeneticsGB.Controls.Add(this.numericUpDown2);
+            this.UpdateGeneticsGB.Controls.Add(this.label53);
+            this.UpdateGeneticsGB.Controls.Add(this.label52);
+            this.UpdateGeneticsGB.Controls.Add(this.textBox5);
+            this.UpdateGeneticsGB.Controls.Add(this.button4);
+            this.UpdateGeneticsGB.Controls.Add(this.button2);
+            this.UpdateGeneticsGB.Location = new System.Drawing.Point(1721, 317);
+            this.UpdateGeneticsGB.Name = "UpdateGeneticsGB";
+            this.UpdateGeneticsGB.Size = new System.Drawing.Size(48, 40);
+            this.UpdateGeneticsGB.TabIndex = 91;
+            this.UpdateGeneticsGB.TabStop = false;
+            this.UpdateGeneticsGB.Visible = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(202, 22);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Обзор";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 410);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "Train";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(105, 22);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(59, 22);
+            this.textBox5.TabIndex = 2;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(18, 23);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(81, 17);
+            this.label52.TabIndex = 3;
+            this.label52.Text = "Популяция";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(170, 25);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(26, 17);
+            this.label53.TabIndex = 4;
+            this.label53.Text = "шт";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(202, 59);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(75, 22);
+            this.numericUpDown2.TabIndex = 5;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(18, 61);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(113, 17);
+            this.label54.TabIndex = 6;
+            this.label54.Text = "Дополнительно";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(18, 99);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(106, 17);
+            this.label56.TabIndex = 8;
+            this.label56.Text = "Эпох обучения";
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(202, 97);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(75, 22);
+            this.numericUpDown3.TabIndex = 9;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(215, 288);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(28, 17);
+            this.label55.TabIndex = 88;
+            this.label55.Text = "MB";
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.DecimalPlaces = 1;
+            this.numericUpDown4.Location = new System.Drawing.Point(143, 286);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(69, 22);
+            this.numericUpDown4.TabIndex = 87;
+            this.numericUpDown4.Value = new decimal(new int[] {
+            8000,
+            0,
+            0,
+            0});
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(16, 288);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(87, 17);
+            this.label57.TabIndex = 86;
+            this.label57.Text = "Max memory";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(215, 231);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(55, 17);
+            this.label58.TabIndex = 85;
+            this.label58.Text = "память";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(141, 231);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(68, 17);
+            this.label59.TabIndex = 84;
+            this.label59.Text = "точность";
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.DecimalPlaces = 1;
+            this.numericUpDown5.Location = new System.Drawing.Point(214, 252);
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(63, 22);
+            this.numericUpDown5.TabIndex = 83;
+            this.numericUpDown5.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown6
+            // 
+            this.numericUpDown6.DecimalPlaces = 1;
+            this.numericUpDown6.Location = new System.Drawing.Point(143, 252);
+            this.numericUpDown6.Name = "numericUpDown6";
+            this.numericUpDown6.Size = new System.Drawing.Size(66, 22);
+            this.numericUpDown6.TabIndex = 82;
+            this.numericUpDown6.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(18, 254);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(117, 17);
+            this.label60.TabIndex = 81;
+            this.label60.Text = "Приоритетность";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(183, 195);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(20, 17);
+            this.label61.TabIndex = 80;
+            this.label61.Text = "%";
+            // 
+            // numericUpDown7
+            // 
+            this.numericUpDown7.Location = new System.Drawing.Point(128, 193);
+            this.numericUpDown7.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDown7.Name = "numericUpDown7";
+            this.numericUpDown7.Size = new System.Drawing.Size(49, 22);
+            this.numericUpDown7.TabIndex = 79;
+            this.numericUpDown7.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(18, 195);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(85, 17);
+            this.label62.TabIndex = 78;
+            this.label62.Text = "Mutate Rate";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(229, 131);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(51, 17);
+            this.label63.TabIndex = 77;
+            this.label63.Text = "mutate";
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(181, 131);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(42, 17);
+            this.label64.TabIndex = 76;
+            this.label64.Text = "cross";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(125, 131);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(38, 17);
+            this.label65.TabIndex = 75;
+            this.label65.Text = "copy";
+            // 
+            // numericUpDown8
+            // 
+            this.numericUpDown8.Location = new System.Drawing.Point(232, 154);
+            this.numericUpDown8.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown8.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown8.Name = "numericUpDown8";
+            this.numericUpDown8.Size = new System.Drawing.Size(45, 22);
+            this.numericUpDown8.TabIndex = 74;
+            this.numericUpDown8.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown9
+            // 
+            this.numericUpDown9.Location = new System.Drawing.Point(183, 154);
+            this.numericUpDown9.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown9.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown9.Name = "numericUpDown9";
+            this.numericUpDown9.Size = new System.Drawing.Size(43, 22);
+            this.numericUpDown9.TabIndex = 73;
+            this.numericUpDown9.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown11
+            // 
+            this.numericUpDown11.Location = new System.Drawing.Point(128, 154);
+            this.numericUpDown11.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown11.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown11.Name = "numericUpDown11";
+            this.numericUpDown11.Size = new System.Drawing.Size(49, 22);
+            this.numericUpDown11.TabIndex = 72;
+            this.numericUpDown11.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(18, 156);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(82, 17);
+            this.label66.TabIndex = 71;
+            this.label66.Text = "Пропорции";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1951,6 +2343,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.UpdateGeneticsGB);
+            this.Controls.Add(this.upgradePopulationChB);
             this.Controls.Add(this.ganWithoutGB);
             this.Controls.Add(this.percWithoutGB);
             this.Controls.Add(this.lstmWithoutGB);
@@ -1975,7 +2369,7 @@
             this.Controls.Add(this.textBox9);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.geneticGB);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.ConvModelGB);
@@ -1993,8 +2387,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchSizeNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.geneticGB.ResumeLayout(false);
+            this.geneticGB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maxMemoryNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).EndInit();
@@ -2035,6 +2429,17 @@
             this.percWithoutGB.PerformLayout();
             this.ganWithoutGB.ResumeLayout(false);
             this.ganWithoutGB.PerformLayout();
+            this.UpdateGeneticsGB.ResumeLayout(false);
+            this.UpdateGeneticsGB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2061,7 +2466,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown12;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox geneticGB;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox textBox4;
@@ -2200,6 +2605,35 @@
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Button testButton;
         private System.Windows.Forms.Button createScriptsBtn;
+        private System.Windows.Forms.CheckBox upgradePopulationChB;
+        private System.Windows.Forms.GroupBox UpdateGeneticsGB;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.NumericUpDown numericUpDown6;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.NumericUpDown numericUpDown7;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.NumericUpDown numericUpDown8;
+        private System.Windows.Forms.NumericUpDown numericUpDown9;
+        private System.Windows.Forms.NumericUpDown numericUpDown11;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button2;
     }
 }
 

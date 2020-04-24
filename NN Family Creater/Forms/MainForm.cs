@@ -254,6 +254,9 @@ namespace NN_Family_Creater
 
             PercModelGB.Size = ConvModelGB.Size;
             percWithoutGB.Size = ConvModelGB.Size;
+
+            UpdateGeneticsGB.Size = geneticGB.Size;
+            UpdateGeneticsGB.Location = geneticGB.Location;
             //////////
 
 
@@ -284,7 +287,7 @@ namespace NN_Family_Creater
         {
             if (withoutGenChB.Checked)
             {
-                groupBox3.Enabled = false;
+                geneticGB.Enabled = false;
                 switch (comboBox2.SelectedIndex)
                 {
                     case 0:
@@ -315,7 +318,7 @@ namespace NN_Family_Creater
             }
             else
             {
-                groupBox3.Enabled = true;
+                geneticGB.Enabled = true;
                 switch (comboBox2.SelectedIndex)
                 {
                     case 0:
@@ -405,6 +408,20 @@ namespace NN_Family_Creater
             
         }
 
+        private void upgradePopulationChB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (upgradePopulationChB.Checked)
+            {
+                UpdateGeneticsGB.Visible = true;
+                geneticGB.Visible = false;
+            }
+            else
+            {
+                UpdateGeneticsGB.Visible = false;
+                geneticGB.Visible = true;
+            }
+        }
+
         private void button9_Click(object sender, EventArgs e) 
         {
             try
@@ -483,5 +500,7 @@ namespace NN_Family_Creater
                 ConfigEditor.Config.Write("plotsDirectory", Properties.Settings.Default.plotsDirectory);
             }
         }
+
+       
     }
 }

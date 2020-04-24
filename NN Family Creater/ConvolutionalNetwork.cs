@@ -58,7 +58,8 @@ namespace NN_Family_Creater
 
         public static void CreateConvBatFile(string scriptName, string scriptsPath, string datasetPath, string modelPath, string labelPath, string plotPath)
         {
-            DirectoryInfo di;
+            DirectoryInfo di; 
+            // добавить безопасность созданию директорий
             // Models Directory
             di = Directory.CreateDirectory(@"C:\keras\folder");
             string currentModelsDirectory = modelPath + @"\" + di.CreationTime.ToString("dd-MM-yyyy");
