@@ -12,36 +12,31 @@ namespace NN_Family_Creater
         Random random;
         public int convLayersNumb;
         public List<ConvLayer> convLayers;
-        private readonly int[] slidingWindowRange;
-        public int firstLayerNeuronsNumbRange;
 
         public bool sameSlidingWindowsSize;
         public bool sameActivations;
         public bool allSquareSlidingWindows;
-        public ConvStructure(int convLayerNumbRange, int[] slidingWindowRange,
-                             int activationsIndexesRange, int firstLayerNeuronsNumbRange, int dropoutRateRange)
+        
+        public ConvStructure(ConvRandomParams crp)
         {
-            this.slidingWindowRange = slidingWindowRange;
-            this.firstLayerNeuronsNumbRange = firstLayerNeuronsNumbRange;
-           
             random = new Random();
 
             sameSlidingWindowsSize = random.Next(100) < 10 ? true : false;      //подредачить шанс
             sameActivations = random.Next(100) < 10 ? true : false;             //подредачить шанс
             allSquareSlidingWindows = random.Next(100) < 10 ? true : false;     //подредачить шанс
 
-            convLayersNumb = random.Next(1, convLayerNumbRange);
+            convLayersNumb = random.Next(1, crp.convLayersNumbRange);
             convLayers = new List<ConvLayer>(convLayersNumb);
             for (int i = 0, adds = 0; i < convLayers.Capacity; i++, adds += 16) // переделать условие выхода ----------- экзепшн!!!!!
             {
-                int neurons = random.Next(8, firstLayerNeuronsNumbRange) + adds; // Переделать!!!?
-                convLayers.Add(new ConvLayer(slidingWindowRange, activationsIndexesRange, neurons, dropoutRateRange));
+                int filters = random.Next(8, crp.firstConvFiltersRange) + adds; // Переделать!!!?
+                convLayers.Add(new ConvLayer(crp, filters));
             }
 
             if (sameSlidingWindowsSize)
             {
                 int abserber = random.Next(convLayers.Count);
-                for(int i = 0; i < convLayers.Count; i++)
+                for (int i = 0; i < convLayers.Count; i++)
                 {
                     convLayers[i].slidingWindow = convLayers[abserber].slidingWindow;
                 }
@@ -49,7 +44,7 @@ namespace NN_Family_Creater
 
             if (allSquareSlidingWindows)
             {
-                for(int i = 0; i < convLayers.Count; i++)
+                for (int i = 0; i < convLayers.Count; i++)
                 {
                     if (convLayers[i].slidingWindow[0] > 1) convLayers[i].slidingWindow[1] = convLayers[i].slidingWindow[0];
                     else convLayers[i].slidingWindow[0] = convLayers[i].slidingWindow[1];
@@ -58,16 +53,12 @@ namespace NN_Family_Creater
 
             if (sameActivations)
             {
-                int sameActivationIndex = random.Next(activationsIndexesRange);
-                for(int i = 0; i < convLayers.Count; i++)
+                int sameActivationIndex = random.Next(crp.convActIndexesRange);
+                for (int i = 0; i < convLayers.Count; i++)
                 {
                     convLayers[i].activationIndex = sameActivationIndex;
                 }
             }
-
-            //this.MutateWindows(30, )
-
-            
         }
 
         public ConvStructure(ConvStructure CSToCopy)
@@ -98,18 +89,17 @@ namespace NN_Family_Creater
             }
         } // создание объекта по ConvolutionalNetwork
 
-        public void MutateLayersNumb(int convLayerNumbRange, int mutateRate, int dropoutRateRange,
-                                     int[] slidingWindowRange, int activationsIndexesRange)
+        public void MutateLayersNumb(ConvRandomParams crp, int mutateRate)
         {
-            if (random.Next(100) < mutateRate) convLayersNumb = random.Next(1, convLayerNumbRange);
+            if (random.Next(100) < mutateRate) convLayersNumb = random.Next(1, crp.convLayersNumbRange);
 
             if(convLayersNumb >= convLayers.Count)
             {
                 convLayers.Capacity = convLayersNumb;
                 while(convLayers.Count != convLayers.Capacity) // проверить условие!!
                 {
-                    int neurons = random.Next(firstLayerNeuronsNumbRange, firstLayerNeuronsNumbRange + firstLayerNeuronsNumbRange * convLayers.Count); //переделать!?
-                    convLayers.Add(new ConvLayer(slidingWindowRange, activationsIndexesRange, neurons, dropoutRateRange));
+                    int filters = random.Next(crp.firstConvFiltersRange, crp.firstConvFiltersRange + crp.firstConvFiltersRange * convLayers.Count); //переделать!?
+                    convLayers.Add(new ConvLayer(crp, filters));
 
                     if (sameSlidingWindowsSize) convLayers[convLayers.Count - 1].slidingWindow = convLayers[0].slidingWindow;
                     if (sameActivations) convLayers[convLayers.Count - 1].activationIndex = convLayers[0].activationIndex;
@@ -128,7 +118,7 @@ namespace NN_Family_Creater
 
         }
 
-        public void MutateActivation(int mutateRate, int activationsIndexesRange)
+        public void MutateActivation(ConvRandomParams crp, int mutateRate)
         {
             if (random.Next(100) < mutateRate)
             {
@@ -148,13 +138,13 @@ namespace NN_Family_Creater
                 {
                     for (int i = 0; i < convLayers.Count; i++)
                     {
-                        convLayers[i].MutateActivation(activationsIndexesRange, mutateRate);
+                        convLayers[i].MutateActivation(crp, mutateRate);
                     }
                 }
             }
         }
 
-        public void MutateWindows(int mutateRate, int[] slidingWindowRange)
+        public void MutateWindows(ConvRandomParams crp, int mutateRate)
         {
             if(random.Next(100) < mutateRate)
             {
@@ -162,21 +152,14 @@ namespace NN_Family_Creater
                 {
                     if (random.Next(100) < 20)
                     {
-                        convLayers[i].slidingWindow[0] = random.Next(1, slidingWindowRange[0]);
-                        if (convLayers[i].slidingWindow[0] > 1) convLayers[i].slidingWindow[1] = random.Next(1, slidingWindowRange[1]);
-                        else convLayers[i].slidingWindow[1] = random.Next(2, slidingWindowRange[1]);
+                        convLayers[i].slidingWindow[0] = random.Next(1, crp.slidingWindowsRange[0]);
+                        if (convLayers[i].slidingWindow[0] > 1) convLayers[i].slidingWindow[1] = random.Next(1, crp.slidingWindowsRange[1]);
+                        else convLayers[i].slidingWindow[1] = random.Next(2, crp.slidingWindowsRange[1]);
                     }
-                    else convLayers[i].MutateWindow(slidingWindowRange, mutateRate);
+                    else convLayers[i].MutateWindow(crp, mutateRate);
 
                 }
             }
-        }
-
-        
-
-        public void CrossSlidingWindow()
-        {
-
         }
     }
 }

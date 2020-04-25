@@ -20,7 +20,7 @@ namespace NN_Family_Creater
         public List<int> convDropoutIndexes;
         public List<int> convDropoutRates;
 
-        public ConvolutionalNetwork(Chromosome chromosome)
+        public ConvolutionalNetwork(ConvolutionalChromosome chromosome)
         {
             slidingWindows = new List<int[]>();
             convActivationIndexes = new List<int>();
@@ -36,7 +36,7 @@ namespace NN_Family_Creater
             {
                 slidingWindows.Add(new int[2] { chromosome.convPart.convLayers[i].slidingWindow[0], chromosome.convPart.convLayers[i].slidingWindow[1] });
                 convActivationIndexes.Add(chromosome.convPart.convLayers[i].activationIndex);
-                filters.Add(chromosome.convPart.convLayers[i].neurons);
+                filters.Add(chromosome.convPart.convLayers[i].filters);
                 if (chromosome.convPart.convLayers[i].dropoutExist)
                 {
                     convDropoutIndexes.Add(i);

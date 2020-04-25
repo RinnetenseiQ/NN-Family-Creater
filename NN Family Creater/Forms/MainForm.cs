@@ -18,8 +18,12 @@ namespace NN_Family_Creater
         List<String> convActivations;
         List<String> denseActivations;
 
-        List<Chromosome> population;
+        List<ConvolutionalChromosome> population;
         List<ConvolutionalNetwork> eliteChromosomes;
+
+        ConvRandomParams crp;
+        DenseRandomParams drp;
+
         Random random;
 
         Form propertyWindow;
@@ -45,6 +49,7 @@ namespace NN_Family_Creater
             switch (comboBox2.SelectedIndex)
             {
                 case 0:
+                    CollectConv_NN_Params();
                     TrainConvolutionalNN();
                     break;
                 case 1:
@@ -72,7 +77,7 @@ namespace NN_Family_Creater
             }
         }
 
-        public void TrainConvolutionalNN()
+        public void CollectConv_NN_Params()
         {
             convActivations = new List<string>();
             if (reluConvChb.Checked) convActivations.Add("relu");
@@ -100,18 +105,33 @@ namespace NN_Family_Creater
             if (PReLUDenseChB.Checked) denseActivations.Add("PReLU");
             if (ThReLUDenseChB.Checked) denseActivations.Add("TReLU");
 
+            crp = new ConvRandomParams((int)ConvLayersNumbNUD.Value,
+                                       (int)ConvFiltersNUD.Value,
+                                            convActivations.Count,
+                                        new int[] { (int)slidingWindow1NUD.Value, (int)slidingWindow2NUD.Value },
+                                       (int)convDropoutNUD.Value);
+            drp = new DenseRandomParams((int)DenseLayersNumbNUD.Value,
+                                        (int)DenseNeuronsNUD.Value,
+                                             denseActivations.Count,
+                                        (int)denseDropoutNUD.Value);
+        }
 
-            population = new List<Chromosome>((int)numericUpDown14.Value);
+        public void TrainConvolutionalNN()
+        {
+
+            population = new List<ConvolutionalChromosome>((int)numericUpDown14.Value);
             while (population.Count != population.Capacity)
             {
-                population.Add(new Chromosome((int)ConvLayersNumbNUD.Value,
-                                              (int)DenseLayersNumbNUD.Value,
-                                              (int)ConvNeuronsNUD.Value,
-                                              (int)DenseNeuronsNUD.Value,
-                                              (int)convActivations.Count,
-                                              (int)denseActivations.Count,
-                                              new int[] { (int)slidingWindow1NUD.Value, (int)slidingWindow2NUD.Value },
-                                              (int)dropoutRateNUD.Value));
+                //population.Add(new ConvolutionalChromosome((int)ConvLayersNumbNUD.Value,
+                //                                           (int)DenseLayersNumbNUD.Value,
+                //                                           (int)ConvFiltersNUD.Value,
+                //                                           (int)DenseNeuronsNUD.Value,
+                //                                           (int)convActivations.Count,
+                //                                           (int)denseActivations.Count,
+                //                                           new int[] { (int)slidingWindow1NUD.Value, (int)slidingWindow2NUD.Value },
+                //                                          (int)denseDropoutNUD.Value));
+
+                population.Add(new ConvolutionalChromosome(crp, drp));                //куча ерроров
                 population[population.Count - 1].name = "Chromosome " + population.Count.ToString();
 
             }
@@ -139,8 +159,8 @@ namespace NN_Family_Creater
             {
                 for (int m = 1; m < population.Count; m++)
                 {
-                    population[m].MutateConvolutional((int)numericUpDown20.Value);
-                    population[m].MutateDense((int)numericUpDown20.Value, (int)dropoutRateNUD.Value);
+                    population[m].MutateConvolutional(crp, (int)numericUpDown20.Value);
+                    population[m].MutateDense(drp, (int)denseDropoutNUD.Value);
                 }
 
 
@@ -165,7 +185,7 @@ namespace NN_Family_Creater
                 textBox9.AppendText("Filters:");
                 for (int l = 0; l < population[0].convPart.convLayersNumb; l++)
                 {
-                    textBox9.AppendText(" " + population[0].convPart.convLayers[l].neurons);
+                    textBox9.AppendText(" " + population[0].convPart.convLayers[l].filters);
                 }
                 textBox9.AppendText(Environment.NewLine);
                 textBox9.AppendText("Window: " + population[0].convPart.convLayers[0].slidingWindow[0].ToString() + "x" + population[0].convPart.convLayers[0].slidingWindow[1].ToString());

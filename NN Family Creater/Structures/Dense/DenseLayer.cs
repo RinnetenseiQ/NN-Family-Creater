@@ -32,13 +32,25 @@ namespace NN_Family_Creater
             this.dropoutRate = dropoutRate;
         } // псевдокопирующий конструктор
 
-        public void MutateActivation(int activationsIndexesRange, int mutateRate)
+        public DenseLayer(DenseRandomParams drp, int neurons)
         {
-           if(random.Next(100) < mutateRate) activationIndex = random.Next(activationsIndexesRange);
+            random = new Random();
+            dropoutExist = random.Next(100) < 10 ? true : false;
+            if (dropoutExist) dropoutRate = random.Next(10, drp.denseDropRange);
+            else dropoutRate = 0;
+            activationIndex = random.Next(drp.denseActIndexesRange);
+            this.neurons = neurons;
+        }
+
+        public void MutateActivation(DenseRandomParams drp, int mutateRate)
+        {
+           if(random.Next(100) < mutateRate) activationIndex = random.Next(drp.denseActIndexesRange);
             // поменять переменную sameActivations в другом классе(классе выше)
         }
 
-        public void MutateDropout(int dropoutRange, int mutateRate)
+        
+
+        public void MutateDropout(DenseRandomParams drp, int mutateRate)
         {
             if(random.Next(100) < mutateRate)
             {
@@ -46,9 +58,9 @@ namespace NN_Family_Creater
                 if (mutationWay < 10)
                 {
                     dropoutExist = !dropoutExist;
-                    if(dropoutExist) dropoutRate = random.Next(10, dropoutRange);
+                    if(dropoutExist) dropoutRate = random.Next(10, drp.denseDropRange);
                 }
-                else dropoutRate = random.Next(10, dropoutRange);
+                else dropoutRate = random.Next(10, drp.denseDropRange);
             }
         }
     }

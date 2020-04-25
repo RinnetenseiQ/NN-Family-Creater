@@ -8,44 +8,37 @@ namespace NN_Family_Creater
 {
     class DenseStructure
     {
-        int firstLayerNeuronsNumbRange;
         Random random;
-
         public int denseLayersNumb;
         public List<DenseLayer> denseLayer;
-        
-
         public bool sameActivations;
 
-        public DenseStructure(int denseLayersNumbRange, int activationsIndexesRange, 
-                              int firstLayerNeuronsNumbRange, int dropoutRateRange)
+        public DenseStructure(DenseRandomParams drp)
         {
             random = new Random();
-            
+
 
             sameActivations = random.Next(100) < 10 ? true : false;
             int abserber = 0;
             if (sameActivations)
             {
-                abserber = random.Next(activationsIndexesRange);
-            } 
-            this.firstLayerNeuronsNumbRange = firstLayerNeuronsNumbRange;
+                abserber = random.Next(drp.denseActIndexesRange);
+            }
 
-            denseLayersNumb = random.Next(1, denseLayersNumbRange);
+            denseLayersNumb = random.Next(1, drp.denseLayersNumbRange);
             denseLayer = new List<DenseLayer>(denseLayersNumb);
-            for(int i = 0; i < denseLayer.Capacity; i++)
+            for (int i = 0; i < denseLayer.Capacity; i++)
             {
                 int neurons;
-                if (i == 0) neurons = random.Next(firstLayerNeuronsNumbRange / 3, firstLayerNeuronsNumbRange);
-                else neurons = random.Next(denseLayer[i-1].neurons/3, denseLayer[i-1].neurons);
-                denseLayer.Add(new DenseLayer(activationsIndexesRange, neurons, dropoutRateRange));
+                if (i == 0) neurons = random.Next(drp.firstDenseNeuronsRange / 3, drp.firstDenseNeuronsRange);
+                else neurons = random.Next(denseLayer[i - 1].neurons / 3, denseLayer[i - 1].neurons);
+                denseLayer.Add(new DenseLayer(drp, neurons));
 
                 if (sameActivations)
                 {
                     denseLayer[denseLayer.Count - 1].activationIndex = abserber;
                 }
             }
-
         }
 
         public DenseStructure(List<int> denseActivationIndexes, List<int> neurons, List<int> denseDropoutIndexes, List<int> dropoutRates)
@@ -70,17 +63,19 @@ namespace NN_Family_Creater
                 denseLayer.Add(new DenseLayer(denseActivationIndexes[i], neurons[i], dropoutExist, dropoutRate));
             }
         } // конструктор для инициализации объекта DenseStructure по полям объекта ConvolutionalNetwork
-
-        public void MutateLayersNumb(int denseLayerNumbRange, int mutateRate, int activationsIndexesRange, int dropoutRateRange)
+  
+        public void MutateLayersNumb(DenseRandomParams drp, int mutateRate)
         {
-            if (random.Next(100) < mutateRate) denseLayersNumb = random.Next(1, denseLayerNumbRange);
+            //if (random.Next(100) < mutateRate) denseLayersNumb = random.Next(1, denseLayerNumbRange);
+            if (random.Next(100) < mutateRate) denseLayersNumb = random.Next(1, drp.denseLayersNumbRange);
             if(denseLayersNumb >= denseLayer.Count)
             {
                 denseLayer.Capacity = denseLayersNumb;
                 while(denseLayer.Count != denseLayer.Capacity)
                 {
                     int neurons = random.Next(denseLayer[denseLayer.Count - 1].neurons / 3, denseLayer[denseLayer.Count - 1].neurons);
-                    denseLayer.Add(new DenseLayer(activationsIndexesRange, neurons, dropoutRateRange));
+                    //denseLayer.Add(new DenseLayer(activationsIndexesRange, neurons, dropoutRateRange));
+                    denseLayer.Add(new DenseLayer(drp, neurons));
 
                     if(sameActivations) denseLayer[denseLayer.Count - 1].activationIndex = denseLayer[0].activationIndex;
                 }
@@ -91,8 +86,8 @@ namespace NN_Family_Creater
                 denseLayer.Capacity = denseLayersNumb;
             }
         }
-
-        public void MutateActivation(int mutateRate, int activationsIndexesRange)
+        
+        public void MutateActivation(DenseRandomParams drp, int mutateRate)
         {
             if(random.Next(100) < mutateRate)
             {
@@ -112,13 +107,13 @@ namespace NN_Family_Creater
                 {
                     for(int i = 0; i < denseLayer.Count; i++)
                     {
-                        denseLayer[i].MutateActivation(activationsIndexesRange, mutateRate);
+                        denseLayer[i].MutateActivation(drp, mutateRate);
                     }
                 }
             }
         }
-
-        public void MutateNeurons(int mutateRate) // проверить
+        
+        public void MutateNeurons(DenseRandomParams drp, int mutateRate) // проверить
         {
             if(random.Next(100) < mutateRate)
             {
@@ -126,15 +121,15 @@ namespace NN_Family_Creater
                 {
                     for(int i = 0; i < denseLayer.Count; i++)
                     {
-                        if (i == 0) denseLayer[0].neurons = random.Next(firstLayerNeuronsNumbRange / 3, firstLayerNeuronsNumbRange);
+                        if (i == 0) denseLayer[0].neurons = random.Next(drp.firstDenseNeuronsRange / 3, drp.firstDenseNeuronsRange);
                         else denseLayer[i].neurons = random.Next(denseLayer[i - 1].neurons / 3, denseLayer[i - 1].neurons);
                     }
                 }
                 //else
             }
         }
-
-        public void MutateDropouts(int mutateRate, int dropoutRange)
+        
+        public void MutateDropouts(DenseRandomParams drp, int mutateRate)
         {
             if (random.Next(100) < mutateRate)
             {
@@ -144,10 +139,10 @@ namespace NN_Family_Creater
                     else for(int i = 0; i < denseLayer.Count; i++)
                         {
                             denseLayer[i].dropoutExist = true;
-                            denseLayer[i].dropoutRate = random.Next(10, dropoutRange);
+                            denseLayer[i].dropoutRate = random.Next(10, drp.denseDropRange);
                         }
                 }
-                else for (int i = 0; i < denseLayer.Count; i++) denseLayer[i].MutateDropout(dropoutRange, mutateRate);
+                else for (int i = 0; i < denseLayer.Count; i++) denseLayer[i].MutateDropout(drp, mutateRate);
             }
         }
     }

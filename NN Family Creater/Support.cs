@@ -63,7 +63,7 @@ namespace NN_Family_Creater
             return sel;
         } // тупо копипаст с лабы(компилятор даже не заметил, что код с джавы приплыл)
 
-        public static void UpdateAssesment(List<Chromosome> chrList, float maxMemory)
+        public static void UpdateAssesment(List<ConvolutionalChromosome> chrList, float maxMemory)
         {
             float minMemory = maxMemory; //локальная переменная для хранения минимальной памяти
             for (int i = 0; i < chrList.Count; i++)
@@ -73,14 +73,14 @@ namespace NN_Family_Creater
         }
 
 
-        public static void InsertChromosomeCode(String path, int line, Chromosome chr, List<String> convActivations, List<String> denseActivations)
+        public static void InsertChromosomeCode(String path, int line, ConvolutionalChromosome chr, List<String> convActivations, List<String> denseActivations)
         {
             string code = "";
             for(int i = 0; i < chr.convPart.convLayers.Count; i++)
             {
                 if (i == 0) code += "model.add(ZeroPadding2D((1, 1), input_shape = (128, 128, 3)))" + Environment.NewLine;
                 else code += "model.add(ZeroPadding2D((1, 1))" + Environment.NewLine;
-                code += "model.add(Conv2D(" + chr.convPart.convLayers[i].neurons.ToString() +
+                code += "model.add(Conv2D(" + chr.convPart.convLayers[i].filters.ToString() +
                                             ", kernel_size = (" + chr.convPart.convLayers[i].slidingWindow[0].ToString() + ", " +
                                             chr.convPart.convLayers[i].slidingWindow[1].ToString() + "), strides = (1, 1), activation ='" +
                                             convActivations[chr.convPart.convLayers[i].activationIndex] + "'))" + Environment.NewLine;

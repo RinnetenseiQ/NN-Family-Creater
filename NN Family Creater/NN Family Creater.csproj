@@ -55,14 +55,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConvolutionalNetwork.cs" />
+    <Compile Include="Structures\ConvolutionalNetwork.cs" />
+    <Compile Include="Structures\Dense\DenseRandomParams.cs" />
+    <Compile Include="Structures\Convolutional\ConvRandomParams.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Structures\Chromosome.cs" />
+    <Compile Include="Structures\ConvolutionalChromosome.cs" />
     <Compile Include="Structures\Convolutional\ConvLayer.cs" />
     <Compile Include="Structures\Convolutional\ConvStructure.cs" />
     <Compile Include="Structures\Dense\DenseLayer.cs" />

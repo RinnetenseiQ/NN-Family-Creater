@@ -128,7 +128,7 @@
             this.DenseNeuronsNUD = new System.Windows.Forms.NumericUpDown();
             this.lReluDenseChb = new System.Windows.Forms.CheckBox();
             this.softsignDenseChb = new System.Windows.Forms.CheckBox();
-            this.ConvNeuronsNUD = new System.Windows.Forms.NumericUpDown();
+            this.ConvFiltersNUD = new System.Windows.Forms.NumericUpDown();
             this.sigmoidDenseChb = new System.Windows.Forms.CheckBox();
             this.slidingWindow2NUD = new System.Windows.Forms.NumericUpDown();
             this.eluDenseChb = new System.Windows.Forms.CheckBox();
@@ -144,7 +144,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.reluConvChb = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dropoutRateNUD = new System.Windows.Forms.NumericUpDown();
+            this.denseDropoutNUD = new System.Windows.Forms.NumericUpDown();
             this.label36 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.PReLUConvChB = new System.Windows.Forms.CheckBox();
@@ -152,6 +152,9 @@
             this.TReLUConvChB = new System.Windows.Forms.CheckBox();
             this.ThReLUDenseChB = new System.Windows.Forms.CheckBox();
             this.ConvModelGB = new System.Windows.Forms.GroupBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.convDropoutNUD = new System.Windows.Forms.NumericUpDown();
             this.LSTMModelGB = new System.Windows.Forms.GroupBox();
             this.label40 = new System.Windows.Forms.Label();
             this.PercModelGB = new System.Windows.Forms.GroupBox();
@@ -189,15 +192,6 @@
             this.label49 = new System.Windows.Forms.Label();
             this.upgradePopulationChB = new System.Windows.Forms.CheckBox();
             this.UpdateGeneticsGB = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label54 = new System.Windows.Forms.Label();
-            this.label56 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.label55 = new System.Windows.Forms.Label();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.label57 = new System.Windows.Forms.Label();
@@ -216,6 +210,15 @@
             this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
             this.label66 = new System.Windows.Forms.Label();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
@@ -238,13 +241,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.GANModelGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DenseNeuronsNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ConvNeuronsNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConvFiltersNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slidingWindow2NUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slidingWindow1NUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DenseLayersNumbNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ConvLayersNumbNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dropoutRateNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.denseDropoutNUD)).BeginInit();
             this.ConvModelGB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.convDropoutNUD)).BeginInit();
             this.LSTMModelGB.SuspendLayout();
             this.PercModelGB.SuspendLayout();
             this.convWithoutGenGB.SuspendLayout();
@@ -255,8 +259,6 @@
             this.percWithoutGB.SuspendLayout();
             this.ganWithoutGB.SuspendLayout();
             this.UpdateGeneticsGB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
@@ -264,6 +266,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // trackBar1
@@ -1199,7 +1203,7 @@
             // sigmoidConvChb
             // 
             this.sigmoidConvChb.AutoSize = true;
-            this.sigmoidConvChb.Location = new System.Drawing.Point(134, 361);
+            this.sigmoidConvChb.Location = new System.Drawing.Point(271, 375);
             this.sigmoidConvChb.Name = "sigmoidConvChb";
             this.sigmoidConvChb.Size = new System.Drawing.Size(18, 17);
             this.sigmoidConvChb.TabIndex = 22;
@@ -1210,7 +1214,7 @@
             this.eluConvChb.AutoSize = true;
             this.eluConvChb.Checked = true;
             this.eluConvChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.eluConvChb.Location = new System.Drawing.Point(10, 292);
+            this.eluConvChb.Location = new System.Drawing.Point(147, 306);
             this.eluConvChb.Name = "eluConvChb";
             this.eluConvChb.Size = new System.Drawing.Size(18, 17);
             this.eluConvChb.TabIndex = 23;
@@ -1219,7 +1223,7 @@
             // softsignConvChb
             // 
             this.softsignConvChb.AutoSize = true;
-            this.softsignConvChb.Location = new System.Drawing.Point(134, 338);
+            this.softsignConvChb.Location = new System.Drawing.Point(271, 352);
             this.softsignConvChb.Name = "softsignConvChb";
             this.softsignConvChb.Size = new System.Drawing.Size(18, 17);
             this.softsignConvChb.TabIndex = 21;
@@ -1230,7 +1234,7 @@
             this.seluConvChb.AutoSize = true;
             this.seluConvChb.Checked = true;
             this.seluConvChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.seluConvChb.Location = new System.Drawing.Point(10, 315);
+            this.seluConvChb.Location = new System.Drawing.Point(147, 329);
             this.seluConvChb.Name = "seluConvChb";
             this.seluConvChb.Size = new System.Drawing.Size(18, 17);
             this.seluConvChb.TabIndex = 24;
@@ -1241,7 +1245,7 @@
             this.lReluConvChb.AutoSize = true;
             this.lReluConvChb.Checked = true;
             this.lReluConvChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.lReluConvChb.Location = new System.Drawing.Point(10, 338);
+            this.lReluConvChb.Location = new System.Drawing.Point(147, 352);
             this.lReluConvChb.Name = "lReluConvChb";
             this.lReluConvChb.Size = new System.Drawing.Size(18, 17);
             this.lReluConvChb.TabIndex = 20;
@@ -1250,7 +1254,7 @@
             // softplusConvChb
             // 
             this.softplusConvChb.AutoSize = true;
-            this.softplusConvChb.Location = new System.Drawing.Point(134, 269);
+            this.softplusConvChb.Location = new System.Drawing.Point(271, 283);
             this.softplusConvChb.Name = "softplusConvChb";
             this.softplusConvChb.Size = new System.Drawing.Size(18, 17);
             this.softplusConvChb.TabIndex = 25;
@@ -1259,7 +1263,7 @@
             // softmaxConvChb
             // 
             this.softmaxConvChb.AutoSize = true;
-            this.softmaxConvChb.Location = new System.Drawing.Point(134, 292);
+            this.softmaxConvChb.Location = new System.Drawing.Point(271, 306);
             this.softmaxConvChb.Name = "softmaxConvChb";
             this.softmaxConvChb.Size = new System.Drawing.Size(18, 17);
             this.softmaxConvChb.TabIndex = 19;
@@ -1268,7 +1272,7 @@
             // tanhConvChb
             // 
             this.tanhConvChb.AutoSize = true;
-            this.tanhConvChb.Location = new System.Drawing.Point(134, 315);
+            this.tanhConvChb.Location = new System.Drawing.Point(271, 329);
             this.tanhConvChb.Name = "tanhConvChb";
             this.tanhConvChb.Size = new System.Drawing.Size(18, 17);
             this.tanhConvChb.TabIndex = 26;
@@ -1277,7 +1281,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(160, 209);
+            this.label6.Location = new System.Drawing.Point(27, 312);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 34);
             this.label6.TabIndex = 18;
@@ -1286,7 +1290,7 @@
             // reluDenseChb
             // 
             this.reluDenseChb.AutoSize = true;
-            this.reluDenseChb.Location = new System.Drawing.Point(34, 267);
+            this.reluDenseChb.Location = new System.Drawing.Point(171, 281);
             this.reluDenseChb.Name = "reluDenseChb";
             this.reluDenseChb.Size = new System.Drawing.Size(66, 21);
             this.reluDenseChb.TabIndex = 27;
@@ -1307,7 +1311,7 @@
             this.softmaxDenseChb.AutoSize = true;
             this.softmaxDenseChb.Checked = true;
             this.softmaxDenseChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.softmaxDenseChb.Location = new System.Drawing.Point(158, 290);
+            this.softmaxDenseChb.Location = new System.Drawing.Point(295, 304);
             this.softmaxDenseChb.Name = "softmaxDenseChb";
             this.softmaxDenseChb.Size = new System.Drawing.Size(80, 21);
             this.softmaxDenseChb.TabIndex = 28;
@@ -1334,7 +1338,7 @@
             // lReluDenseChb
             // 
             this.lReluDenseChb.AutoSize = true;
-            this.lReluDenseChb.Location = new System.Drawing.Point(34, 336);
+            this.lReluDenseChb.Location = new System.Drawing.Point(171, 350);
             this.lReluDenseChb.Name = "lReluDenseChb";
             this.lReluDenseChb.Size = new System.Drawing.Size(74, 21);
             this.lReluDenseChb.TabIndex = 29;
@@ -1344,20 +1348,20 @@
             // softsignDenseChb
             // 
             this.softsignDenseChb.AutoSize = true;
-            this.softsignDenseChb.Location = new System.Drawing.Point(158, 336);
+            this.softsignDenseChb.Location = new System.Drawing.Point(295, 350);
             this.softsignDenseChb.Name = "softsignDenseChb";
             this.softsignDenseChb.Size = new System.Drawing.Size(83, 21);
             this.softsignDenseChb.TabIndex = 30;
             this.softsignDenseChb.Text = "SoftSign";
             this.softsignDenseChb.UseVisualStyleBackColor = true;
             // 
-            // ConvNeuronsNUD
+            // ConvFiltersNUD
             // 
-            this.ConvNeuronsNUD.Location = new System.Drawing.Point(50, 101);
-            this.ConvNeuronsNUD.Name = "ConvNeuronsNUD";
-            this.ConvNeuronsNUD.Size = new System.Drawing.Size(58, 22);
-            this.ConvNeuronsNUD.TabIndex = 14;
-            this.ConvNeuronsNUD.Value = new decimal(new int[] {
+            this.ConvFiltersNUD.Location = new System.Drawing.Point(34, 97);
+            this.ConvFiltersNUD.Name = "ConvFiltersNUD";
+            this.ConvFiltersNUD.Size = new System.Drawing.Size(58, 22);
+            this.ConvFiltersNUD.TabIndex = 14;
+            this.ConvFiltersNUD.Value = new decimal(new int[] {
             16,
             0,
             0,
@@ -1368,7 +1372,7 @@
             this.sigmoidDenseChb.AutoSize = true;
             this.sigmoidDenseChb.Checked = true;
             this.sigmoidDenseChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.sigmoidDenseChb.Location = new System.Drawing.Point(158, 359);
+            this.sigmoidDenseChb.Location = new System.Drawing.Point(295, 373);
             this.sigmoidDenseChb.Name = "sigmoidDenseChb";
             this.sigmoidDenseChb.Size = new System.Drawing.Size(80, 21);
             this.sigmoidDenseChb.TabIndex = 31;
@@ -1377,7 +1381,7 @@
             // 
             // slidingWindow2NUD
             // 
-            this.slidingWindow2NUD.Location = new System.Drawing.Point(96, 169);
+            this.slidingWindow2NUD.Location = new System.Drawing.Point(98, 237);
             this.slidingWindow2NUD.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1396,7 +1400,7 @@
             // eluDenseChb
             // 
             this.eluDenseChb.AutoSize = true;
-            this.eluDenseChb.Location = new System.Drawing.Point(34, 290);
+            this.eluDenseChb.Location = new System.Drawing.Point(171, 304);
             this.eluDenseChb.Name = "eluDenseChb";
             this.eluDenseChb.Size = new System.Drawing.Size(57, 21);
             this.eluDenseChb.TabIndex = 32;
@@ -1405,7 +1409,7 @@
             // 
             // slidingWindow1NUD
             // 
-            this.slidingWindow1NUD.Location = new System.Drawing.Point(11, 169);
+            this.slidingWindow1NUD.Location = new System.Drawing.Point(13, 237);
             this.slidingWindow1NUD.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1428,7 +1432,7 @@
             // seluDenseChb
             // 
             this.seluDenseChb.AutoSize = true;
-            this.seluDenseChb.Location = new System.Drawing.Point(34, 313);
+            this.seluDenseChb.Location = new System.Drawing.Point(171, 327);
             this.seluDenseChb.Name = "seluDenseChb";
             this.seluDenseChb.Size = new System.Drawing.Size(66, 21);
             this.seluDenseChb.TabIndex = 33;
@@ -1438,7 +1442,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(60, 149);
+            this.label4.Location = new System.Drawing.Point(62, 217);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 17);
             this.label4.TabIndex = 10;
@@ -1447,7 +1451,7 @@
             // softplusDenseChb
             // 
             this.softplusDenseChb.AutoSize = true;
-            this.softplusDenseChb.Location = new System.Drawing.Point(158, 267);
+            this.softplusDenseChb.Location = new System.Drawing.Point(295, 281);
             this.softplusDenseChb.Name = "softplusDenseChb";
             this.softplusDenseChb.Size = new System.Drawing.Size(82, 21);
             this.softplusDenseChb.TabIndex = 34;
@@ -1468,7 +1472,7 @@
             this.tanhDenseChb.AutoSize = true;
             this.tanhDenseChb.Checked = true;
             this.tanhDenseChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tanhDenseChb.Location = new System.Drawing.Point(158, 313);
+            this.tanhDenseChb.Location = new System.Drawing.Point(295, 327);
             this.tanhDenseChb.Name = "tanhDenseChb";
             this.tanhDenseChb.Size = new System.Drawing.Size(63, 21);
             this.tanhDenseChb.TabIndex = 35;
@@ -1495,7 +1499,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(295, 149);
+            this.label7.Location = new System.Drawing.Point(164, 148);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(59, 17);
             this.label7.TabIndex = 36;
@@ -1532,7 +1536,7 @@
             this.reluConvChb.AutoSize = true;
             this.reluConvChb.Checked = true;
             this.reluConvChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.reluConvChb.Location = new System.Drawing.Point(10, 269);
+            this.reluConvChb.Location = new System.Drawing.Point(147, 283);
             this.reluConvChb.Name = "reluConvChb";
             this.reluConvChb.Size = new System.Drawing.Size(18, 17);
             this.reluConvChb.TabIndex = 4;
@@ -1547,23 +1551,23 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Сверточные\r\n      слои";
             // 
-            // dropoutRateNUD
+            // denseDropoutNUD
             // 
-            this.dropoutRateNUD.Increment = new decimal(new int[] {
+            this.denseDropoutNUD.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.dropoutRateNUD.Location = new System.Drawing.Point(298, 169);
-            this.dropoutRateNUD.Minimum = new decimal(new int[] {
+            this.denseDropoutNUD.Location = new System.Drawing.Point(294, 149);
+            this.denseDropoutNUD.Minimum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.dropoutRateNUD.Name = "dropoutRateNUD";
-            this.dropoutRateNUD.Size = new System.Drawing.Size(46, 22);
-            this.dropoutRateNUD.TabIndex = 38;
-            this.dropoutRateNUD.Value = new decimal(new int[] {
+            this.denseDropoutNUD.Name = "denseDropoutNUD";
+            this.denseDropoutNUD.Size = new System.Drawing.Size(46, 22);
+            this.denseDropoutNUD.TabIndex = 38;
+            this.denseDropoutNUD.Value = new decimal(new int[] {
             50,
             0,
             0,
@@ -1572,7 +1576,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(350, 171);
+            this.label36.Location = new System.Drawing.Point(346, 151);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(20, 17);
             this.label36.TabIndex = 39;
@@ -1581,7 +1585,7 @@
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(66, 171);
+            this.label37.Location = new System.Drawing.Point(68, 239);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(24, 17);
             this.label37.TabIndex = 40;
@@ -1590,7 +1594,7 @@
             // PReLUConvChB
             // 
             this.PReLUConvChB.AutoSize = true;
-            this.PReLUConvChB.Location = new System.Drawing.Point(10, 361);
+            this.PReLUConvChB.Location = new System.Drawing.Point(147, 375);
             this.PReLUConvChB.Name = "PReLUConvChB";
             this.PReLUConvChB.Size = new System.Drawing.Size(18, 17);
             this.PReLUConvChB.TabIndex = 41;
@@ -1599,7 +1603,7 @@
             // PReLUDenseChB
             // 
             this.PReLUDenseChB.AutoSize = true;
-            this.PReLUDenseChB.Location = new System.Drawing.Point(34, 359);
+            this.PReLUDenseChB.Location = new System.Drawing.Point(171, 373);
             this.PReLUDenseChB.Name = "PReLUDenseChB";
             this.PReLUDenseChB.Size = new System.Drawing.Size(75, 21);
             this.PReLUDenseChB.TabIndex = 42;
@@ -1609,7 +1613,7 @@
             // TReLUConvChB
             // 
             this.TReLUConvChB.AutoSize = true;
-            this.TReLUConvChB.Location = new System.Drawing.Point(10, 384);
+            this.TReLUConvChB.Location = new System.Drawing.Point(147, 398);
             this.TReLUConvChB.Name = "TReLUConvChB";
             this.TReLUConvChB.Size = new System.Drawing.Size(18, 17);
             this.TReLUConvChB.TabIndex = 43;
@@ -1618,7 +1622,7 @@
             // ThReLUDenseChB
             // 
             this.ThReLUDenseChB.AutoSize = true;
-            this.ThReLUDenseChB.Location = new System.Drawing.Point(34, 382);
+            this.ThReLUDenseChB.Location = new System.Drawing.Point(171, 396);
             this.ThReLUDenseChB.Name = "ThReLUDenseChB";
             this.ThReLUDenseChB.Size = new System.Drawing.Size(75, 21);
             this.ThReLUDenseChB.TabIndex = 44;
@@ -1627,6 +1631,9 @@
             // 
             // ConvModelGB
             // 
+            this.ConvModelGB.Controls.Add(this.checkBox6);
+            this.ConvModelGB.Controls.Add(this.checkBox5);
+            this.ConvModelGB.Controls.Add(this.convDropoutNUD);
             this.ConvModelGB.Controls.Add(this.ThReLUDenseChB);
             this.ConvModelGB.Controls.Add(this.TReLUConvChB);
             this.ConvModelGB.Controls.Add(this.softplusConvChb);
@@ -1638,7 +1645,7 @@
             this.ConvModelGB.Controls.Add(this.softmaxConvChb);
             this.ConvModelGB.Controls.Add(this.label36);
             this.ConvModelGB.Controls.Add(this.tanhConvChb);
-            this.ConvModelGB.Controls.Add(this.dropoutRateNUD);
+            this.ConvModelGB.Controls.Add(this.denseDropoutNUD);
             this.ConvModelGB.Controls.Add(this.softmaxDenseChb);
             this.ConvModelGB.Controls.Add(this.label1);
             this.ConvModelGB.Controls.Add(this.softsignDenseChb);
@@ -1656,7 +1663,7 @@
             this.ConvModelGB.Controls.Add(this.slidingWindow1NUD);
             this.ConvModelGB.Controls.Add(this.eluDenseChb);
             this.ConvModelGB.Controls.Add(this.slidingWindow2NUD);
-            this.ConvModelGB.Controls.Add(this.ConvNeuronsNUD);
+            this.ConvModelGB.Controls.Add(this.ConvFiltersNUD);
             this.ConvModelGB.Controls.Add(this.lReluDenseChb);
             this.ConvModelGB.Controls.Add(this.DenseNeuronsNUD);
             this.ConvModelGB.Controls.Add(this.label5);
@@ -1670,6 +1677,46 @@
             this.ConvModelGB.Size = new System.Drawing.Size(396, 439);
             this.ConvModelGB.TabIndex = 50;
             this.ConvModelGB.TabStop = false;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(20, 149);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(18, 17);
+            this.checkBox6.TabIndex = 47;
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(270, 152);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(18, 17);
+            this.checkBox5.TabIndex = 46;
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // convDropoutNUD
+            // 
+            this.convDropoutNUD.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.convDropoutNUD.Location = new System.Drawing.Point(44, 146);
+            this.convDropoutNUD.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.convDropoutNUD.Name = "convDropoutNUD";
+            this.convDropoutNUD.Size = new System.Drawing.Size(41, 22);
+            this.convDropoutNUD.TabIndex = 45;
+            this.convDropoutNUD.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             // 
             // LSTMModelGB
             // 
@@ -2030,81 +2077,6 @@
             this.UpdateGeneticsGB.TabStop = false;
             this.UpdateGeneticsGB.Visible = false;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(202, 22);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Обзор";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(6, 410);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "Train";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(105, 22);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(59, 22);
-            this.textBox5.TabIndex = 2;
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(18, 23);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(81, 17);
-            this.label52.TabIndex = 3;
-            this.label52.Text = "Популяция";
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(170, 25);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(26, 17);
-            this.label53.TabIndex = 4;
-            this.label53.Text = "шт";
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(202, 59);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(75, 22);
-            this.numericUpDown2.TabIndex = 5;
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(18, 61);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(113, 17);
-            this.label54.TabIndex = 6;
-            this.label54.Text = "Дополнительно";
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(18, 99);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(106, 17);
-            this.label56.TabIndex = 8;
-            this.label56.Text = "Эпох обучения";
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(202, 97);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(75, 22);
-            this.numericUpDown3.TabIndex = 9;
-            // 
             // label55
             // 
             this.label55.AutoSize = true;
@@ -2336,6 +2308,81 @@
             this.label66.TabIndex = 71;
             this.label66.Text = "Пропорции";
             // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(202, 97);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(75, 22);
+            this.numericUpDown3.TabIndex = 9;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(18, 99);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(106, 17);
+            this.label56.TabIndex = 8;
+            this.label56.Text = "Эпох обучения";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(18, 61);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(113, 17);
+            this.label54.TabIndex = 6;
+            this.label54.Text = "Дополнительно";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(202, 59);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(75, 22);
+            this.numericUpDown2.TabIndex = 5;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(170, 25);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(26, 17);
+            this.label53.TabIndex = 4;
+            this.label53.Text = "шт";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(18, 23);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(81, 17);
+            this.label52.TabIndex = 3;
+            this.label52.Text = "Популяция";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(105, 22);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(59, 22);
+            this.textBox5.TabIndex = 2;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 410);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "Train";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(202, 22);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Обзор";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2406,14 +2453,15 @@
             this.GANModelGB.ResumeLayout(false);
             this.GANModelGB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DenseNeuronsNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ConvNeuronsNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConvFiltersNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slidingWindow2NUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slidingWindow1NUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DenseLayersNumbNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ConvLayersNumbNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dropoutRateNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.denseDropoutNUD)).EndInit();
             this.ConvModelGB.ResumeLayout(false);
             this.ConvModelGB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.convDropoutNUD)).EndInit();
             this.LSTMModelGB.ResumeLayout(false);
             this.LSTMModelGB.PerformLayout();
             this.PercModelGB.ResumeLayout(false);
@@ -2431,8 +2479,6 @@
             this.ganWithoutGB.PerformLayout();
             this.UpdateGeneticsGB.ResumeLayout(false);
             this.UpdateGeneticsGB.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
@@ -2440,6 +2486,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2537,7 +2585,7 @@
         private System.Windows.Forms.NumericUpDown DenseNeuronsNUD;
         private System.Windows.Forms.CheckBox lReluDenseChb;
         private System.Windows.Forms.CheckBox softsignDenseChb;
-        private System.Windows.Forms.NumericUpDown ConvNeuronsNUD;
+        private System.Windows.Forms.NumericUpDown ConvFiltersNUD;
         private System.Windows.Forms.CheckBox sigmoidDenseChb;
         private System.Windows.Forms.NumericUpDown slidingWindow2NUD;
         private System.Windows.Forms.CheckBox eluDenseChb;
@@ -2553,7 +2601,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox reluConvChb;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown dropoutRateNUD;
+        private System.Windows.Forms.NumericUpDown denseDropoutNUD;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.CheckBox PReLUConvChB;
@@ -2634,6 +2682,9 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.NumericUpDown convDropoutNUD;
     }
 }
 
