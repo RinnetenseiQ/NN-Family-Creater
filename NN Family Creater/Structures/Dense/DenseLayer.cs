@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NN_Family_Creater
 {
-    class DenseLayer
+    public class DenseLayer
     {
         public bool dropoutExist;
         public int dropoutRate;
@@ -14,13 +14,14 @@ namespace NN_Family_Creater
         public int activationIndex;
         public int neurons;
 
-        public DenseLayer(int activationsIndexesRange, int neurons, int dropoutRateRange)
+
+        public DenseLayer(DenseRandomParams drp, Random random, int neurons)
         {
-            random = new Random();
+            this.random = random;
             dropoutExist = random.Next(100) < 10 ? true : false;
-            if (dropoutExist) dropoutRate = random.Next(10, dropoutRateRange);
+            if (dropoutExist) dropoutRate = random.Next(10, drp.denseDropRange);
             else dropoutRate = 0;
-            activationIndex = random.Next(activationsIndexesRange);
+            activationIndex = random.Next(drp.denseActIndexesRange);
             this.neurons = neurons;
         }
 
@@ -31,16 +32,6 @@ namespace NN_Family_Creater
             this.dropoutExist = dropoutExist;
             this.dropoutRate = dropoutRate;
         } // псевдокопирующий конструктор
-
-        public DenseLayer(DenseRandomParams drp, int neurons)
-        {
-            random = new Random();
-            dropoutExist = random.Next(100) < 10 ? true : false;
-            if (dropoutExist) dropoutRate = random.Next(10, drp.denseDropRange);
-            else dropoutRate = 0;
-            activationIndex = random.Next(drp.denseActIndexesRange);
-            this.neurons = neurons;
-        }
 
         public void MutateActivation(DenseRandomParams drp, int mutateRate)
         {
@@ -58,7 +49,8 @@ namespace NN_Family_Creater
                 if (mutationWay < 10)
                 {
                     dropoutExist = !dropoutExist;
-                    if(dropoutExist) dropoutRate = random.Next(10, drp.denseDropRange);
+                    if (dropoutExist) dropoutRate = random.Next(10, drp.denseDropRange);
+                    else dropoutRate = 0;
                 }
                 else dropoutRate = random.Next(10, drp.denseDropRange);
             }

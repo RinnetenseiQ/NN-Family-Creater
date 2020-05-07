@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.minConstSpeedTB = new System.Windows.Forms.TextBox();
+            this.maxConstSpeedTB = new System.Windows.Forms.TextBox();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.checkBox19 = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -52,10 +52,7 @@
             this.geneticGB = new System.Windows.Forms.GroupBox();
             this.createScriptsBtn = new System.Windows.Forms.Button();
             this.testButton = new System.Windows.Forms.Button();
-            this.label51 = new System.Windows.Forms.Label();
-            this.maxMemoryNUD = new System.Windows.Forms.NumericUpDown();
-            this.label50 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.networkNameTB = new System.Windows.Forms.TextBox();
             this.button9 = new System.Windows.Forms.Button();
             this.label38 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
@@ -99,6 +96,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.trainQueryBtn = new System.Windows.Forms.Button();
             this.label32 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,8 +150,8 @@
             this.TReLUConvChB = new System.Windows.Forms.CheckBox();
             this.ThReLUDenseChB = new System.Windows.Forms.CheckBox();
             this.ConvModelGB = new System.Windows.Forms.GroupBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.convDropoutChB = new System.Windows.Forms.CheckBox();
+            this.denseDropoutChB = new System.Windows.Forms.CheckBox();
             this.convDropoutNUD = new System.Windows.Forms.NumericUpDown();
             this.LSTMModelGB = new System.Windows.Forms.GroupBox();
             this.label40 = new System.Windows.Forms.Label();
@@ -219,6 +217,10 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.ErrorTB = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.chrOutTB = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
@@ -227,7 +229,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.batchSizeNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
             this.geneticGB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.maxMemoryNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown18)).BeginInit();
@@ -277,19 +278,23 @@
             this.trackBar1.Size = new System.Drawing.Size(189, 56);
             this.trackBar1.TabIndex = 0;
             // 
-            // textBox1
+            // minConstSpeedTB
             // 
-            this.textBox1.Location = new System.Drawing.Point(330, 80);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(45, 22);
-            this.textBox1.TabIndex = 1;
+            this.minConstSpeedTB.Location = new System.Drawing.Point(330, 80);
+            this.minConstSpeedTB.Name = "minConstSpeedTB";
+            this.minConstSpeedTB.Size = new System.Drawing.Size(45, 22);
+            this.minConstSpeedTB.TabIndex = 1;
+            this.minConstSpeedTB.Text = "0.001";
+            this.minConstSpeedTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
-            // textBox2
+            // maxConstSpeedTB
             // 
-            this.textBox2.Location = new System.Drawing.Point(330, 126);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(45, 22);
-            this.textBox2.TabIndex = 2;
+            this.maxConstSpeedTB.Location = new System.Drawing.Point(330, 126);
+            this.maxConstSpeedTB.Name = "maxConstSpeedTB";
+            this.maxConstSpeedTB.Size = new System.Drawing.Size(45, 22);
+            this.maxConstSpeedTB.TabIndex = 2;
+            this.maxConstSpeedTB.Text = "0.700";
+            this.maxConstSpeedTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // trackBar2
             // 
@@ -369,9 +374,9 @@
             this.groupBox1.Controls.Add(this.checkBox19);
             this.groupBox1.Controls.Add(this.trackBar1);
             this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.minConstSpeedTB);
             this.groupBox1.Controls.Add(this.numericUpDown10);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.maxConstSpeedTB);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.trackBar2);
             this.groupBox1.Controls.Add(this.label10);
@@ -488,10 +493,7 @@
             // 
             this.geneticGB.Controls.Add(this.createScriptsBtn);
             this.geneticGB.Controls.Add(this.testButton);
-            this.geneticGB.Controls.Add(this.label51);
-            this.geneticGB.Controls.Add(this.maxMemoryNUD);
-            this.geneticGB.Controls.Add(this.label50);
-            this.geneticGB.Controls.Add(this.textBox10);
+            this.geneticGB.Controls.Add(this.networkNameTB);
             this.geneticGB.Controls.Add(this.button9);
             this.geneticGB.Controls.Add(this.label38);
             this.geneticGB.Controls.Add(this.label35);
@@ -545,53 +547,13 @@
             this.testButton.UseVisualStyleBackColor = true;
             this.testButton.Click += new System.EventHandler(this.testButton_Click);
             // 
-            // label51
+            // networkNameTB
             // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(216, 280);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(28, 17);
-            this.label51.TabIndex = 70;
-            this.label51.Text = "MB";
-            // 
-            // maxMemoryNUD
-            // 
-            this.maxMemoryNUD.DecimalPlaces = 1;
-            this.maxMemoryNUD.Location = new System.Drawing.Point(144, 278);
-            this.maxMemoryNUD.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.maxMemoryNUD.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.maxMemoryNUD.Name = "maxMemoryNUD";
-            this.maxMemoryNUD.Size = new System.Drawing.Size(69, 22);
-            this.maxMemoryNUD.TabIndex = 69;
-            this.maxMemoryNUD.Value = new decimal(new int[] {
-            8000,
-            0,
-            0,
-            0});
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(17, 280);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(87, 17);
-            this.label50.TabIndex = 68;
-            this.label50.Text = "Max memory";
-            // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(92, 18);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(172, 22);
-            this.textBox10.TabIndex = 61;
+            this.networkNameTB.Location = new System.Drawing.Point(92, 18);
+            this.networkNameTB.Name = "networkNameTB";
+            this.networkNameTB.Size = new System.Drawing.Size(172, 22);
+            this.networkNameTB.TabIndex = 61;
+            this.networkNameTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.networkNameTB_KeyPress);
             // 
             // button9
             // 
@@ -1051,6 +1013,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.trainQueryBtn);
             this.groupBox5.Controls.Add(this.pauseQueryBtn);
             this.groupBox5.Controls.Add(this.button3);
             this.groupBox5.Location = new System.Drawing.Point(1110, 53);
@@ -1058,6 +1021,16 @@
             this.groupBox5.Size = new System.Drawing.Size(203, 439);
             this.groupBox5.TabIndex = 65;
             this.groupBox5.TabStop = false;
+            // 
+            // trainQueryBtn
+            // 
+            this.trainQueryBtn.Location = new System.Drawing.Point(6, 381);
+            this.trainQueryBtn.Name = "trainQueryBtn";
+            this.trainQueryBtn.Size = new System.Drawing.Size(89, 23);
+            this.trainQueryBtn.TabIndex = 62;
+            this.trainQueryBtn.Text = "Start";
+            this.trainQueryBtn.UseVisualStyleBackColor = true;
+            this.trainQueryBtn.Click += new System.EventHandler(this.trainQueryBtn_ClickAsync);
             // 
             // label32
             // 
@@ -1124,11 +1097,12 @@
             this.coutModeCB.Items.AddRange(new object[] {
             "Current Genetic Search",
             "Errorneous Chromosome Configuration",
-            "Current Genetic Epoch"});
+            "Current Chromosome Output"});
             this.coutModeCB.Location = new System.Drawing.Point(5, 498);
             this.coutModeCB.Name = "coutModeCB";
             this.coutModeCB.Size = new System.Drawing.Size(395, 24);
             this.coutModeCB.TabIndex = 69;
+            this.coutModeCB.SelectedIndexChanged += new System.EventHandler(this.coutModeCB_SelectedIndexChanged);
             // 
             // dataGridView1
             // 
@@ -1212,8 +1186,6 @@
             // eluConvChb
             // 
             this.eluConvChb.AutoSize = true;
-            this.eluConvChb.Checked = true;
-            this.eluConvChb.CheckState = System.Windows.Forms.CheckState.Checked;
             this.eluConvChb.Location = new System.Drawing.Point(147, 306);
             this.eluConvChb.Name = "eluConvChb";
             this.eluConvChb.Size = new System.Drawing.Size(18, 17);
@@ -1232,8 +1204,6 @@
             // seluConvChb
             // 
             this.seluConvChb.AutoSize = true;
-            this.seluConvChb.Checked = true;
-            this.seluConvChb.CheckState = System.Windows.Forms.CheckState.Checked;
             this.seluConvChb.Location = new System.Drawing.Point(147, 329);
             this.seluConvChb.Name = "seluConvChb";
             this.seluConvChb.Size = new System.Drawing.Size(18, 17);
@@ -1243,8 +1213,6 @@
             // lReluConvChb
             // 
             this.lReluConvChb.AutoSize = true;
-            this.lReluConvChb.Checked = true;
-            this.lReluConvChb.CheckState = System.Windows.Forms.CheckState.Checked;
             this.lReluConvChb.Location = new System.Drawing.Point(147, 352);
             this.lReluConvChb.Name = "lReluConvChb";
             this.lReluConvChb.Size = new System.Drawing.Size(18, 17);
@@ -1300,17 +1268,15 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(123, 99);
+            this.label5.Location = new System.Drawing.Point(123, 83);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(147, 34);
+            this.label5.Size = new System.Drawing.Size(139, 51);
             this.label5.TabIndex = 17;
-            this.label5.Text = "Нейронов(фильтров)\r\n     первого слоя";
+            this.label5.Text = "        Нейронов\r\n(степень фильтров)\r\n     первого слоя";
             // 
             // softmaxDenseChb
             // 
             this.softmaxDenseChb.AutoSize = true;
-            this.softmaxDenseChb.Checked = true;
-            this.softmaxDenseChb.CheckState = System.Windows.Forms.CheckState.Checked;
             this.softmaxDenseChb.Location = new System.Drawing.Point(295, 304);
             this.softmaxDenseChb.Name = "softmaxDenseChb";
             this.softmaxDenseChb.Size = new System.Drawing.Size(80, 21);
@@ -1362,7 +1328,7 @@
             this.ConvFiltersNUD.Size = new System.Drawing.Size(58, 22);
             this.ConvFiltersNUD.TabIndex = 14;
             this.ConvFiltersNUD.Value = new decimal(new int[] {
-            16,
+            4,
             0,
             0,
             0});
@@ -1470,8 +1436,6 @@
             // tanhDenseChb
             // 
             this.tanhDenseChb.AutoSize = true;
-            this.tanhDenseChb.Checked = true;
-            this.tanhDenseChb.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tanhDenseChb.Location = new System.Drawing.Point(295, 327);
             this.tanhDenseChb.Name = "tanhDenseChb";
             this.tanhDenseChb.Size = new System.Drawing.Size(63, 21);
@@ -1631,8 +1595,8 @@
             // 
             // ConvModelGB
             // 
-            this.ConvModelGB.Controls.Add(this.checkBox6);
-            this.ConvModelGB.Controls.Add(this.checkBox5);
+            this.ConvModelGB.Controls.Add(this.convDropoutChB);
+            this.ConvModelGB.Controls.Add(this.denseDropoutChB);
             this.ConvModelGB.Controls.Add(this.convDropoutNUD);
             this.ConvModelGB.Controls.Add(this.ThReLUDenseChB);
             this.ConvModelGB.Controls.Add(this.TReLUConvChB);
@@ -1678,23 +1642,23 @@
             this.ConvModelGB.TabIndex = 50;
             this.ConvModelGB.TabStop = false;
             // 
-            // checkBox6
+            // convDropoutChB
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(20, 149);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(18, 17);
-            this.checkBox6.TabIndex = 47;
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.convDropoutChB.AutoSize = true;
+            this.convDropoutChB.Location = new System.Drawing.Point(20, 149);
+            this.convDropoutChB.Name = "convDropoutChB";
+            this.convDropoutChB.Size = new System.Drawing.Size(18, 17);
+            this.convDropoutChB.TabIndex = 47;
+            this.convDropoutChB.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // denseDropoutChB
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(270, 152);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(18, 17);
-            this.checkBox5.TabIndex = 46;
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.denseDropoutChB.AutoSize = true;
+            this.denseDropoutChB.Location = new System.Drawing.Point(270, 152);
+            this.denseDropoutChB.Name = "denseDropoutChB";
+            this.denseDropoutChB.Size = new System.Drawing.Size(18, 17);
+            this.denseDropoutChB.TabIndex = 46;
+            this.denseDropoutChB.UseVisualStyleBackColor = true;
             // 
             // convDropoutNUD
             // 
@@ -1710,7 +1674,7 @@
             0,
             0});
             this.convDropoutNUD.Name = "convDropoutNUD";
-            this.convDropoutNUD.Size = new System.Drawing.Size(41, 22);
+            this.convDropoutNUD.Size = new System.Drawing.Size(48, 22);
             this.convDropoutNUD.TabIndex = 45;
             this.convDropoutNUD.Value = new decimal(new int[] {
             50,
@@ -2383,6 +2347,44 @@
             this.button2.Text = "Обзор";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // ErrorTB
+            // 
+            this.ErrorTB.Location = new System.Drawing.Point(1721, 454);
+            this.ErrorTB.Multiline = true;
+            this.ErrorTB.Name = "ErrorTB";
+            this.ErrorTB.Size = new System.Drawing.Size(48, 34);
+            this.ErrorTB.TabIndex = 92;
+            this.ErrorTB.Visible = false;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(1780, 463);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(83, 17);
+            this.label50.TabIndex = 93;
+            this.label50.Text = "error output";
+            this.label50.Visible = false;
+            // 
+            // chrOutTB
+            // 
+            this.chrOutTB.Location = new System.Drawing.Point(1721, 532);
+            this.chrOutTB.Multiline = true;
+            this.chrOutTB.Name = "chrOutTB";
+            this.chrOutTB.Size = new System.Drawing.Size(48, 33);
+            this.chrOutTB.TabIndex = 94;
+            this.chrOutTB.Visible = false;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(1780, 535);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(133, 17);
+            this.label51.TabIndex = 95;
+            this.label51.Text = "chromosome output";
+            this.label51.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2390,6 +2392,10 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.label51);
+            this.Controls.Add(this.chrOutTB);
+            this.Controls.Add(this.label50);
+            this.Controls.Add(this.ErrorTB);
             this.Controls.Add(this.UpdateGeneticsGB);
             this.Controls.Add(this.upgradePopulationChB);
             this.Controls.Add(this.ganWithoutGB);
@@ -2436,7 +2442,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
             this.geneticGB.ResumeLayout(false);
             this.geneticGB.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.maxMemoryNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown18)).EndInit();
@@ -2496,8 +2501,8 @@
         #endregion
 
         private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox minConstSpeedTB;
+        private System.Windows.Forms.TextBox maxConstSpeedTB;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.CheckBox checkBox19;
         private System.Windows.Forms.Label label9;
@@ -2558,7 +2563,7 @@
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox networkNameTB;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -2648,9 +2653,6 @@
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.GroupBox ganWithoutGB;
         private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.NumericUpDown maxMemoryNUD;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Button testButton;
         private System.Windows.Forms.Button createScriptsBtn;
         private System.Windows.Forms.CheckBox upgradePopulationChB;
@@ -2682,9 +2684,14 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox convDropoutChB;
+        private System.Windows.Forms.CheckBox denseDropoutChB;
         private System.Windows.Forms.NumericUpDown convDropoutNUD;
+        private System.Windows.Forms.Button trainQueryBtn;
+        public System.Windows.Forms.TextBox ErrorTB;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.TextBox chrOutTB;
+        private System.Windows.Forms.Label label51;
     }
 }
 

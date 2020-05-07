@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NN_Family_Creater
 {
-    class ConvolutionalChromosome
+    public class ConvolutionalChromosome
     {
         Random random;
 
@@ -18,21 +19,24 @@ namespace NN_Family_Creater
 
         public ConvStructure convPart;
         public DenseStructure densePart;
+
+        public NetworkRandomParams nrp;
         public ConvRandomParams crp;
         public DenseRandomParams drp;
 
         public float assessment;
 
         public float accuracy;
-        public float memory;
+        public float paramsCount;
 
-        public ConvolutionalChromosome(ConvRandomParams crp, DenseRandomParams drp)
+        public ConvolutionalChromosome(NetworkRandomParams nrp, ConvRandomParams crp, DenseRandomParams drp, Random random)
         {
-            random = new Random();
+            this.random = random;
+            this.nrp = nrp;
             this.crp = crp;
             this.drp = drp;
-            convPart = new ConvStructure(crp);
-            densePart = new DenseStructure(drp);
+            convPart = new ConvStructure(crp, random);
+            densePart = new DenseStructure(drp, random);
         }
 
   
@@ -40,6 +44,7 @@ namespace NN_Family_Creater
         {
             this.crp = crp;
             this.drp = drp;
+            //добавить рандомные параметры 
             convPart = new ConvStructure(cNet.slidingWindows, cNet.convActivationIndexes, cNet.filters, cNet.convDropoutIndexes, cNet.convDropoutRates);
             densePart = new DenseStructure(cNet.denseActivationIndexes, cNet.neurons, cNet.denseDropoutIndexes, cNet.denseDropoutRates);
         } // конструктор для создания хромосомы из полей описательного класса ConvolutionalNetwork для последующего использования в генетических алгоритмах (например, для поиска лучшего варианта чем текущий)
@@ -50,7 +55,7 @@ namespace NN_Family_Creater
             {
                 if(random.Next(100) < 5)
                 {
-                    convPart = new ConvStructure(crp);
+                    convPart = new ConvStructure(crp, random);
                 }
                 else
                 {
@@ -68,7 +73,7 @@ namespace NN_Family_Creater
             {
                 if (random.Next(100) < 5)
                 {
-                    densePart = new DenseStructure(drp);
+                    densePart = new DenseStructure(drp, random);
                 }
                 else
                 {
@@ -80,14 +85,18 @@ namespace NN_Family_Creater
             }
         }
 
+
         public void UpdateAssessmentParam()
         {
             // TO DO
             // assessment = convPart.convLayers.Count*8 + densePart.denseLayer.Count*8 + densePart.denseLayer[0].neurons/8;
             //assessment = random.Next(100);
 
+            //accuracy = new Random().Next(100);
             accuracy = random.Next(100);
-            memory = random.Next(20, 1000);
+          
+            paramsCount = random.Next(20, 10000);
+            //paramsCount = new Random().Next(20, 10000);
         }
 
     }
@@ -104,11 +113,11 @@ namespace NN_Family_Creater
         {
             // TO DO assessment rules
 
-            if ((b.memory - a.memory > 0) && (b.accuracy - a.accuracy < 0)) return 1;
-            else if ((b.memory - a.memory < 0) && (b.accuracy - a.accuracy > 0)) return -1;
-            else if ((b.memory - a.memory == 0) && (b.accuracy - a.accuracy == 0)) return 0;
-            else if ((b.memory - MemoryCoef * a.memory > 0) && (b.accuracy - AccuracyCoef * a.accuracy > 0)) return 1;
-            else if ((b.memory - MemoryCoef * a.memory < 0) && (b.accuracy - AccuracyCoef * a.accuracy < 0)) return -1;
+            if ((b.paramsCount - a.paramsCount > 0) && (b.accuracy - a.accuracy < 0)) return 1;
+            else if ((b.paramsCount - a.paramsCount < 0) && (b.accuracy - a.accuracy > 0)) return -1;
+            else if ((b.paramsCount - a.paramsCount == 0) && (b.accuracy - a.accuracy == 0)) return 0;
+            else if ((b.paramsCount - MemoryCoef * a.paramsCount > 0) && (b.accuracy - AccuracyCoef * a.accuracy > 0)) return 1;
+            else if ((b.paramsCount - MemoryCoef * a.paramsCount < 0) && (b.accuracy - AccuracyCoef * a.accuracy < 0)) return -1;
             else return 0; //
 
             //return b.assessment - a.assessment;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NN_Family_Creater
 {
-    class ConvLayer
+    public class ConvLayer
     {
         public int activationIndex;
         Random random;
@@ -21,8 +21,9 @@ namespace NN_Family_Creater
         public int filters;
 
 
-        public ConvLayer(ConvRandomParams crp, int filters)
+        public ConvLayer(ConvRandomParams crp, Random random, int filters)
         {
+            this.random = random;
             this.filters = filters;
             random = new Random();
             slidingWindow = new int[2];
@@ -31,6 +32,8 @@ namespace NN_Family_Creater
             maxPullingExist = random.Next(100) < 10 ? true : false;
             if (dropoutExist) dropoutRate = random.Next(10, crp.convDropRange);
             else dropoutRate = 0;
+
+            activationIndex = random.Next(crp.convActIndexesRange);
 
             squareSlidingWindow = random.Next(100) <= 50 ? true : false;
             if (squareSlidingWindow)

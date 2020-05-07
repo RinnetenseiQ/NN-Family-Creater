@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace NN_Family_Creater
 {
-    class DenseStructure
+    public class DenseStructure
     {
         Random random;
         public int denseLayersNumb;
         public List<DenseLayer> denseLayer;
         public bool sameActivations;
 
-        public DenseStructure(DenseRandomParams drp)
+        public DenseStructure(DenseRandomParams drp, Random random)
         {
-            random = new Random();
-
+            this.random = random;
 
             sameActivations = random.Next(100) < 10 ? true : false;
             int abserber = 0;
@@ -32,7 +31,7 @@ namespace NN_Family_Creater
                 int neurons;
                 if (i == 0) neurons = random.Next(drp.firstDenseNeuronsRange / 3, drp.firstDenseNeuronsRange);
                 else neurons = random.Next(denseLayer[i - 1].neurons / 3, denseLayer[i - 1].neurons);
-                denseLayer.Add(new DenseLayer(drp, neurons));
+                denseLayer.Add(new DenseLayer(drp, random, neurons));
 
                 if (sameActivations)
                 {
@@ -75,7 +74,7 @@ namespace NN_Family_Creater
                 {
                     int neurons = random.Next(denseLayer[denseLayer.Count - 1].neurons / 3, denseLayer[denseLayer.Count - 1].neurons);
                     //denseLayer.Add(new DenseLayer(activationsIndexesRange, neurons, dropoutRateRange));
-                    denseLayer.Add(new DenseLayer(drp, neurons));
+                    denseLayer.Add(new DenseLayer(drp, random, neurons));
 
                     if(sameActivations) denseLayer[denseLayer.Count - 1].activationIndex = denseLayer[0].activationIndex;
                 }
@@ -135,8 +134,12 @@ namespace NN_Family_Creater
             {
                 if (random.Next(100) < 10)
                 {
-                    if(denseLayer[0].dropoutExist) for(int i = 0; i < denseLayer.Count; i++) denseLayer[i].dropoutExist = false;
-                    else for(int i = 0; i < denseLayer.Count; i++)
+                    if (denseLayer[0].dropoutExist) for (int i = 0; i < denseLayer.Count; i++)
+                        {
+                            denseLayer[i].dropoutExist = false;
+                            denseLayer[i].dropoutRate = 0;
+                        }
+                    else for (int i = 0; i < denseLayer.Count; i++)
                         {
                             denseLayer[i].dropoutExist = true;
                             denseLayer[i].dropoutRate = random.Next(10, drp.denseDropRange);

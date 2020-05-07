@@ -63,47 +63,35 @@ namespace NN_Family_Creater
             return sel;
         } // тупо копипаст с лабы(компилятор даже не заметил, что код с джавы приплыл)
 
-        public static void UpdateAssesment(List<ConvolutionalChromosome> chrList, float maxMemory)
+        public static void UpdateAssesment(List<ConvolutionalChromosome> chrList)
         {
-            float minMemory = maxMemory; //локальная переменная для хранения минимальной памяти
+            float minParamsCount = chrList[0].paramsCount; //локальная переменная для хранения минимальной памяти
+            for (int i = 1; i < chrList.Count; i++)
+                if (chrList[i].paramsCount < minParamsCount) minParamsCount = chrList[i].paramsCount; // цикл поиска минимума
             for (int i = 0; i < chrList.Count; i++)
-                if (chrList[i].memory < minMemory) minMemory = chrList[i].memory; // цикл поиска минимума
-            for (int i = 0; i < chrList.Count; i++)
-                chrList[i].assessment = (chrList[i].accuracy / 100) + (minMemory / chrList[i].memory); // цикл расчета ошибки
+                chrList[i].assessment = (chrList[i].accuracy / 100.0f) + (minParamsCount / chrList[i].paramsCount); // цикл расчета оценки
+        } // расчет оценки сети
+
+
+        public static void MutateConvChr(ConvRandomParams crp, DenseRandomParams drp, 
+                                          int mutateRate)
+        {
+            if (new Random().Next(100) < mutateRate)
+            {
+                if (new Random().Next(100) < 5)
+                {
+                    //TO DOOOOOOOOOOOOOO  new Chromosome
+
+                }
+            }
         }
 
-
-        public static void InsertChromosomeCode(String path, int line, ConvolutionalChromosome chr, List<String> convActivations, List<String> denseActivations)
-        {
-            string code = "";
-            for(int i = 0; i < chr.convPart.convLayers.Count; i++)
-            {
-                if (i == 0) code += "model.add(ZeroPadding2D((1, 1), input_shape = (128, 128, 3)))" + Environment.NewLine;
-                else code += "model.add(ZeroPadding2D((1, 1))" + Environment.NewLine;
-                code += "model.add(Conv2D(" + chr.convPart.convLayers[i].filters.ToString() +
-                                            ", kernel_size = (" + chr.convPart.convLayers[i].slidingWindow[0].ToString() + ", " +
-                                            chr.convPart.convLayers[i].slidingWindow[1].ToString() + "), strides = (1, 1), activation ='" +
-                                            convActivations[chr.convPart.convLayers[i].activationIndex] + "'))" + Environment.NewLine;
-                code += "model.add(MaxPooling2D(pool_size = (2, 2), strides = (2, 2)))" + Environment.NewLine;
-            }
-            code += "model.add(Flatten())" + Environment.NewLine;
-            for(int i = 0; i < chr.densePart.denseLayer.Count; i++)
-            {
-                code += "model.add(Dense(" + chr.densePart.denseLayer[i].neurons.ToString() +
-                                        ", activation = '" + denseActivations[chr.densePart.denseLayer[i].activationIndex] + "'))" + Environment.NewLine;
-                if (chr.densePart.denseLayer[i].dropoutExist)
-                    code += "model.add(Dropout(" + ((float)chr.densePart.denseLayer[i].dropoutRate / 100).ToString() + "))" + Environment.NewLine;
-            }
-            code += "model.add(Dense(len(lb.classes_), activation = \"softmax\"";
-            insertLineToFile(path, line, code);
-        }
-
-        
-        // 30 означает что в 30 строку, а не после нее (1 - в первую строку)
-        //insertLineToFile("proba.txt",30,"abc");
 
         public static void insertLineToFile(String path, int line, String text)
         {
+            //insertLineToFile("proba.txt", 30, "abc");
+            // 30 означает что в 30 строку, а не после нее (1 - в первую строку)
+
             //уменьшить, т.к. нумерация с единицы и если номер отрицательный - указать начало файла
             if (--line < 0) line = 0;
 
@@ -141,21 +129,13 @@ namespace NN_Family_Creater
                 file.Write(textFile);
             }
 
-        }
+        } // метод вставки в определенную строку файла
 
 
-        
-        ////
-        ///
-        public void MutateNeurons(int mutateRate, string path, int firstLayer)
-        {
-
-        }
-
-        public int GetOutputNumb(string path)
+        public static int GetOutputNumb(string path)
         {
             return Directory.GetDirectories(path).Length;
-        }
+        } // возвращает количество выходов сети(классов), нужных для обучения сети - нужно для распределения нейронов, чтобы не вышло, что предыдущий слой меньше количества классов.
 
 
         public static void WriteConvNetworkConfig(List<ConvolutionalNetwork> eliteConvNets)
@@ -164,7 +144,7 @@ namespace NN_Family_Creater
             {
                 sw.WriteLine(JsonConvert.SerializeObject(eliteConvNets));
             }
-        }
+        } // метод сериализации конфигураций сети в файл
 
         public static void ReadConvNetworkConfig(List<ConvolutionalNetwork> eliteConvNets)
         {
@@ -172,6 +152,6 @@ namespace NN_Family_Creater
             {
                 eliteConvNets = JsonConvert.DeserializeObject<List<ConvolutionalNetwork>>(sr.ReadLine());
             }
-        }
+        } // метод десериализации конфигуриции сети из файла
     }
 }

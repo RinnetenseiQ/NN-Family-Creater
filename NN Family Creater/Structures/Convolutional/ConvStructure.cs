@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NN_Family_Creater
 {
-    class ConvStructure
+    public class ConvStructure
     {
         Random random;
         public int convLayersNumb;
@@ -17,9 +17,9 @@ namespace NN_Family_Creater
         public bool sameActivations;
         public bool allSquareSlidingWindows;
         
-        public ConvStructure(ConvRandomParams crp)
+        public ConvStructure(ConvRandomParams crp, Random random)
         {
-            random = new Random();
+            this.random = random;
 
             sameSlidingWindowsSize = random.Next(100) < 10 ? true : false;      //подредачить шанс
             sameActivations = random.Next(100) < 10 ? true : false;             //подредачить шанс
@@ -27,13 +27,17 @@ namespace NN_Family_Creater
 
             convLayersNumb = random.Next(1, crp.convLayersNumbRange);
             convLayers = new List<ConvLayer>(convLayersNumb);
-            for (int i = 0, adds = 0; i < convLayers.Capacity; i++, adds += 16) // переделать условие выхода ----------- экзепшн!!!!!
+
+            int powRandomValue = 0;
+            for (int i = 0; i < convLayers.Capacity; i++) 
             {
-                int filters = random.Next(8, crp.firstConvFiltersRange) + adds; // Переделать!!!?
-                convLayers.Add(new ConvLayer(crp, filters));
+                if (i == 0) powRandomValue = random.Next(1, crp.firstConvPowFilters + 1);
+                else powRandomValue += random.Next(0, 2);
+                int filters = (int)Math.Pow(2, powRandomValue);
+                convLayers.Add(new ConvLayer(crp, random, filters)); // создаются разные, но в листе получаются одинаковые
             }
 
-            if (sameSlidingWindowsSize)
+            if (sameSlidingWindowsSize) // тут уже одинаковые
             {
                 int abserber = random.Next(convLayers.Count);
                 for (int i = 0; i < convLayers.Count; i++)
@@ -61,10 +65,6 @@ namespace NN_Family_Creater
             }
         }
 
-        public ConvStructure(ConvStructure CSToCopy)
-        {
-            this.convLayersNumb = CSToCopy.convLayersNumb;
-        }
 
         public ConvStructure(List<int[]> slidingWindows, List<int> convActivationIndexes, List<int> filters, List<int> convDropoutIndexes, List<int> dropoutRates)
         {
@@ -98,8 +98,8 @@ namespace NN_Family_Creater
                 convLayers.Capacity = convLayersNumb;
                 while(convLayers.Count != convLayers.Capacity) // проверить условие!!
                 {
-                    int filters = random.Next(crp.firstConvFiltersRange, crp.firstConvFiltersRange + crp.firstConvFiltersRange * convLayers.Count); //переделать!?
-                    convLayers.Add(new ConvLayer(crp, filters));
+                    int filters = random.Next(crp.firstConvPowFilters, crp.firstConvPowFilters + crp.firstConvPowFilters * convLayers.Count); //переделать!?
+                    convLayers.Add(new ConvLayer(crp, random, filters));
 
                     if (sameSlidingWindowsSize) convLayers[convLayers.Count - 1].slidingWindow = convLayers[0].slidingWindow;
                     if (sameActivations) convLayers[convLayers.Count - 1].activationIndex = convLayers[0].activationIndex;

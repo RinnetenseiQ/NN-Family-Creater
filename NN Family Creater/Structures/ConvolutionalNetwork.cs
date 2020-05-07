@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NN_Family_Creater
 {
-    class ConvolutionalNetwork
+    public class ConvolutionalNetwork
     {
         public List<int[]> slidingWindows;
         public List<int> convActivationIndexes;
@@ -19,6 +20,7 @@ namespace NN_Family_Creater
 
         public List<int> convDropoutIndexes;
         public List<int> convDropoutRates;
+
 
         public ConvolutionalNetwork(ConvolutionalChromosome chromosome)
         {
@@ -76,14 +78,17 @@ namespace NN_Family_Creater
             if (!Directory.Exists(currentPlotsDirectory)) Directory.Move(@"C:\keras\folder", currentPlotsDirectory);
             else Directory.Delete(@"C:\keras\folder");
 
+            string time = File.GetLastWriteTime(scriptsPath + @"\" + scriptName).ToString("HH-mm-ss");
+            string currentTask = new DirectoryInfo(datasetPath).Name; 
 
             string code = @"C:\Users\Rinnetensei\Anaconda3\envs\keras\python.exe " + scriptsPath + @"\" + scriptName + " -d " +
-                            datasetPath + " -m " + currentModelsDirectory + @"\" + scriptName + "_m_temp -l " + currentLabelsDirectory + @"\" +
-                            scriptName + "_l_temp -p " + currentPlotsDirectory + @"\" + scriptName + "_p_temp";
+                            datasetPath + " -m " + currentModelsDirectory + @"\" + currentTask + "_" + time + "_m_genetic -l " + currentLabelsDirectory + @"\" +
+                            currentTask + time + "_l_genetic -p " + currentPlotsDirectory + @"\" + currentTask + time + "_p_genetic.png";
 
             try
             {
                 File.Copy(@"C:\keras\Directory\scripts\train.bat", @"C:\keras\Directory\scripts\convolutional\temp_train.bat", true);
+                
                 Support.insertLineToFile(@"C:\keras\Directory\scripts\convolutional\temp_train.bat", 3, code);
             }
             catch (Exception ex)
@@ -96,20 +101,22 @@ namespace NN_Family_Creater
 
         public static void CreateNetworkScript(/*String toCopyPath, String copyPath, int line,*/ ConvolutionalNetwork network, List<String> convActivations, List<String> denseActivations)
         {
-            string fileName = "convolutional_v" + Properties.Settings.Default.convScriptNumber + ".py";
-
+            string fileName;  // = "convolutional_v" + Properties.Settings.Default.convScriptNumber + ".py";
+            fileName = "temp_convolution.py";
+            string path = @"C:\keras\Directory\scripts\convolutional\genetic\";
+            //path = @"C:\keras\Directory\scripts\convolutional\genetic\elites\";
             try
             {
-                File.Copy(@"C:\keras\Directory\scripts\convolutional\convolutional.py", @"C:\keras\Directory\scripts\convolutional\genetic\elites\" + fileName, true);
+                File.Copy(@"C:\keras\Directory\scripts\convolutional\convolutional.py", path + fileName, true);
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message);
             }
 
-            InsertConvNetworkCode(@"C:\keras\Directory\scripts\convolutional\genetic\elites\" + fileName, 72, network, convActivations, denseActivations);
-            Properties.Settings.Default.convScriptNumber++;
-            ConfigEditor.Config.Write("convScriptNumber", Properties.Settings.Default.convScriptNumber);
+            InsertConvNetworkCode(path + fileName, 72, network, convActivations, denseActivations);
+            //Properties.Settings.Default.convScriptNumber++;
+            //ConfigEditor.Config.Write("convScriptNumber", Properties.Settings.Default.convScriptNumber);
         }
 
         public static void InsertConvNetworkCode(String path, int line, ConvolutionalNetwork network, List<String> convActivations, List<String> denseActivations)
@@ -132,7 +139,7 @@ namespace NN_Family_Creater
                          denseActivations[network.denseActivationIndexes[i]] + "'))" + Environment.NewLine;
                 if (network.denseDropoutIndexes.Count > 0)
                 {
-                    if (network.denseDropoutIndexes[dropoutCounter] == i)  ///////// error за пределами массива
+                    if (network.denseDropoutIndexes[dropoutCounter] == i)  
                     {
                         code += "model.add(Dropout(" + ((float)network.denseDropoutRates[dropoutCounter] / 100).ToString() + "))" + Environment.NewLine;
 
@@ -142,9 +149,7 @@ namespace NN_Family_Creater
                 
             }
             code += "model.add(Dense(len(lb.classes_), activation = \"softmax\"))" + Environment.NewLine;
-            code += "INIT_LR = 0.01" + Environment.NewLine + "EPOCHS = 200" + Environment.NewLine + "BS = 16" + Environment.NewLine;
-
-
+            code += "INIT_LR = 0.01" + Environment.NewLine + "EPOCHS = 5" + Environment.NewLine + "BS = 16" + Environment.NewLine;
             Support.insertLineToFile(path, line, code);
         }
     }
