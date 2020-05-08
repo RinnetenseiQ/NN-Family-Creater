@@ -21,6 +21,9 @@ namespace NN_Family_Creater
         List<String> convActivations;
         List<String> denseActivations;
 
+        List<String> optimazers;
+        List<String> loss_functions;
+
         List<ConvolutionalChromosome> population;
         List<ConvolutionalNetwork> eliteChromosomes;
 
@@ -58,9 +61,11 @@ namespace NN_Family_Creater
             switch (comboBox2.SelectedIndex)
             {
                 case 0:
-
-                    CollectConv_NN_Params();
-                    TrainConvolutionalNN();
+                    //Task.Run(TrainConvolutionalNN());
+                    //worker = new Thread(new ThreadStart(TrainConvolutionalNN));
+                    //worker.Start();
+                    var task = new Task(() => TrainConvolutionalNN());
+                    task.Start();
                     break;
                 case 1:
                     TrainLSTM_NN();
@@ -105,9 +110,15 @@ namespace NN_Family_Creater
             if (PReLUDenseChB.Checked) denseActivations.Add("PReLU");
             if (ThReLUDenseChB.Checked) denseActivations.Add("TReLU");
 
+            optimazers = new List<string>();
+            if (SGD_OptChB.Checked) optimazers.Add("SGD");
+
+            loss_functions = new List<string>();
+            if (categorical_crossentropyChB.Checked) loss_functions.Add("categorical_crossentropy");
+
             nrp = new NetworkRandomParams(new float[2] {float.Parse(minConstSpeedTB.Text, System.Globalization.CultureInfo.InvariantCulture),
                                                         float.Parse(maxConstSpeedTB.Text, System.Globalization.CultureInfo.InvariantCulture)},
-                                                        datasetPathTB.Text, networkNameTB.Text);
+                                                        datasetPathTB.Text, networkNameTB.Text, optimazers, loss_functions, (int)learningEpochsNUD.Value, (int)batchSizeNUD.Value);
 
             crp = new ConvRandomParams((int)ConvLayersNumbNUD.Value,
                                        (int)ConvFiltersNUD.Value,
@@ -125,112 +136,105 @@ namespace NN_Family_Creater
                                         (int)denseDropoutNUD.Value);
         }
 
-        public void TrainConvolutionalNN()
+        public static void TrainConvolutionalNN()
         {
-
-            textBox9.Clear();
-            population = new List<ConvolutionalChromosome>((int)numericUpDown14.Value);
-            population.Add(new ConvolutionalChromosome(nrp, crp, drp, random));
-            population[population.Count - 1].name = "Chromosome " + population.Count.ToString();
-            startUpdateAssesmentParams(population[population.Count - 1]);
-            /*while (population.Count != population.Capacity)
+            if (instance.InvokeRequired)
             {
-                population.Add(new ConvolutionalChromosome(nrp, crp, drp, random));
-                population[population.Count - 1].name = "Chromosome " + population.Count.ToString();
+                //instance.Invoke(new Action<object>(TrainConvolutionalNN), new object[] { });
+
+                instance.Invoke(new Action(TrainConvolutionalNN));
+                return;
+            }
+
+            instance.CollectConv_NN_Params();
+            instance.textBox9.Clear();
+            instance.population = new List<ConvolutionalChromosome>((int)instance.popolationCountNUD.Value);
+            
+            while (instance.population.Count != instance.population.Capacity)
+            {
+                instance.population.Add(new ConvolutionalChromosome(instance.nrp, instance.crp, instance.drp, random));
+                instance.population[instance.population.Count - 1].name = "Chromosome " + instance.population.Count.ToString();
                 //UpdateAssesmentParams(population[population.Count - 1]);
-                startUpdateAssesmentParams(population[population.Count - 1]);
+                instance.UpdateAssesmentParams(instance.population[instance.population.Count - 1]);
 
             }
-            //for (int i = 0; i < population.Count; i++)
-            //{
-            //    population[i].UpdateAssessmentParam(); //заглушка для сортировки
-            //}
-
-            /// error!!!!!!!!!!!!!!!!!!!!!!11111
-            /// 
-
-            //for(int i = 0; i < population.Count; i++)
-            //{
-            Support.UpdateAssesment(population);
-            //}
-            population.Sort(new ChromosomeComparer2());
-            eliteChromosomes.Add(new ConvolutionalNetwork(population[0]));
-
+            
+            Support.UpdateAssesment(instance.population);
+         
+            instance.population.Sort(new ChromosomeComparer2());
+            instance.eliteChromosomes.Add(new ConvolutionalNetwork(instance.population[0]));
 
             /////
-            textBox9.AppendText("Epoch 0" + Environment.NewLine);
-            for (int v = 0; v < population.Count; v++) textBox9.AppendText(population[v].assessment + ":" + population[v].accuracy + "/" + population[v].paramsCount + " ");
-            textBox9.AppendText(Environment.NewLine + "---------------------------" + Environment.NewLine);
+            instance.textBox9.AppendText("Epoch 0" + Environment.NewLine);
+            for (int v = 0; v < instance.population.Count; v++) instance.textBox9.AppendText(instance.population[v].assessment + ":" + instance.population[v].accuracy + "/" + instance.population[v].paramsCount + " ");
+            instance.textBox9.AppendText(Environment.NewLine + "---------------------------" + Environment.NewLine);
 
             // train
 
-            for (int i = 0; i < numericUpDown12.Value; i++)
+            for (int i = 0; i < instance.geneticEpochsNUD.Value; i++)
             {
-                for (int m = 1; m < population.Count; m++)
+                for (int m = 1; m < instance.population.Count; m++)
                 {
-                    if (new Random().Next() < 5) population[m] = new ConvolutionalChromosome(nrp, crp, drp, random);
+                    if (new Random().Next() < 5) instance.population[m] = new ConvolutionalChromosome(instance.nrp, instance.crp, instance.drp, random);
                     else
                     {
-                        population[m].MutateConvolutional(crp, (int)numericUpDown20.Value);
-                        population[m].MutateDense(drp, (int)denseDropoutNUD.Value);
+                        instance.population[m].MutateConvolutional(instance.crp, (int)instance.mutateRateNUD.Value);
+                        instance.population[m].MutateDense(instance.drp, (int)instance.denseDropoutNUD.Value);
                     }
                 }
 
 
-                for (int n = 0; n < population.Count; n++)
+                for (int n = 0; n < instance.population.Count; n++)
                 {
-                    //population[n].UpdateAssessmentParam(); //метод, который устанавливает случайные значения 2м полям объекта
-                    //UpdateAssesmentParams(population[n]);
-                    startUpdateAssesmentParams(population[n]);
+                    instance.UpdateAssesmentParams(instance.population[n]);
                 }
-                //до выхода из цикла accuracy и paramsCount у всех разные
-                Support.UpdateAssesment(population); // в этот метод прилетает population, 
-                                                     //объекты которого имеют одинаковые acuracy & paramsCount
+                
+                Support.UpdateAssesment(instance.population); 
 
 
                 //population.Sort(new ChromosomeComparer((float)memPriorityNUD.Value, (float)accPriorityNUD.Value));
-                population.Sort(new ChromosomeComparer2());
-                eliteChromosomes.Add(new ConvolutionalNetwork(population[0]));
+                instance.population.Sort(new ChromosomeComparer2());
+                instance.eliteChromosomes.Add(new ConvolutionalNetwork(instance.population[0]));
 
 
-                textBox9.AppendText("Epoch: " + (i + 1).ToString());
-                textBox9.AppendText(Environment.NewLine);
-                textBox9.AppendText(population[0].name);
-                textBox9.AppendText(Environment.NewLine);
+                instance.textBox9.AppendText("Epoch: " + (i + 1).ToString());
+                instance.textBox9.AppendText(Environment.NewLine);
+                instance.textBox9.AppendText(instance.population[0].name);
+                instance.textBox9.AppendText(Environment.NewLine);
 
-                textBox9.AppendText("Conv Layers: is " + population[0].convPart.convLayers.Count.ToString() + ", should be " + population[0].convPart.convLayers.Capacity.ToString());
-                textBox9.AppendText(Environment.NewLine);
-                textBox9.AppendText("Filters:");
-                for (int l = 0; l < population[0].convPart.convLayersNumb; l++)
+                instance.textBox9.AppendText("Conv Layers: is " + instance.population[0].convPart.convLayers.Count.ToString() + ", should be " + instance.population[0].convPart.convLayers.Capacity.ToString());
+                instance.textBox9.AppendText(Environment.NewLine);
+                instance.textBox9.AppendText("Filters:");
+                for (int l = 0; l < instance.population[0].convPart.convLayersNumb; l++)
                 {
-                    textBox9.AppendText(" " + population[0].convPart.convLayers[l].filters);
+                    instance.textBox9.AppendText(" " + instance.population[0].convPart.convLayers[l].filters);
                 }
-                textBox9.AppendText(Environment.NewLine);
-                textBox9.AppendText("Window: " + population[0].convPart.convLayers[0].slidingWindow[0].ToString() + "x" + population[0].convPart.convLayers[0].slidingWindow[1].ToString());
-                textBox9.AppendText(Environment.NewLine);
-                textBox9.AppendText("SameWindow: " + population[0].convPart.sameSlidingWindowsSize + ", allWindowSquare: " + population[0].convPart.allSquareSlidingWindows + " firstSquare: " + population[0].convPart.convLayers[0].squareSlidingWindow);
-                textBox9.AppendText(Environment.NewLine);
-                textBox9.AppendText("Activation: " + convActivations[population[0].convPart.convLayers[0].activationIndex] + " - same = " + population[0].convPart.sameActivations);
-                textBox9.AppendText(Environment.NewLine);
-                textBox9.AppendText("Dense Layers: is " + population[0].densePart.denseLayer.Count.ToString() + ", should be " + population[0].densePart.denseLayer.Capacity.ToString());
-                textBox9.AppendText(Environment.NewLine);
+                instance.textBox9.AppendText(Environment.NewLine);
+                instance.textBox9.AppendText("Window: " + instance.population[0].convPart.convLayers[0].slidingWindow[0].ToString() + "x" + instance.population[0].convPart.convLayers[0].slidingWindow[1].ToString());
+                instance.textBox9.AppendText(Environment.NewLine);
+                instance.textBox9.AppendText("SameWindow: " + instance.population[0].convPart.sameSlidingWindowsSize + ", allWindowSquare: " + instance.population[0].convPart.allSquareSlidingWindows + " firstSquare: " + instance.population[0].convPart.convLayers[0].squareSlidingWindow);
+                instance.textBox9.AppendText(Environment.NewLine);
+                instance.textBox9.AppendText("Activation: " + instance.convActivations[instance.population[0].convPart.convLayers[0].activationIndex] + " - same = " + instance.population[0].convPart.sameActivations);
+                instance.textBox9.AppendText(Environment.NewLine);
+                instance.textBox9.AppendText("Dense Layers: is " + instance.population[0].densePart.denseLayer.Count.ToString() + ", should be " + instance.population[0].densePart.denseLayer.Capacity.ToString());
+                instance.textBox9.AppendText(Environment.NewLine);
                 //textBox9.AppendText("Neurons: " + population[0].densePart.denseLayer[0].neurons.ToString());
-                textBox9.AppendText("Neurons:");
-                for (int k = 0; k < population[0].densePart.denseLayersNumb; k++)
+                instance.textBox9.AppendText("Neurons:");
+                for (int k = 0; k < instance.population[0].densePart.denseLayersNumb; k++)
                 {
-                    textBox9.AppendText(" " + population[0].densePart.denseLayer[k].neurons);
+                    instance.textBox9.AppendText(" " + instance.population[0].densePart.denseLayer[k].neurons);
                 }
-                textBox9.AppendText(Environment.NewLine);
-                textBox9.AppendText("Activation: " + denseActivations[population[0].densePart.denseLayer[0].activationIndex] + " - same = " + population[0].densePart.sameActivations);
-                textBox9.AppendText(Environment.NewLine);
-                for (int s = 0; s < population.Count; s++)
+                instance.textBox9.AppendText(Environment.NewLine);
+                instance.textBox9.AppendText("Activation: " + instance.denseActivations[instance.population[0].densePart.denseLayer[0].activationIndex] + " - same = " + instance.population[0].densePart.sameActivations);
+                instance.textBox9.AppendText(Environment.NewLine);
+                for (int s = 0; s < instance.population.Count; s++)
                 {
-                    textBox9.AppendText(population[s].assessment.ToString() + ":" + population[s].accuracy.ToString() + "/" + population[s].paramsCount.ToString() + "  ");
+                    instance.textBox9.AppendText(instance.population[s].assessment.ToString() + ":" + instance.population[s].accuracy.ToString() + "/" + instance.population[s].paramsCount.ToString() + "  ");
                 }
-                textBox9.AppendText(Environment.NewLine);
-                textBox9.AppendText("-----------------------------------------------------");
-                textBox9.AppendText(Environment.NewLine);
-            }*/
+                instance.textBox9.AppendText(Environment.NewLine);
+                instance.textBox9.AppendText("-----------------------------------------------------");
+                instance.textBox9.AppendText(Environment.NewLine);
+            }
         }
 
         public void TrainLSTM_NN()
@@ -406,15 +410,12 @@ namespace NN_Family_Creater
         {
             if (checkBox19.Checked)
             {
-                trackBar1.Visible = true;
-                trackBar2.Visible = true;
                 minConstSpeedTB.Visible = true;
                 maxConstSpeedTB.Visible = true;
+                
             }
             else
             {
-                trackBar1.Visible = false;
-                trackBar2.Visible = false;
                 minConstSpeedTB.Visible = false;
                 maxConstSpeedTB.Visible = false;
             }
@@ -567,34 +568,36 @@ namespace NN_Family_Creater
             }
         }
         
-        public void startUpdateAssesmentParams(ConvolutionalChromosome chr)
-        {
-            ThreadParam threadParam = new ThreadParam(instance, chr);
-            worker = new Thread(new ParameterizedThreadStart(UpdateAssesmentParams));
-            worker.Start(threadParam);
-        }
+        //public void startUpdateAssesmentParams(ConvolutionalChromosome chr)
+        //{
+        //    ThreadParam threadParam = new ThreadParam(instance, chr);
+        //    worker = new Thread(new ParameterizedThreadStart(UpdateAssesmentParams));
+        //    worker.Start(threadParam);
+        //}
         
 
-        public static void UpdateAssesmentParams(object par)
+        public void UpdateAssesmentParams(ConvolutionalChromosome chromosome)
         {
-            ThreadParam param = (ThreadParam)par;
-            if (param.form1.InvokeRequired)
-            {
-                param.form1.Invoke(new Action<object>(UpdateAssesmentParams), new object[] { par });
-                return;
-            }
+            //ThreadParam param = (ThreadParam)par;
+            //if (param.form1.InvokeRequired)
+            //{
+            //    param.form1.Invoke(new Action<object>(UpdateAssesmentParams), new object[] { par });
+            //    return;
+            //}
 
-            param.form1.ErrorTB.Clear();
-            param.form1.chrOutTB.Clear();
+            ErrorTB.Clear();
+            chrOutTB.Clear();
 
-            ConvolutionalNetwork temp_net = new ConvolutionalNetwork(param.chromosome);
-            ConvolutionalNetwork.CreateNetworkScript(temp_net, param.chromosome.crp.convActivations, param.chromosome.drp.denseActivations);
-            ConvolutionalNetwork.CreateConvBatFile("temp_convolution.py", @"C:\keras\Directory\scripts\convolutional\genetic", param.form1.datasetPathTB.Text, param.form1.modelsPathTB.Text, param.form1.labelsPathTB.Text, param.form1.plotsPathTB.Text);
-            param.form1.createConvBatProcess();
-            param.form1.worker.Suspend();
+            ConvolutionalNetwork temp_net = new ConvolutionalNetwork(chromosome);
+            ConvolutionalNetwork.CreateNetworkScript(temp_net, chromosome.crp.convActivations, chromosome.drp.denseActivations);
+            ConvolutionalNetwork.CreateConvBatFile("temp_convolution.py", @"C:\keras\Directory\scripts\convolutional\genetic", datasetPathTB.Text, modelsPathTB.Text, labelsPathTB.Text, plotsPathTB.Text);
+            createConvBatProcess();
+            
+            //worker.Suspend();
+            
 
-            param.chromosome.accuracy = param.form1.tempAccuracy;
-            param.chromosome.paramsCount = param.form1.tempParameters;
+            chromosome.accuracy = tempAccuracy;
+            chromosome.paramsCount = tempParameters;
         }
 
         void OutputHandler(object sendingProcess, DataReceivedEventArgs consoleLine)
@@ -669,7 +672,10 @@ namespace NN_Family_Creater
             }
             ErrorTB.AppendText(data + Environment.NewLine);
         }
-
+        public void processExited(object sender, System.EventArgs e)
+        {
+            worker.Resume();
+        }
         public void createConvBatProcess()
         {
             Process p = new Process()
@@ -692,6 +698,7 @@ namespace NN_Family_Creater
             p.BeginOutputReadLine();
             p.BeginErrorReadLine();
             //p.WaitForExit();
+            //p.Exited += new EventHandler(processExited);
         }
 
         ///////////////////////////////////////////////////////

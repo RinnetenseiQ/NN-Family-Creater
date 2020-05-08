@@ -13,7 +13,10 @@ namespace NN_Family_Creater
 
         public string name;
 
-        public double trainConstSpeed;
+        public float trainConstSpeed;
+        public string optimizer;
+        public string loss_function;
+
         public double adaptiveSpeedRatio;
         public int speedAlgorithmIndex;
 
@@ -37,6 +40,10 @@ namespace NN_Family_Creater
             this.drp = drp;
             convPart = new ConvStructure(crp, random);
             densePart = new DenseStructure(drp, random);
+
+            trainConstSpeed = Convert.ToSingle(random.Next((int)(nrp.trainConstSpeedRange[0] * 1000), (int)(nrp.trainConstSpeedRange[1] * 1000))) / 1000;
+            optimizer = nrp.optimizers[random.Next(nrp.optimizers.Count)];
+            loss_function = nrp.loss_functions[random.Next(nrp.loss_functions.Count)];
         }
 
   

@@ -21,9 +21,26 @@ namespace NN_Family_Creater
         public List<int> convDropoutIndexes;
         public List<int> convDropoutRates;
 
+        public int batchSize;
+        public int networkLearningEpochs;
+
+        public float trainConstSpeed;
+        public string optimizer;
+        public string loss_finction;
+        public int outputNumb;
+
 
         public ConvolutionalNetwork(ConvolutionalChromosome chromosome)
         {
+            trainConstSpeed = chromosome.trainConstSpeed;
+            optimizer = chromosome.optimizer;
+            loss_finction = chromosome.loss_function;
+            outputNumb = chromosome.nrp.networkOutputNumb;
+
+            batchSize = chromosome.nrp.batchSize;
+            networkLearningEpochs = chromosome.nrp.epochs;
+
+
             slidingWindows = new List<int[]>();
             convActivationIndexes = new List<int>();
             filters = new List<int>();
@@ -121,6 +138,8 @@ namespace NN_Family_Creater
 
         public static void InsertConvNetworkCode(String path, int line, ConvolutionalNetwork network, List<String> convActivations, List<String> denseActivations)
         {
+            string init_lr = network.trainConstSpeed.ToString();
+            init_lr = init_lr.Replace(",", ".");
             string code = "";
             for (int i = 0; i < network.filters.Count; i++)
             {
@@ -149,7 +168,9 @@ namespace NN_Family_Creater
                 
             }
             code += "model.add(Dense(len(lb.classes_), activation = \"softmax\"))" + Environment.NewLine;
-            code += "INIT_LR = 0.01" + Environment.NewLine + "EPOCHS = 5" + Environment.NewLine + "BS = 16" + Environment.NewLine;
+            code += "INIT_LR = " + init_lr + Environment.NewLine + 
+                    "EPOCHS = " + network.networkLearningEpochs.ToString() + Environment.NewLine + 
+                    "BS = " + network.batchSize.ToString() + Environment.NewLine;
             Support.insertLineToFile(path, line, code);
         }
     }

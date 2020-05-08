@@ -29,24 +29,44 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.minConstSpeedTB = new System.Windows.Forms.TextBox();
             this.maxConstSpeedTB = new System.Windows.Forms.TextBox();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.checkBox19 = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.checkBox20 = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cosine_proximityChB = new System.Windows.Forms.CheckBox();
+            this.poissonChB = new System.Windows.Forms.CheckBox();
+            this.kullback_leibler_divergenceChB = new System.Windows.Forms.CheckBox();
+            this.binary_crossentropyChB = new System.Windows.Forms.CheckBox();
+            this.sparse_categorical_crossentropyChB = new System.Windows.Forms.CheckBox();
+            this.categorical_crossentropyChB = new System.Windows.Forms.CheckBox();
+            this.logcoshChB = new System.Windows.Forms.CheckBox();
+            this.categorical_hingeChB = new System.Windows.Forms.CheckBox();
+            this.hingeChB = new System.Windows.Forms.CheckBox();
+            this.mean_squared_logarithmic_errorChB = new System.Windows.Forms.CheckBox();
+            this.squared_hingeChB = new System.Windows.Forms.CheckBox();
+            this.mean_absolute_percentage_errorChB = new System.Windows.Forms.CheckBox();
+            this.mean_absolute_errorChB = new System.Windows.Forms.CheckBox();
+            this.mean_squared_errorChB = new System.Windows.Forms.CheckBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.Nadam_OptChB = new System.Windows.Forms.CheckBox();
+            this.Adamax_OptChB = new System.Windows.Forms.CheckBox();
+            this.Adam_OptChB = new System.Windows.Forms.CheckBox();
+            this.Adadelta_OptChB = new System.Windows.Forms.CheckBox();
+            this.Adagrad_OptChB = new System.Windows.Forms.CheckBox();
+            this.RMSp_OptChB = new System.Windows.Forms.CheckBox();
+            this.SGD_OptChB = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.numericUpDown20 = new System.Windows.Forms.NumericUpDown();
+            this.mutateRateNUD = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.batchSizeNUD = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
-            this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
+            this.geneticEpochsNUD = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.geneticGB = new System.Windows.Forms.GroupBox();
@@ -76,7 +96,7 @@
             this.numericUpDown16 = new System.Windows.Forms.NumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.numericUpDown14 = new System.Windows.Forms.NumericUpDown();
+            this.popolationCountNUD = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
             this.learningEpochsNUD = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -221,20 +241,20 @@
             this.label50 = new System.Windows.Forms.Label();
             this.chrOutTB = new System.Windows.Forms.TextBox();
             this.label51 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mutateRateNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchSizeNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.geneticEpochsNUD)).BeginInit();
             this.geneticGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popolationCountNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.learningEpochsNUD)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -269,18 +289,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(135, 77);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(189, 56);
-            this.trackBar1.TabIndex = 0;
             // 
             // minConstSpeedTB
             // 
-            this.minConstSpeedTB.Location = new System.Drawing.Point(330, 80);
+            this.minConstSpeedTB.Location = new System.Drawing.Point(96, 44);
             this.minConstSpeedTB.Name = "minConstSpeedTB";
             this.minConstSpeedTB.Size = new System.Drawing.Size(45, 22);
             this.minConstSpeedTB.TabIndex = 1;
@@ -289,26 +304,19 @@
             // 
             // maxConstSpeedTB
             // 
-            this.maxConstSpeedTB.Location = new System.Drawing.Point(330, 126);
+            this.maxConstSpeedTB.Location = new System.Drawing.Point(166, 43);
             this.maxConstSpeedTB.Name = "maxConstSpeedTB";
             this.maxConstSpeedTB.Size = new System.Drawing.Size(45, 22);
             this.maxConstSpeedTB.TabIndex = 2;
             this.maxConstSpeedTB.Text = "0.700";
             this.maxConstSpeedTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
-            // trackBar2
-            // 
-            this.trackBar2.Location = new System.Drawing.Point(135, 126);
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(189, 56);
-            this.trackBar2.TabIndex = 3;
-            // 
             // checkBox19
             // 
             this.checkBox19.AutoSize = true;
             this.checkBox19.Checked = true;
             this.checkBox19.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox19.Location = new System.Drawing.Point(23, 79);
+            this.checkBox19.Location = new System.Drawing.Point(24, 45);
             this.checkBox19.Name = "checkBox19";
             this.checkBox19.Size = new System.Drawing.Size(66, 21);
             this.checkBox19.TabIndex = 40;
@@ -328,87 +336,310 @@
             // checkBox20
             // 
             this.checkBox20.AutoSize = true;
-            this.checkBox20.Location = new System.Drawing.Point(23, 193);
+            this.checkBox20.Location = new System.Drawing.Point(228, 43);
             this.checkBox20.Name = "checkBox20";
             this.checkBox20.Size = new System.Drawing.Size(85, 21);
             this.checkBox20.TabIndex = 42;
             this.checkBox20.Text = "Adaptive";
             this.checkBox20.UseVisualStyleBackColor = true;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(99, 80);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(30, 17);
-            this.label10.TabIndex = 44;
-            this.label10.Text = "min";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(96, 123);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(33, 17);
-            this.label11.TabIndex = 45;
-            this.label11.Text = "max";
-            // 
             // numericUpDown10
             // 
-            this.numericUpDown10.Location = new System.Drawing.Point(159, 192);
+            this.numericUpDown10.Location = new System.Drawing.Point(319, 44);
             this.numericUpDown10.Name = "numericUpDown10";
-            this.numericUpDown10.Size = new System.Drawing.Size(52, 22);
+            this.numericUpDown10.Size = new System.Drawing.Size(45, 22);
             this.numericUpDown10.TabIndex = 46;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(262, 193);
+            this.label12.Location = new System.Drawing.Point(121, 99);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(0, 17);
             this.label12.TabIndex = 47;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox3);
+            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.label67);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.checkBox19);
-            this.groupBox1.Controls.Add(this.trackBar1);
-            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.minConstSpeedTB);
             this.groupBox1.Controls.Add(this.numericUpDown10);
             this.groupBox1.Controls.Add(this.maxConstSpeedTB);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.trackBar2);
-            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.checkBox20);
             this.groupBox1.Location = new System.Drawing.Point(5, 53);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(395, 232);
+            this.groupBox1.Size = new System.Drawing.Size(395, 300);
             this.groupBox1.TabIndex = 49;
             this.groupBox1.TabStop = false;
+            // 
+            // cosine_proximityChB
+            // 
+            this.cosine_proximityChB.AutoSize = true;
+            this.cosine_proximityChB.Location = new System.Drawing.Point(112, 148);
+            this.cosine_proximityChB.Name = "cosine_proximityChB";
+            this.cosine_proximityChB.Size = new System.Drawing.Size(130, 21);
+            this.cosine_proximityChB.TabIndex = 72;
+            this.cosine_proximityChB.Text = "cosine proximity";
+            this.cosine_proximityChB.UseVisualStyleBackColor = true;
+            // 
+            // poissonChB
+            // 
+            this.poissonChB.AutoSize = true;
+            this.poissonChB.Location = new System.Drawing.Point(6, 148);
+            this.poissonChB.Name = "poissonChB";
+            this.poissonChB.Size = new System.Drawing.Size(79, 21);
+            this.poissonChB.TabIndex = 71;
+            this.poissonChB.Text = "poisson";
+            this.poissonChB.UseVisualStyleBackColor = true;
+            // 
+            // kullback_leibler_divergenceChB
+            // 
+            this.kullback_leibler_divergenceChB.AutoSize = true;
+            this.kullback_leibler_divergenceChB.Location = new System.Drawing.Point(6, 121);
+            this.kullback_leibler_divergenceChB.Name = "kullback_leibler_divergenceChB";
+            this.kullback_leibler_divergenceChB.Size = new System.Drawing.Size(57, 21);
+            this.kullback_leibler_divergenceChB.TabIndex = 70;
+            this.kullback_leibler_divergenceChB.Text = "KLD";
+            this.kullback_leibler_divergenceChB.UseVisualStyleBackColor = true;
+            // 
+            // binary_crossentropyChB
+            // 
+            this.binary_crossentropyChB.AutoSize = true;
+            this.binary_crossentropyChB.Location = new System.Drawing.Point(112, 94);
+            this.binary_crossentropyChB.Name = "binary_crossentropyChB";
+            this.binary_crossentropyChB.Size = new System.Drawing.Size(126, 21);
+            this.binary_crossentropyChB.TabIndex = 69;
+            this.binary_crossentropyChB.Text = "B-crossentropy";
+            this.binary_crossentropyChB.UseVisualStyleBackColor = true;
+            // 
+            // sparse_categorical_crossentropyChB
+            // 
+            this.sparse_categorical_crossentropyChB.AutoSize = true;
+            this.sparse_categorical_crossentropyChB.Location = new System.Drawing.Point(112, 67);
+            this.sparse_categorical_crossentropyChB.Name = "sparse_categorical_crossentropyChB";
+            this.sparse_categorical_crossentropyChB.Size = new System.Drawing.Size(135, 21);
+            this.sparse_categorical_crossentropyChB.TabIndex = 68;
+            this.sparse_categorical_crossentropyChB.Text = "SC-crossentropy";
+            this.sparse_categorical_crossentropyChB.UseVisualStyleBackColor = true;
+            // 
+            // categorical_crossentropyChB
+            // 
+            this.categorical_crossentropyChB.AutoSize = true;
+            this.categorical_crossentropyChB.Checked = true;
+            this.categorical_crossentropyChB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.categorical_crossentropyChB.Location = new System.Drawing.Point(112, 40);
+            this.categorical_crossentropyChB.Name = "categorical_crossentropyChB";
+            this.categorical_crossentropyChB.Size = new System.Drawing.Size(126, 21);
+            this.categorical_crossentropyChB.TabIndex = 67;
+            this.categorical_crossentropyChB.Text = "C-crossentropy";
+            this.categorical_crossentropyChB.UseVisualStyleBackColor = true;
+            // 
+            // logcoshChB
+            // 
+            this.logcoshChB.AutoSize = true;
+            this.logcoshChB.Location = new System.Drawing.Point(112, 12);
+            this.logcoshChB.Name = "logcoshChB";
+            this.logcoshChB.Size = new System.Drawing.Size(79, 21);
+            this.logcoshChB.TabIndex = 66;
+            this.logcoshChB.Text = "logcosh";
+            this.logcoshChB.UseVisualStyleBackColor = true;
+            // 
+            // categorical_hingeChB
+            // 
+            this.categorical_hingeChB.AutoSize = true;
+            this.categorical_hingeChB.Location = new System.Drawing.Point(112, 175);
+            this.categorical_hingeChB.Name = "categorical_hingeChB";
+            this.categorical_hingeChB.Size = new System.Drawing.Size(104, 21);
+            this.categorical_hingeChB.TabIndex = 65;
+            this.categorical_hingeChB.Text = "categ hinge";
+            this.categorical_hingeChB.UseVisualStyleBackColor = true;
+            // 
+            // hingeChB
+            // 
+            this.hingeChB.AutoSize = true;
+            this.hingeChB.Location = new System.Drawing.Point(6, 175);
+            this.hingeChB.Name = "hingeChB";
+            this.hingeChB.Size = new System.Drawing.Size(65, 21);
+            this.hingeChB.TabIndex = 64;
+            this.hingeChB.Text = "hinge";
+            this.hingeChB.UseVisualStyleBackColor = true;
+            // 
+            // mean_squared_logarithmic_errorChB
+            // 
+            this.mean_squared_logarithmic_errorChB.AutoSize = true;
+            this.mean_squared_logarithmic_errorChB.Location = new System.Drawing.Point(6, 94);
+            this.mean_squared_logarithmic_errorChB.Name = "mean_squared_logarithmic_errorChB";
+            this.mean_squared_logarithmic_errorChB.Size = new System.Drawing.Size(67, 21);
+            this.mean_squared_logarithmic_errorChB.TabIndex = 63;
+            this.mean_squared_logarithmic_errorChB.Text = "MSLE";
+            this.mean_squared_logarithmic_errorChB.UseVisualStyleBackColor = true;
+            // 
+            // squared_hingeChB
+            // 
+            this.squared_hingeChB.AutoSize = true;
+            this.squared_hingeChB.Location = new System.Drawing.Point(112, 121);
+            this.squared_hingeChB.Name = "squared_hingeChB";
+            this.squared_hingeChB.Size = new System.Drawing.Size(121, 21);
+            this.squared_hingeChB.TabIndex = 62;
+            this.squared_hingeChB.Text = "squared hinge";
+            this.squared_hingeChB.UseVisualStyleBackColor = true;
+            // 
+            // mean_absolute_percentage_errorChB
+            // 
+            this.mean_absolute_percentage_errorChB.AutoSize = true;
+            this.mean_absolute_percentage_errorChB.Location = new System.Drawing.Point(6, 67);
+            this.mean_absolute_percentage_errorChB.Name = "mean_absolute_percentage_errorChB";
+            this.mean_absolute_percentage_errorChB.Size = new System.Drawing.Size(68, 21);
+            this.mean_absolute_percentage_errorChB.TabIndex = 61;
+            this.mean_absolute_percentage_errorChB.Text = "MAPE";
+            this.mean_absolute_percentage_errorChB.UseVisualStyleBackColor = true;
+            // 
+            // mean_absolute_errorChB
+            // 
+            this.mean_absolute_errorChB.AutoSize = true;
+            this.mean_absolute_errorChB.Location = new System.Drawing.Point(6, 40);
+            this.mean_absolute_errorChB.Name = "mean_absolute_errorChB";
+            this.mean_absolute_errorChB.Size = new System.Drawing.Size(59, 21);
+            this.mean_absolute_errorChB.TabIndex = 60;
+            this.mean_absolute_errorChB.Text = "MAE";
+            this.mean_absolute_errorChB.UseVisualStyleBackColor = true;
+            // 
+            // mean_squared_errorChB
+            // 
+            this.mean_squared_errorChB.AutoSize = true;
+            this.mean_squared_errorChB.Location = new System.Drawing.Point(6, 12);
+            this.mean_squared_errorChB.Name = "mean_squared_errorChB";
+            this.mean_squared_errorChB.Size = new System.Drawing.Size(59, 21);
+            this.mean_squared_errorChB.TabIndex = 59;
+            this.mean_squared_errorChB.Text = "MSE";
+            this.mean_squared_errorChB.UseVisualStyleBackColor = true;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(207, 72);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(87, 17);
+            this.label67.TabIndex = 58;
+            this.label67.Text = "loss function";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(22, 72);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(97, 17);
+            this.label11.TabIndex = 57;
+            this.label11.Text = "Оптимизатор";
+            // 
+            // Nadam_OptChB
+            // 
+            this.Nadam_OptChB.AutoSize = true;
+            this.Nadam_OptChB.Location = new System.Drawing.Point(9, 177);
+            this.Nadam_OptChB.Name = "Nadam_OptChB";
+            this.Nadam_OptChB.Size = new System.Drawing.Size(75, 21);
+            this.Nadam_OptChB.TabIndex = 56;
+            this.Nadam_OptChB.Text = "Nadam";
+            this.Nadam_OptChB.UseVisualStyleBackColor = true;
+            // 
+            // Adamax_OptChB
+            // 
+            this.Adamax_OptChB.AutoSize = true;
+            this.Adamax_OptChB.Location = new System.Drawing.Point(9, 150);
+            this.Adamax_OptChB.Name = "Adamax_OptChB";
+            this.Adamax_OptChB.Size = new System.Drawing.Size(80, 21);
+            this.Adamax_OptChB.TabIndex = 55;
+            this.Adamax_OptChB.Text = "Adamax";
+            this.Adamax_OptChB.UseVisualStyleBackColor = true;
+            // 
+            // Adam_OptChB
+            // 
+            this.Adam_OptChB.AutoSize = true;
+            this.Adam_OptChB.Location = new System.Drawing.Point(9, 123);
+            this.Adam_OptChB.Name = "Adam_OptChB";
+            this.Adam_OptChB.Size = new System.Drawing.Size(66, 21);
+            this.Adam_OptChB.TabIndex = 54;
+            this.Adam_OptChB.Text = "Adam";
+            this.Adam_OptChB.UseVisualStyleBackColor = true;
+            // 
+            // Adadelta_OptChB
+            // 
+            this.Adadelta_OptChB.AutoSize = true;
+            this.Adadelta_OptChB.Location = new System.Drawing.Point(9, 96);
+            this.Adadelta_OptChB.Name = "Adadelta_OptChB";
+            this.Adadelta_OptChB.Size = new System.Drawing.Size(86, 21);
+            this.Adadelta_OptChB.TabIndex = 53;
+            this.Adadelta_OptChB.Text = "Adadelta";
+            this.Adadelta_OptChB.UseVisualStyleBackColor = true;
+            // 
+            // Adagrad_OptChB
+            // 
+            this.Adagrad_OptChB.AutoSize = true;
+            this.Adagrad_OptChB.Location = new System.Drawing.Point(9, 69);
+            this.Adagrad_OptChB.Name = "Adagrad_OptChB";
+            this.Adagrad_OptChB.Size = new System.Drawing.Size(84, 21);
+            this.Adagrad_OptChB.TabIndex = 52;
+            this.Adagrad_OptChB.Text = "Adagrad";
+            this.Adagrad_OptChB.UseVisualStyleBackColor = true;
+            // 
+            // RMSp_OptChB
+            // 
+            this.RMSp_OptChB.AutoSize = true;
+            this.RMSp_OptChB.Location = new System.Drawing.Point(9, 42);
+            this.RMSp_OptChB.Name = "RMSp_OptChB";
+            this.RMSp_OptChB.Size = new System.Drawing.Size(89, 21);
+            this.RMSp_OptChB.TabIndex = 51;
+            this.RMSp_OptChB.Text = "RMSprop";
+            this.RMSp_OptChB.UseVisualStyleBackColor = true;
+            // 
+            // SGD_OptChB
+            // 
+            this.SGD_OptChB.AutoSize = true;
+            this.SGD_OptChB.Checked = true;
+            this.SGD_OptChB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.SGD_OptChB.Location = new System.Drawing.Point(9, 14);
+            this.SGD_OptChB.Name = "SGD_OptChB";
+            this.SGD_OptChB.Size = new System.Drawing.Size(60, 21);
+            this.SGD_OptChB.TabIndex = 50;
+            this.SGD_OptChB.Text = "SGD";
+            this.SGD_OptChB.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(147, 47);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(13, 17);
+            this.label10.TabIndex = 49;
+            this.label10.Text = "-";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(110, 18);
+            this.label13.Location = new System.Drawing.Point(110, 9);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(192, 17);
             this.label13.TabIndex = 48;
             this.label13.Text = "Алгоритм расчета скорости";
             // 
-            // numericUpDown20
+            // mutateRateNUD
             // 
-            this.numericUpDown20.Location = new System.Drawing.Point(115, 185);
-            this.numericUpDown20.Minimum = new decimal(new int[] {
+            this.mutateRateNUD.Location = new System.Drawing.Point(115, 185);
+            this.mutateRateNUD.Minimum = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.numericUpDown20.Name = "numericUpDown20";
-            this.numericUpDown20.Size = new System.Drawing.Size(49, 22);
-            this.numericUpDown20.TabIndex = 39;
-            this.numericUpDown20.Value = new decimal(new int[] {
+            this.mutateRateNUD.Name = "mutateRateNUD";
+            this.mutateRateNUD.Size = new System.Drawing.Size(49, 22);
+            this.mutateRateNUD.TabIndex = 39;
+            this.mutateRateNUD.Value = new decimal(new int[] {
             30,
             0,
             0,
@@ -449,23 +680,23 @@
             this.label14.TabIndex = 53;
             this.label14.Text = "Epochs";
             // 
-            // numericUpDown12
+            // geneticEpochsNUD
             // 
-            this.numericUpDown12.Location = new System.Drawing.Point(186, 81);
-            this.numericUpDown12.Maximum = new decimal(new int[] {
+            this.geneticEpochsNUD.Location = new System.Drawing.Point(186, 81);
+            this.geneticEpochsNUD.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.numericUpDown12.Minimum = new decimal(new int[] {
+            this.geneticEpochsNUD.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown12.Name = "numericUpDown12";
-            this.numericUpDown12.Size = new System.Drawing.Size(78, 22);
-            this.numericUpDown12.TabIndex = 54;
-            this.numericUpDown12.Value = new decimal(new int[] {
+            this.geneticEpochsNUD.Name = "geneticEpochsNUD";
+            this.geneticEpochsNUD.Size = new System.Drawing.Size(78, 22);
+            this.geneticEpochsNUD.TabIndex = 54;
+            this.geneticEpochsNUD.Value = new decimal(new int[] {
             100,
             0,
             0,
@@ -503,7 +734,7 @@
             this.geneticGB.Controls.Add(this.accPriorityNUD);
             this.geneticGB.Controls.Add(this.label33);
             this.geneticGB.Controls.Add(this.label31);
-            this.geneticGB.Controls.Add(this.numericUpDown20);
+            this.geneticGB.Controls.Add(this.mutateRateNUD);
             this.geneticGB.Controls.Add(this.button1);
             this.geneticGB.Controls.Add(this.label25);
             this.geneticGB.Controls.Add(this.textBox4);
@@ -516,20 +747,20 @@
             this.geneticGB.Controls.Add(this.numericUpDown18);
             this.geneticGB.Controls.Add(this.numericUpDown17);
             this.geneticGB.Controls.Add(this.numericUpDown16);
-            this.geneticGB.Controls.Add(this.numericUpDown12);
+            this.geneticGB.Controls.Add(this.geneticEpochsNUD);
             this.geneticGB.Controls.Add(this.label19);
             this.geneticGB.Controls.Add(this.label18);
-            this.geneticGB.Controls.Add(this.numericUpDown14);
+            this.geneticGB.Controls.Add(this.popolationCountNUD);
             this.geneticGB.Controls.Add(this.label17);
             this.geneticGB.Location = new System.Drawing.Point(808, 53);
             this.geneticGB.Name = "geneticGB";
-            this.geneticGB.Size = new System.Drawing.Size(296, 439);
+            this.geneticGB.Size = new System.Drawing.Size(296, 468);
             this.geneticGB.TabIndex = 57;
             this.geneticGB.TabStop = false;
             // 
             // createScriptsBtn
             // 
-            this.createScriptsBtn.Location = new System.Drawing.Point(103, 380);
+            this.createScriptsBtn.Location = new System.Drawing.Point(103, 410);
             this.createScriptsBtn.Name = "createScriptsBtn";
             this.createScriptsBtn.Size = new System.Drawing.Size(84, 23);
             this.createScriptsBtn.TabIndex = 72;
@@ -539,7 +770,7 @@
             // 
             // testButton
             // 
-            this.testButton.Location = new System.Drawing.Point(6, 381);
+            this.testButton.Location = new System.Drawing.Point(6, 411);
             this.testButton.Name = "testButton";
             this.testButton.Size = new System.Drawing.Size(80, 23);
             this.testButton.TabIndex = 71;
@@ -557,7 +788,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(103, 409);
+            this.button9.Location = new System.Drawing.Point(103, 439);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(84, 23);
             this.button9.TabIndex = 67;
@@ -594,7 +825,7 @@
             // 
             // predsBtn
             // 
-            this.predsBtn.Location = new System.Drawing.Point(204, 409);
+            this.predsBtn.Location = new System.Drawing.Point(204, 439);
             this.predsBtn.Name = "predsBtn";
             this.predsBtn.Size = new System.Drawing.Size(86, 23);
             this.predsBtn.TabIndex = 62;
@@ -648,7 +879,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 410);
+            this.button1.Location = new System.Drawing.Point(6, 440);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 23);
             this.button1.TabIndex = 59;
@@ -808,18 +1039,18 @@
             this.label18.TabIndex = 2;
             this.label18.Text = "Эпох обучения";
             // 
-            // numericUpDown14
+            // popolationCountNUD
             // 
-            this.numericUpDown14.Location = new System.Drawing.Point(187, 50);
-            this.numericUpDown14.Minimum = new decimal(new int[] {
+            this.popolationCountNUD.Location = new System.Drawing.Point(187, 50);
+            this.popolationCountNUD.Minimum = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.numericUpDown14.Name = "numericUpDown14";
-            this.numericUpDown14.Size = new System.Drawing.Size(77, 22);
-            this.numericUpDown14.TabIndex = 1;
-            this.numericUpDown14.Value = new decimal(new int[] {
+            this.popolationCountNUD.Name = "popolationCountNUD";
+            this.popolationCountNUD.Size = new System.Drawing.Size(77, 22);
+            this.popolationCountNUD.TabIndex = 1;
+            this.popolationCountNUD.Value = new decimal(new int[] {
             5,
             0,
             0,
@@ -836,7 +1067,7 @@
             // 
             // learningEpochsNUD
             // 
-            this.learningEpochsNUD.Location = new System.Drawing.Point(298, 24);
+            this.learningEpochsNUD.Location = new System.Drawing.Point(300, 24);
             this.learningEpochsNUD.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -848,10 +1079,10 @@
             0,
             0});
             this.learningEpochsNUD.Name = "learningEpochsNUD";
-            this.learningEpochsNUD.Size = new System.Drawing.Size(77, 22);
+            this.learningEpochsNUD.Size = new System.Drawing.Size(75, 22);
             this.learningEpochsNUD.TabIndex = 3;
             this.learningEpochsNUD.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -874,15 +1105,15 @@
             this.groupBox4.Controls.Add(this.label14);
             this.groupBox4.Controls.Add(this.batchSizeNUD);
             this.groupBox4.Controls.Add(this.learningEpochsNUD);
-            this.groupBox4.Location = new System.Drawing.Point(5, 291);
+            this.groupBox4.Location = new System.Drawing.Point(5, 348);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(395, 201);
+            this.groupBox4.Size = new System.Drawing.Size(395, 173);
             this.groupBox4.TabIndex = 58;
             this.groupBox4.TabStop = false;
             // 
             // openPlotsFolderBtn
             // 
-            this.openPlotsFolderBtn.Location = new System.Drawing.Point(300, 163);
+            this.openPlotsFolderBtn.Location = new System.Drawing.Point(300, 140);
             this.openPlotsFolderBtn.Name = "openPlotsFolderBtn";
             this.openPlotsFolderBtn.Size = new System.Drawing.Size(75, 23);
             this.openPlotsFolderBtn.TabIndex = 66;
@@ -892,7 +1123,7 @@
             // 
             // plotsPathTB
             // 
-            this.plotsPathTB.Location = new System.Drawing.Point(113, 163);
+            this.plotsPathTB.Location = new System.Drawing.Point(113, 140);
             this.plotsPathTB.Name = "plotsPathTB";
             this.plotsPathTB.Size = new System.Drawing.Size(181, 22);
             this.plotsPathTB.TabIndex = 65;
@@ -900,7 +1131,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(20, 163);
+            this.label29.Location = new System.Drawing.Point(20, 140);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(39, 17);
             this.label29.TabIndex = 64;
@@ -908,7 +1139,7 @@
             // 
             // openLabelsFolderBtn
             // 
-            this.openLabelsFolderBtn.Location = new System.Drawing.Point(300, 135);
+            this.openLabelsFolderBtn.Location = new System.Drawing.Point(300, 112);
             this.openLabelsFolderBtn.Name = "openLabelsFolderBtn";
             this.openLabelsFolderBtn.Size = new System.Drawing.Size(75, 23);
             this.openLabelsFolderBtn.TabIndex = 63;
@@ -918,7 +1149,7 @@
             // 
             // modelsPathTB
             // 
-            this.modelsPathTB.Location = new System.Drawing.Point(113, 106);
+            this.modelsPathTB.Location = new System.Drawing.Point(113, 83);
             this.modelsPathTB.Name = "modelsPathTB";
             this.modelsPathTB.Size = new System.Drawing.Size(181, 22);
             this.modelsPathTB.TabIndex = 62;
@@ -926,7 +1157,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(20, 109);
+            this.label28.Location = new System.Drawing.Point(20, 86);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(53, 17);
             this.label28.TabIndex = 61;
@@ -935,7 +1166,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(20, 138);
+            this.label27.Location = new System.Drawing.Point(20, 115);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(50, 17);
             this.label27.TabIndex = 60;
@@ -943,7 +1174,7 @@
             // 
             // openModelsFolderBtn
             // 
-            this.openModelsFolderBtn.Location = new System.Drawing.Point(300, 105);
+            this.openModelsFolderBtn.Location = new System.Drawing.Point(300, 82);
             this.openModelsFolderBtn.Name = "openModelsFolderBtn";
             this.openModelsFolderBtn.Size = new System.Drawing.Size(75, 23);
             this.openModelsFolderBtn.TabIndex = 59;
@@ -953,14 +1184,14 @@
             // 
             // labelsPathTB
             // 
-            this.labelsPathTB.Location = new System.Drawing.Point(113, 135);
+            this.labelsPathTB.Location = new System.Drawing.Point(113, 112);
             this.labelsPathTB.Name = "labelsPathTB";
             this.labelsPathTB.Size = new System.Drawing.Size(181, 22);
             this.labelsPathTB.TabIndex = 58;
             // 
             // openDatasetFolderBtn
             // 
-            this.openDatasetFolderBtn.Location = new System.Drawing.Point(300, 77);
+            this.openDatasetFolderBtn.Location = new System.Drawing.Point(300, 54);
             this.openDatasetFolderBtn.Name = "openDatasetFolderBtn";
             this.openDatasetFolderBtn.Size = new System.Drawing.Size(75, 23);
             this.openDatasetFolderBtn.TabIndex = 57;
@@ -970,7 +1201,7 @@
             // 
             // datasetPathTB
             // 
-            this.datasetPathTB.Location = new System.Drawing.Point(113, 77);
+            this.datasetPathTB.Location = new System.Drawing.Point(113, 54);
             this.datasetPathTB.Name = "datasetPathTB";
             this.datasetPathTB.Size = new System.Drawing.Size(181, 22);
             this.datasetPathTB.TabIndex = 56;
@@ -978,7 +1209,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(20, 80);
+            this.label26.Location = new System.Drawing.Point(20, 57);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(57, 17);
             this.label26.TabIndex = 55;
@@ -986,7 +1217,7 @@
             // 
             // pauseQueryBtn
             // 
-            this.pauseQueryBtn.Location = new System.Drawing.Point(6, 409);
+            this.pauseQueryBtn.Location = new System.Drawing.Point(6, 438);
             this.pauseQueryBtn.Name = "pauseQueryBtn";
             this.pauseQueryBtn.Size = new System.Drawing.Size(89, 23);
             this.pauseQueryBtn.TabIndex = 60;
@@ -996,7 +1227,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(104, 409);
+            this.button3.Location = new System.Drawing.Point(104, 438);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(93, 23);
             this.button3.TabIndex = 61;
@@ -1005,7 +1236,7 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(5, 528);
+            this.textBox9.Location = new System.Drawing.Point(5, 551);
             this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(395, 426);
@@ -1018,13 +1249,13 @@
             this.groupBox5.Controls.Add(this.button3);
             this.groupBox5.Location = new System.Drawing.Point(1110, 53);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(203, 439);
+            this.groupBox5.Size = new System.Drawing.Size(203, 468);
             this.groupBox5.TabIndex = 65;
             this.groupBox5.TabStop = false;
             // 
             // trainQueryBtn
             // 
-            this.trainQueryBtn.Location = new System.Drawing.Point(6, 381);
+            this.trainQueryBtn.Location = new System.Drawing.Point(6, 410);
             this.trainQueryBtn.Name = "trainQueryBtn";
             this.trainQueryBtn.Size = new System.Drawing.Size(89, 23);
             this.trainQueryBtn.TabIndex = 62;
@@ -1098,7 +1329,7 @@
             "Current Genetic Search",
             "Errorneous Chromosome Configuration",
             "Current Chromosome Output"});
-            this.coutModeCB.Location = new System.Drawing.Point(5, 498);
+            this.coutModeCB.Location = new System.Drawing.Point(5, 521);
             this.coutModeCB.Name = "coutModeCB";
             this.coutModeCB.Size = new System.Drawing.Size(395, 24);
             this.coutModeCB.TabIndex = 69;
@@ -1107,7 +1338,7 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(406, 528);
+            this.dataGridView1.Location = new System.Drawing.Point(406, 551);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(396, 245);
@@ -1118,7 +1349,7 @@
             this.zedGraphControl1.IsEnableHZoom = false;
             this.zedGraphControl1.IsEnableVZoom = false;
             this.zedGraphControl1.IsEnableWheelZoom = false;
-            this.zedGraphControl1.Location = new System.Drawing.Point(809, 499);
+            this.zedGraphControl1.Location = new System.Drawing.Point(808, 521);
             this.zedGraphControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
@@ -1177,7 +1408,7 @@
             // sigmoidConvChb
             // 
             this.sigmoidConvChb.AutoSize = true;
-            this.sigmoidConvChb.Location = new System.Drawing.Point(271, 375);
+            this.sigmoidConvChb.Location = new System.Drawing.Point(271, 377);
             this.sigmoidConvChb.Name = "sigmoidConvChb";
             this.sigmoidConvChb.Size = new System.Drawing.Size(18, 17);
             this.sigmoidConvChb.TabIndex = 22;
@@ -1186,7 +1417,7 @@
             // eluConvChb
             // 
             this.eluConvChb.AutoSize = true;
-            this.eluConvChb.Location = new System.Drawing.Point(147, 306);
+            this.eluConvChb.Location = new System.Drawing.Point(147, 308);
             this.eluConvChb.Name = "eluConvChb";
             this.eluConvChb.Size = new System.Drawing.Size(18, 17);
             this.eluConvChb.TabIndex = 23;
@@ -1195,7 +1426,7 @@
             // softsignConvChb
             // 
             this.softsignConvChb.AutoSize = true;
-            this.softsignConvChb.Location = new System.Drawing.Point(271, 352);
+            this.softsignConvChb.Location = new System.Drawing.Point(271, 354);
             this.softsignConvChb.Name = "softsignConvChb";
             this.softsignConvChb.Size = new System.Drawing.Size(18, 17);
             this.softsignConvChb.TabIndex = 21;
@@ -1204,7 +1435,7 @@
             // seluConvChb
             // 
             this.seluConvChb.AutoSize = true;
-            this.seluConvChb.Location = new System.Drawing.Point(147, 329);
+            this.seluConvChb.Location = new System.Drawing.Point(147, 331);
             this.seluConvChb.Name = "seluConvChb";
             this.seluConvChb.Size = new System.Drawing.Size(18, 17);
             this.seluConvChb.TabIndex = 24;
@@ -1213,7 +1444,7 @@
             // lReluConvChb
             // 
             this.lReluConvChb.AutoSize = true;
-            this.lReluConvChb.Location = new System.Drawing.Point(147, 352);
+            this.lReluConvChb.Location = new System.Drawing.Point(147, 354);
             this.lReluConvChb.Name = "lReluConvChb";
             this.lReluConvChb.Size = new System.Drawing.Size(18, 17);
             this.lReluConvChb.TabIndex = 20;
@@ -1222,7 +1453,7 @@
             // softplusConvChb
             // 
             this.softplusConvChb.AutoSize = true;
-            this.softplusConvChb.Location = new System.Drawing.Point(271, 283);
+            this.softplusConvChb.Location = new System.Drawing.Point(271, 285);
             this.softplusConvChb.Name = "softplusConvChb";
             this.softplusConvChb.Size = new System.Drawing.Size(18, 17);
             this.softplusConvChb.TabIndex = 25;
@@ -1231,7 +1462,7 @@
             // softmaxConvChb
             // 
             this.softmaxConvChb.AutoSize = true;
-            this.softmaxConvChb.Location = new System.Drawing.Point(271, 306);
+            this.softmaxConvChb.Location = new System.Drawing.Point(271, 308);
             this.softmaxConvChb.Name = "softmaxConvChb";
             this.softmaxConvChb.Size = new System.Drawing.Size(18, 17);
             this.softmaxConvChb.TabIndex = 19;
@@ -1240,7 +1471,7 @@
             // tanhConvChb
             // 
             this.tanhConvChb.AutoSize = true;
-            this.tanhConvChb.Location = new System.Drawing.Point(271, 329);
+            this.tanhConvChb.Location = new System.Drawing.Point(271, 331);
             this.tanhConvChb.Name = "tanhConvChb";
             this.tanhConvChb.Size = new System.Drawing.Size(18, 17);
             this.tanhConvChb.TabIndex = 26;
@@ -1249,7 +1480,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(27, 312);
+            this.label6.Location = new System.Drawing.Point(31, 325);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 34);
             this.label6.TabIndex = 18;
@@ -1258,7 +1489,7 @@
             // reluDenseChb
             // 
             this.reluDenseChb.AutoSize = true;
-            this.reluDenseChb.Location = new System.Drawing.Point(171, 281);
+            this.reluDenseChb.Location = new System.Drawing.Point(171, 283);
             this.reluDenseChb.Name = "reluDenseChb";
             this.reluDenseChb.Size = new System.Drawing.Size(66, 21);
             this.reluDenseChb.TabIndex = 27;
@@ -1268,7 +1499,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(123, 83);
+            this.label5.Location = new System.Drawing.Point(122, 83);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(139, 51);
             this.label5.TabIndex = 17;
@@ -1277,7 +1508,7 @@
             // softmaxDenseChb
             // 
             this.softmaxDenseChb.AutoSize = true;
-            this.softmaxDenseChb.Location = new System.Drawing.Point(295, 304);
+            this.softmaxDenseChb.Location = new System.Drawing.Point(295, 306);
             this.softmaxDenseChb.Name = "softmaxDenseChb";
             this.softmaxDenseChb.Size = new System.Drawing.Size(80, 21);
             this.softmaxDenseChb.TabIndex = 28;
@@ -1304,7 +1535,7 @@
             // lReluDenseChb
             // 
             this.lReluDenseChb.AutoSize = true;
-            this.lReluDenseChb.Location = new System.Drawing.Point(171, 350);
+            this.lReluDenseChb.Location = new System.Drawing.Point(171, 352);
             this.lReluDenseChb.Name = "lReluDenseChb";
             this.lReluDenseChb.Size = new System.Drawing.Size(74, 21);
             this.lReluDenseChb.TabIndex = 29;
@@ -1314,7 +1545,7 @@
             // softsignDenseChb
             // 
             this.softsignDenseChb.AutoSize = true;
-            this.softsignDenseChb.Location = new System.Drawing.Point(295, 350);
+            this.softsignDenseChb.Location = new System.Drawing.Point(295, 352);
             this.softsignDenseChb.Name = "softsignDenseChb";
             this.softsignDenseChb.Size = new System.Drawing.Size(83, 21);
             this.softsignDenseChb.TabIndex = 30;
@@ -1338,7 +1569,7 @@
             this.sigmoidDenseChb.AutoSize = true;
             this.sigmoidDenseChb.Checked = true;
             this.sigmoidDenseChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.sigmoidDenseChb.Location = new System.Drawing.Point(295, 373);
+            this.sigmoidDenseChb.Location = new System.Drawing.Point(295, 375);
             this.sigmoidDenseChb.Name = "sigmoidDenseChb";
             this.sigmoidDenseChb.Size = new System.Drawing.Size(80, 21);
             this.sigmoidDenseChb.TabIndex = 31;
@@ -1347,7 +1578,7 @@
             // 
             // slidingWindow2NUD
             // 
-            this.slidingWindow2NUD.Location = new System.Drawing.Point(98, 237);
+            this.slidingWindow2NUD.Location = new System.Drawing.Point(80, 205);
             this.slidingWindow2NUD.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1366,7 +1597,7 @@
             // eluDenseChb
             // 
             this.eluDenseChb.AutoSize = true;
-            this.eluDenseChb.Location = new System.Drawing.Point(171, 304);
+            this.eluDenseChb.Location = new System.Drawing.Point(171, 306);
             this.eluDenseChb.Name = "eluDenseChb";
             this.eluDenseChb.Size = new System.Drawing.Size(57, 21);
             this.eluDenseChb.TabIndex = 32;
@@ -1375,7 +1606,7 @@
             // 
             // slidingWindow1NUD
             // 
-            this.slidingWindow1NUD.Location = new System.Drawing.Point(13, 237);
+            this.slidingWindow1NUD.Location = new System.Drawing.Point(6, 205);
             this.slidingWindow1NUD.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1398,7 +1629,7 @@
             // seluDenseChb
             // 
             this.seluDenseChb.AutoSize = true;
-            this.seluDenseChb.Location = new System.Drawing.Point(171, 327);
+            this.seluDenseChb.Location = new System.Drawing.Point(171, 329);
             this.seluDenseChb.Name = "seluDenseChb";
             this.seluDenseChb.Size = new System.Drawing.Size(66, 21);
             this.seluDenseChb.TabIndex = 33;
@@ -1408,16 +1639,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(62, 217);
+            this.label4.Location = new System.Drawing.Point(21, 185);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 17);
+            this.label4.Size = new System.Drawing.Size(97, 17);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Окно";
+            this.label4.Text = "sliding window";
             // 
             // softplusDenseChb
             // 
             this.softplusDenseChb.AutoSize = true;
-            this.softplusDenseChb.Location = new System.Drawing.Point(295, 281);
+            this.softplusDenseChb.Location = new System.Drawing.Point(295, 283);
             this.softplusDenseChb.Name = "softplusDenseChb";
             this.softplusDenseChb.Size = new System.Drawing.Size(82, 21);
             this.softplusDenseChb.TabIndex = 34;
@@ -1436,7 +1667,7 @@
             // tanhDenseChb
             // 
             this.tanhDenseChb.AutoSize = true;
-            this.tanhDenseChb.Location = new System.Drawing.Point(295, 327);
+            this.tanhDenseChb.Location = new System.Drawing.Point(295, 329);
             this.tanhDenseChb.Name = "tanhDenseChb";
             this.tanhDenseChb.Size = new System.Drawing.Size(63, 21);
             this.tanhDenseChb.TabIndex = 35;
@@ -1500,7 +1731,7 @@
             this.reluConvChb.AutoSize = true;
             this.reluConvChb.Checked = true;
             this.reluConvChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.reluConvChb.Location = new System.Drawing.Point(147, 283);
+            this.reluConvChb.Location = new System.Drawing.Point(147, 285);
             this.reluConvChb.Name = "reluConvChb";
             this.reluConvChb.Size = new System.Drawing.Size(18, 17);
             this.reluConvChb.TabIndex = 4;
@@ -1522,7 +1753,7 @@
             0,
             0,
             0});
-            this.denseDropoutNUD.Location = new System.Drawing.Point(294, 149);
+            this.denseDropoutNUD.Location = new System.Drawing.Point(295, 149);
             this.denseDropoutNUD.Minimum = new decimal(new int[] {
             10,
             0,
@@ -1540,7 +1771,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(346, 151);
+            this.label36.Location = new System.Drawing.Point(347, 151);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(20, 17);
             this.label36.TabIndex = 39;
@@ -1549,16 +1780,16 @@
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(68, 239);
+            this.label37.Location = new System.Drawing.Point(61, 207);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(24, 17);
+            this.label37.Size = new System.Drawing.Size(14, 17);
             this.label37.TabIndex = 40;
-            this.label37.Text = "на";
+            this.label37.Text = "x";
             // 
             // PReLUConvChB
             // 
             this.PReLUConvChB.AutoSize = true;
-            this.PReLUConvChB.Location = new System.Drawing.Point(147, 375);
+            this.PReLUConvChB.Location = new System.Drawing.Point(147, 377);
             this.PReLUConvChB.Name = "PReLUConvChB";
             this.PReLUConvChB.Size = new System.Drawing.Size(18, 17);
             this.PReLUConvChB.TabIndex = 41;
@@ -1567,7 +1798,7 @@
             // PReLUDenseChB
             // 
             this.PReLUDenseChB.AutoSize = true;
-            this.PReLUDenseChB.Location = new System.Drawing.Point(171, 373);
+            this.PReLUDenseChB.Location = new System.Drawing.Point(171, 375);
             this.PReLUDenseChB.Name = "PReLUDenseChB";
             this.PReLUDenseChB.Size = new System.Drawing.Size(75, 21);
             this.PReLUDenseChB.TabIndex = 42;
@@ -1577,7 +1808,7 @@
             // TReLUConvChB
             // 
             this.TReLUConvChB.AutoSize = true;
-            this.TReLUConvChB.Location = new System.Drawing.Point(147, 398);
+            this.TReLUConvChB.Location = new System.Drawing.Point(147, 400);
             this.TReLUConvChB.Name = "TReLUConvChB";
             this.TReLUConvChB.Size = new System.Drawing.Size(18, 17);
             this.TReLUConvChB.TabIndex = 43;
@@ -1586,7 +1817,7 @@
             // ThReLUDenseChB
             // 
             this.ThReLUDenseChB.AutoSize = true;
-            this.ThReLUDenseChB.Location = new System.Drawing.Point(171, 396);
+            this.ThReLUDenseChB.Location = new System.Drawing.Point(171, 398);
             this.ThReLUDenseChB.Name = "ThReLUDenseChB";
             this.ThReLUDenseChB.Size = new System.Drawing.Size(75, 21);
             this.ThReLUDenseChB.TabIndex = 44;
@@ -1638,7 +1869,7 @@
             this.ConvModelGB.Controls.Add(this.eluConvChb);
             this.ConvModelGB.Location = new System.Drawing.Point(406, 53);
             this.ConvModelGB.Name = "ConvModelGB";
-            this.ConvModelGB.Size = new System.Drawing.Size(396, 439);
+            this.ConvModelGB.Size = new System.Drawing.Size(396, 468);
             this.ConvModelGB.TabIndex = 50;
             this.ConvModelGB.TabStop = false;
             // 
@@ -1654,7 +1885,7 @@
             // denseDropoutChB
             // 
             this.denseDropoutChB.AutoSize = true;
-            this.denseDropoutChB.Location = new System.Drawing.Point(270, 152);
+            this.denseDropoutChB.Location = new System.Drawing.Point(271, 152);
             this.denseDropoutChB.Name = "denseDropoutChB";
             this.denseDropoutChB.Size = new System.Drawing.Size(18, 17);
             this.denseDropoutChB.TabIndex = 46;
@@ -1819,7 +2050,7 @@
             this.DisplayModeCB.Items.AddRange(new object[] {
             "Current Epoch Graph",
             "Current Genetic Search Graph"});
-            this.DisplayModeCB.Location = new System.Drawing.Point(406, 498);
+            this.DisplayModeCB.Location = new System.Drawing.Point(406, 521);
             this.DisplayModeCB.Name = "DisplayModeCB";
             this.DisplayModeCB.Size = new System.Drawing.Size(396, 24);
             this.DisplayModeCB.TabIndex = 78;
@@ -1840,7 +2071,7 @@
             this.groupBox6.Controls.Add(this.checkBox3);
             this.groupBox6.Controls.Add(this.checkBox2);
             this.groupBox6.Controls.Add(this.checkBox1);
-            this.groupBox6.Location = new System.Drawing.Point(406, 779);
+            this.groupBox6.Location = new System.Drawing.Point(406, 802);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(396, 175);
             this.groupBox6.TabIndex = 80;
@@ -2385,6 +2616,44 @@
             this.label51.Text = "chromosome output";
             this.label51.Visible = false;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.SGD_OptChB);
+            this.groupBox2.Controls.Add(this.RMSp_OptChB);
+            this.groupBox2.Controls.Add(this.Adagrad_OptChB);
+            this.groupBox2.Controls.Add(this.Adadelta_OptChB);
+            this.groupBox2.Controls.Add(this.Adam_OptChB);
+            this.groupBox2.Controls.Add(this.Adamax_OptChB);
+            this.groupBox2.Controls.Add(this.Nadam_OptChB);
+            this.groupBox2.Location = new System.Drawing.Point(6, 92);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(125, 202);
+            this.groupBox2.TabIndex = 48;
+            this.groupBox2.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.mean_squared_errorChB);
+            this.groupBox3.Controls.Add(this.cosine_proximityChB);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.poissonChB);
+            this.groupBox3.Controls.Add(this.mean_absolute_errorChB);
+            this.groupBox3.Controls.Add(this.kullback_leibler_divergenceChB);
+            this.groupBox3.Controls.Add(this.mean_absolute_percentage_errorChB);
+            this.groupBox3.Controls.Add(this.binary_crossentropyChB);
+            this.groupBox3.Controls.Add(this.squared_hingeChB);
+            this.groupBox3.Controls.Add(this.sparse_categorical_crossentropyChB);
+            this.groupBox3.Controls.Add(this.mean_squared_logarithmic_errorChB);
+            this.groupBox3.Controls.Add(this.categorical_crossentropyChB);
+            this.groupBox3.Controls.Add(this.hingeChB);
+            this.groupBox3.Controls.Add(this.logcoshChB);
+            this.groupBox3.Controls.Add(this.categorical_hingeChB);
+            this.groupBox3.Location = new System.Drawing.Point(137, 92);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(252, 202);
+            this.groupBox3.TabIndex = 48;
+            this.groupBox3.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2432,14 +2701,12 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " NN Family Creater";
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mutateRateNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchSizeNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.geneticEpochsNUD)).EndInit();
             this.geneticGB.ResumeLayout(false);
             this.geneticGB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).EndInit();
@@ -2447,7 +2714,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popolationCountNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.learningEpochsNUD)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -2493,22 +2760,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.TextBox minConstSpeedTB;
         private System.Windows.Forms.TextBox maxConstSpeedTB;
-        private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.CheckBox checkBox19;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkBox20;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown numericUpDown10;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -2516,7 +2782,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown batchSizeNUD;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.NumericUpDown numericUpDown12;
+        private System.Windows.Forms.NumericUpDown geneticEpochsNUD;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.GroupBox geneticGB;
@@ -2535,7 +2801,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.NumericUpDown learningEpochsNUD;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.NumericUpDown numericUpDown14;
+        private System.Windows.Forms.NumericUpDown popolationCountNUD;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button openPlotsFolderBtn;
         private System.Windows.Forms.TextBox plotsPathTB;
@@ -2554,7 +2820,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button predsBtn;
         private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.NumericUpDown numericUpDown20;
+        private System.Windows.Forms.NumericUpDown mutateRateNUD;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label32;
@@ -2692,6 +2958,32 @@
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.TextBox chrOutTB;
         private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox Nadam_OptChB;
+        private System.Windows.Forms.CheckBox Adamax_OptChB;
+        private System.Windows.Forms.CheckBox Adam_OptChB;
+        private System.Windows.Forms.CheckBox Adadelta_OptChB;
+        private System.Windows.Forms.CheckBox Adagrad_OptChB;
+        private System.Windows.Forms.CheckBox RMSp_OptChB;
+        private System.Windows.Forms.CheckBox SGD_OptChB;
+        private System.Windows.Forms.CheckBox cosine_proximityChB;
+        private System.Windows.Forms.CheckBox poissonChB;
+        private System.Windows.Forms.CheckBox kullback_leibler_divergenceChB;
+        private System.Windows.Forms.CheckBox binary_crossentropyChB;
+        private System.Windows.Forms.CheckBox sparse_categorical_crossentropyChB;
+        private System.Windows.Forms.CheckBox categorical_crossentropyChB;
+        private System.Windows.Forms.CheckBox logcoshChB;
+        private System.Windows.Forms.CheckBox categorical_hingeChB;
+        private System.Windows.Forms.CheckBox hingeChB;
+        private System.Windows.Forms.CheckBox mean_squared_logarithmic_errorChB;
+        private System.Windows.Forms.CheckBox squared_hingeChB;
+        private System.Windows.Forms.CheckBox mean_absolute_percentage_errorChB;
+        private System.Windows.Forms.CheckBox mean_absolute_errorChB;
+        private System.Windows.Forms.CheckBox mean_squared_errorChB;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 
