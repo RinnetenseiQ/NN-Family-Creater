@@ -8,6 +8,7 @@ namespace NN_Family_Creater
 {
     public class NetworkRandomParams
     {
+        public readonly bool notRandomSpeed;
         public readonly float[] trainConstSpeedRange;
         public readonly string datasetPath;
         public readonly string networkName;
@@ -17,11 +18,12 @@ namespace NN_Family_Creater
         public readonly int epochs;
         public readonly int batchSize;
 
-        public NetworkRandomParams(float[] trainConstSpeedRange, string datasetPath, 
+        public NetworkRandomParams(bool notRandomSpeed, float[] trainConstSpeedRange, string datasetPath, 
                                    string networkName, List<string> optimizers,
                                    List<string> loss_functions, int epochs,
                                    int batchSize)
         {
+            this.notRandomSpeed = notRandomSpeed;
             this.trainConstSpeedRange = trainConstSpeedRange;
             this.datasetPath = datasetPath;
             this.networkName = networkName;

@@ -31,35 +31,37 @@
             this.components = new System.ComponentModel.Container();
             this.minConstSpeedTB = new System.Windows.Forms.TextBox();
             this.maxConstSpeedTB = new System.Windows.Forms.TextBox();
-            this.checkBox19 = new System.Windows.Forms.CheckBox();
+            this.constSpeedChB = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.checkBox20 = new System.Windows.Forms.CheckBox();
             this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.mean_squared_errorChB = new System.Windows.Forms.CheckBox();
             this.cosine_proximityChB = new System.Windows.Forms.CheckBox();
             this.poissonChB = new System.Windows.Forms.CheckBox();
+            this.mean_absolute_errorChB = new System.Windows.Forms.CheckBox();
             this.kullback_leibler_divergenceChB = new System.Windows.Forms.CheckBox();
+            this.mean_absolute_percentage_errorChB = new System.Windows.Forms.CheckBox();
             this.binary_crossentropyChB = new System.Windows.Forms.CheckBox();
+            this.squared_hingeChB = new System.Windows.Forms.CheckBox();
             this.sparse_categorical_crossentropyChB = new System.Windows.Forms.CheckBox();
+            this.mean_squared_logarithmic_errorChB = new System.Windows.Forms.CheckBox();
             this.categorical_crossentropyChB = new System.Windows.Forms.CheckBox();
+            this.hingeChB = new System.Windows.Forms.CheckBox();
             this.logcoshChB = new System.Windows.Forms.CheckBox();
             this.categorical_hingeChB = new System.Windows.Forms.CheckBox();
-            this.hingeChB = new System.Windows.Forms.CheckBox();
-            this.mean_squared_logarithmic_errorChB = new System.Windows.Forms.CheckBox();
-            this.squared_hingeChB = new System.Windows.Forms.CheckBox();
-            this.mean_absolute_percentage_errorChB = new System.Windows.Forms.CheckBox();
-            this.mean_absolute_errorChB = new System.Windows.Forms.CheckBox();
-            this.mean_squared_errorChB = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.SGD_OptChB = new System.Windows.Forms.CheckBox();
+            this.RMSp_OptChB = new System.Windows.Forms.CheckBox();
+            this.Adagrad_OptChB = new System.Windows.Forms.CheckBox();
+            this.Adadelta_OptChB = new System.Windows.Forms.CheckBox();
+            this.Adam_OptChB = new System.Windows.Forms.CheckBox();
+            this.Adamax_OptChB = new System.Windows.Forms.CheckBox();
+            this.Nadam_OptChB = new System.Windows.Forms.CheckBox();
             this.label67 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.Nadam_OptChB = new System.Windows.Forms.CheckBox();
-            this.Adamax_OptChB = new System.Windows.Forms.CheckBox();
-            this.Adam_OptChB = new System.Windows.Forms.CheckBox();
-            this.Adadelta_OptChB = new System.Windows.Forms.CheckBox();
-            this.Adagrad_OptChB = new System.Windows.Forms.CheckBox();
-            this.RMSp_OptChB = new System.Windows.Forms.CheckBox();
-            this.SGD_OptChB = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.mutateRateNUD = new System.Windows.Forms.NumericUpDown();
@@ -241,10 +243,10 @@
             this.label50 = new System.Windows.Forms.Label();
             this.chrOutTB = new System.Windows.Forms.TextBox();
             this.label51 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mutateRateNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchSizeNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.geneticEpochsNUD)).BeginInit();
@@ -289,8 +291,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // minConstSpeedTB
@@ -299,7 +299,7 @@
             this.minConstSpeedTB.Name = "minConstSpeedTB";
             this.minConstSpeedTB.Size = new System.Drawing.Size(45, 22);
             this.minConstSpeedTB.TabIndex = 1;
-            this.minConstSpeedTB.Text = "0.001";
+            this.minConstSpeedTB.Text = "0.01";
             this.minConstSpeedTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // maxConstSpeedTB
@@ -311,18 +311,18 @@
             this.maxConstSpeedTB.Text = "0.700";
             this.maxConstSpeedTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
-            // checkBox19
+            // constSpeedChB
             // 
-            this.checkBox19.AutoSize = true;
-            this.checkBox19.Checked = true;
-            this.checkBox19.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox19.Location = new System.Drawing.Point(24, 45);
-            this.checkBox19.Name = "checkBox19";
-            this.checkBox19.Size = new System.Drawing.Size(66, 21);
-            this.checkBox19.TabIndex = 40;
-            this.checkBox19.Text = "Const";
-            this.checkBox19.UseVisualStyleBackColor = true;
-            this.checkBox19.CheckedChanged += new System.EventHandler(this.checkBox19_CheckedChanged);
+            this.constSpeedChB.AutoSize = true;
+            this.constSpeedChB.Checked = true;
+            this.constSpeedChB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.constSpeedChB.Location = new System.Drawing.Point(24, 45);
+            this.constSpeedChB.Name = "constSpeedChB";
+            this.constSpeedChB.Size = new System.Drawing.Size(66, 21);
+            this.constSpeedChB.TabIndex = 40;
+            this.constSpeedChB.Text = "Const";
+            this.constSpeedChB.UseVisualStyleBackColor = true;
+            this.constSpeedChB.CheckedChanged += new System.EventHandler(this.checkBox19_CheckedChanged);
             // 
             // label9
             // 
@@ -366,7 +366,7 @@
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.checkBox19);
+            this.groupBox1.Controls.Add(this.constSpeedChB);
             this.groupBox1.Controls.Add(this.minConstSpeedTB);
             this.groupBox1.Controls.Add(this.numericUpDown10);
             this.groupBox1.Controls.Add(this.maxConstSpeedTB);
@@ -377,6 +377,39 @@
             this.groupBox1.Size = new System.Drawing.Size(395, 300);
             this.groupBox1.TabIndex = 49;
             this.groupBox1.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.mean_squared_errorChB);
+            this.groupBox3.Controls.Add(this.cosine_proximityChB);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.poissonChB);
+            this.groupBox3.Controls.Add(this.mean_absolute_errorChB);
+            this.groupBox3.Controls.Add(this.kullback_leibler_divergenceChB);
+            this.groupBox3.Controls.Add(this.mean_absolute_percentage_errorChB);
+            this.groupBox3.Controls.Add(this.binary_crossentropyChB);
+            this.groupBox3.Controls.Add(this.squared_hingeChB);
+            this.groupBox3.Controls.Add(this.sparse_categorical_crossentropyChB);
+            this.groupBox3.Controls.Add(this.mean_squared_logarithmic_errorChB);
+            this.groupBox3.Controls.Add(this.categorical_crossentropyChB);
+            this.groupBox3.Controls.Add(this.hingeChB);
+            this.groupBox3.Controls.Add(this.logcoshChB);
+            this.groupBox3.Controls.Add(this.categorical_hingeChB);
+            this.groupBox3.Location = new System.Drawing.Point(137, 92);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(252, 202);
+            this.groupBox3.TabIndex = 48;
+            this.groupBox3.TabStop = false;
+            // 
+            // mean_squared_errorChB
+            // 
+            this.mean_squared_errorChB.AutoSize = true;
+            this.mean_squared_errorChB.Location = new System.Drawing.Point(6, 12);
+            this.mean_squared_errorChB.Name = "mean_squared_errorChB";
+            this.mean_squared_errorChB.Size = new System.Drawing.Size(59, 21);
+            this.mean_squared_errorChB.TabIndex = 59;
+            this.mean_squared_errorChB.Text = "MSE";
+            this.mean_squared_errorChB.UseVisualStyleBackColor = true;
             // 
             // cosine_proximityChB
             // 
@@ -398,6 +431,16 @@
             this.poissonChB.Text = "poisson";
             this.poissonChB.UseVisualStyleBackColor = true;
             // 
+            // mean_absolute_errorChB
+            // 
+            this.mean_absolute_errorChB.AutoSize = true;
+            this.mean_absolute_errorChB.Location = new System.Drawing.Point(6, 40);
+            this.mean_absolute_errorChB.Name = "mean_absolute_errorChB";
+            this.mean_absolute_errorChB.Size = new System.Drawing.Size(59, 21);
+            this.mean_absolute_errorChB.TabIndex = 60;
+            this.mean_absolute_errorChB.Text = "MAE";
+            this.mean_absolute_errorChB.UseVisualStyleBackColor = true;
+            // 
             // kullback_leibler_divergenceChB
             // 
             this.kullback_leibler_divergenceChB.AutoSize = true;
@@ -407,6 +450,16 @@
             this.kullback_leibler_divergenceChB.TabIndex = 70;
             this.kullback_leibler_divergenceChB.Text = "KLD";
             this.kullback_leibler_divergenceChB.UseVisualStyleBackColor = true;
+            // 
+            // mean_absolute_percentage_errorChB
+            // 
+            this.mean_absolute_percentage_errorChB.AutoSize = true;
+            this.mean_absolute_percentage_errorChB.Location = new System.Drawing.Point(6, 67);
+            this.mean_absolute_percentage_errorChB.Name = "mean_absolute_percentage_errorChB";
+            this.mean_absolute_percentage_errorChB.Size = new System.Drawing.Size(68, 21);
+            this.mean_absolute_percentage_errorChB.TabIndex = 61;
+            this.mean_absolute_percentage_errorChB.Text = "MAPE";
+            this.mean_absolute_percentage_errorChB.UseVisualStyleBackColor = true;
             // 
             // binary_crossentropyChB
             // 
@@ -418,6 +471,16 @@
             this.binary_crossentropyChB.Text = "B-crossentropy";
             this.binary_crossentropyChB.UseVisualStyleBackColor = true;
             // 
+            // squared_hingeChB
+            // 
+            this.squared_hingeChB.AutoSize = true;
+            this.squared_hingeChB.Location = new System.Drawing.Point(112, 121);
+            this.squared_hingeChB.Name = "squared_hingeChB";
+            this.squared_hingeChB.Size = new System.Drawing.Size(121, 21);
+            this.squared_hingeChB.TabIndex = 62;
+            this.squared_hingeChB.Text = "squared hinge";
+            this.squared_hingeChB.UseVisualStyleBackColor = true;
+            // 
             // sparse_categorical_crossentropyChB
             // 
             this.sparse_categorical_crossentropyChB.AutoSize = true;
@@ -427,6 +490,16 @@
             this.sparse_categorical_crossentropyChB.TabIndex = 68;
             this.sparse_categorical_crossentropyChB.Text = "SC-crossentropy";
             this.sparse_categorical_crossentropyChB.UseVisualStyleBackColor = true;
+            // 
+            // mean_squared_logarithmic_errorChB
+            // 
+            this.mean_squared_logarithmic_errorChB.AutoSize = true;
+            this.mean_squared_logarithmic_errorChB.Location = new System.Drawing.Point(6, 94);
+            this.mean_squared_logarithmic_errorChB.Name = "mean_squared_logarithmic_errorChB";
+            this.mean_squared_logarithmic_errorChB.Size = new System.Drawing.Size(67, 21);
+            this.mean_squared_logarithmic_errorChB.TabIndex = 63;
+            this.mean_squared_logarithmic_errorChB.Text = "MSLE";
+            this.mean_squared_logarithmic_errorChB.UseVisualStyleBackColor = true;
             // 
             // categorical_crossentropyChB
             // 
@@ -439,6 +512,16 @@
             this.categorical_crossentropyChB.TabIndex = 67;
             this.categorical_crossentropyChB.Text = "C-crossentropy";
             this.categorical_crossentropyChB.UseVisualStyleBackColor = true;
+            // 
+            // hingeChB
+            // 
+            this.hingeChB.AutoSize = true;
+            this.hingeChB.Location = new System.Drawing.Point(6, 175);
+            this.hingeChB.Name = "hingeChB";
+            this.hingeChB.Size = new System.Drawing.Size(65, 21);
+            this.hingeChB.TabIndex = 64;
+            this.hingeChB.Text = "hinge";
+            this.hingeChB.UseVisualStyleBackColor = true;
             // 
             // logcoshChB
             // 
@@ -460,65 +543,92 @@
             this.categorical_hingeChB.Text = "categ hinge";
             this.categorical_hingeChB.UseVisualStyleBackColor = true;
             // 
-            // hingeChB
+            // groupBox2
             // 
-            this.hingeChB.AutoSize = true;
-            this.hingeChB.Location = new System.Drawing.Point(6, 175);
-            this.hingeChB.Name = "hingeChB";
-            this.hingeChB.Size = new System.Drawing.Size(65, 21);
-            this.hingeChB.TabIndex = 64;
-            this.hingeChB.Text = "hinge";
-            this.hingeChB.UseVisualStyleBackColor = true;
+            this.groupBox2.Controls.Add(this.SGD_OptChB);
+            this.groupBox2.Controls.Add(this.RMSp_OptChB);
+            this.groupBox2.Controls.Add(this.Adagrad_OptChB);
+            this.groupBox2.Controls.Add(this.Adadelta_OptChB);
+            this.groupBox2.Controls.Add(this.Adam_OptChB);
+            this.groupBox2.Controls.Add(this.Adamax_OptChB);
+            this.groupBox2.Controls.Add(this.Nadam_OptChB);
+            this.groupBox2.Location = new System.Drawing.Point(6, 92);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(125, 202);
+            this.groupBox2.TabIndex = 48;
+            this.groupBox2.TabStop = false;
             // 
-            // mean_squared_logarithmic_errorChB
+            // SGD_OptChB
             // 
-            this.mean_squared_logarithmic_errorChB.AutoSize = true;
-            this.mean_squared_logarithmic_errorChB.Location = new System.Drawing.Point(6, 94);
-            this.mean_squared_logarithmic_errorChB.Name = "mean_squared_logarithmic_errorChB";
-            this.mean_squared_logarithmic_errorChB.Size = new System.Drawing.Size(67, 21);
-            this.mean_squared_logarithmic_errorChB.TabIndex = 63;
-            this.mean_squared_logarithmic_errorChB.Text = "MSLE";
-            this.mean_squared_logarithmic_errorChB.UseVisualStyleBackColor = true;
+            this.SGD_OptChB.AutoSize = true;
+            this.SGD_OptChB.Checked = true;
+            this.SGD_OptChB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.SGD_OptChB.Location = new System.Drawing.Point(9, 14);
+            this.SGD_OptChB.Name = "SGD_OptChB";
+            this.SGD_OptChB.Size = new System.Drawing.Size(60, 21);
+            this.SGD_OptChB.TabIndex = 50;
+            this.SGD_OptChB.Text = "SGD";
+            this.SGD_OptChB.UseVisualStyleBackColor = true;
             // 
-            // squared_hingeChB
+            // RMSp_OptChB
             // 
-            this.squared_hingeChB.AutoSize = true;
-            this.squared_hingeChB.Location = new System.Drawing.Point(112, 121);
-            this.squared_hingeChB.Name = "squared_hingeChB";
-            this.squared_hingeChB.Size = new System.Drawing.Size(121, 21);
-            this.squared_hingeChB.TabIndex = 62;
-            this.squared_hingeChB.Text = "squared hinge";
-            this.squared_hingeChB.UseVisualStyleBackColor = true;
+            this.RMSp_OptChB.AutoSize = true;
+            this.RMSp_OptChB.Location = new System.Drawing.Point(9, 42);
+            this.RMSp_OptChB.Name = "RMSp_OptChB";
+            this.RMSp_OptChB.Size = new System.Drawing.Size(89, 21);
+            this.RMSp_OptChB.TabIndex = 51;
+            this.RMSp_OptChB.Text = "RMSprop";
+            this.RMSp_OptChB.UseVisualStyleBackColor = true;
             // 
-            // mean_absolute_percentage_errorChB
+            // Adagrad_OptChB
             // 
-            this.mean_absolute_percentage_errorChB.AutoSize = true;
-            this.mean_absolute_percentage_errorChB.Location = new System.Drawing.Point(6, 67);
-            this.mean_absolute_percentage_errorChB.Name = "mean_absolute_percentage_errorChB";
-            this.mean_absolute_percentage_errorChB.Size = new System.Drawing.Size(68, 21);
-            this.mean_absolute_percentage_errorChB.TabIndex = 61;
-            this.mean_absolute_percentage_errorChB.Text = "MAPE";
-            this.mean_absolute_percentage_errorChB.UseVisualStyleBackColor = true;
+            this.Adagrad_OptChB.AutoSize = true;
+            this.Adagrad_OptChB.Location = new System.Drawing.Point(9, 69);
+            this.Adagrad_OptChB.Name = "Adagrad_OptChB";
+            this.Adagrad_OptChB.Size = new System.Drawing.Size(84, 21);
+            this.Adagrad_OptChB.TabIndex = 52;
+            this.Adagrad_OptChB.Text = "Adagrad";
+            this.Adagrad_OptChB.UseVisualStyleBackColor = true;
             // 
-            // mean_absolute_errorChB
+            // Adadelta_OptChB
             // 
-            this.mean_absolute_errorChB.AutoSize = true;
-            this.mean_absolute_errorChB.Location = new System.Drawing.Point(6, 40);
-            this.mean_absolute_errorChB.Name = "mean_absolute_errorChB";
-            this.mean_absolute_errorChB.Size = new System.Drawing.Size(59, 21);
-            this.mean_absolute_errorChB.TabIndex = 60;
-            this.mean_absolute_errorChB.Text = "MAE";
-            this.mean_absolute_errorChB.UseVisualStyleBackColor = true;
+            this.Adadelta_OptChB.AutoSize = true;
+            this.Adadelta_OptChB.Location = new System.Drawing.Point(9, 96);
+            this.Adadelta_OptChB.Name = "Adadelta_OptChB";
+            this.Adadelta_OptChB.Size = new System.Drawing.Size(86, 21);
+            this.Adadelta_OptChB.TabIndex = 53;
+            this.Adadelta_OptChB.Text = "Adadelta";
+            this.Adadelta_OptChB.UseVisualStyleBackColor = true;
             // 
-            // mean_squared_errorChB
+            // Adam_OptChB
             // 
-            this.mean_squared_errorChB.AutoSize = true;
-            this.mean_squared_errorChB.Location = new System.Drawing.Point(6, 12);
-            this.mean_squared_errorChB.Name = "mean_squared_errorChB";
-            this.mean_squared_errorChB.Size = new System.Drawing.Size(59, 21);
-            this.mean_squared_errorChB.TabIndex = 59;
-            this.mean_squared_errorChB.Text = "MSE";
-            this.mean_squared_errorChB.UseVisualStyleBackColor = true;
+            this.Adam_OptChB.AutoSize = true;
+            this.Adam_OptChB.Location = new System.Drawing.Point(9, 123);
+            this.Adam_OptChB.Name = "Adam_OptChB";
+            this.Adam_OptChB.Size = new System.Drawing.Size(66, 21);
+            this.Adam_OptChB.TabIndex = 54;
+            this.Adam_OptChB.Text = "Adam";
+            this.Adam_OptChB.UseVisualStyleBackColor = true;
+            // 
+            // Adamax_OptChB
+            // 
+            this.Adamax_OptChB.AutoSize = true;
+            this.Adamax_OptChB.Location = new System.Drawing.Point(9, 150);
+            this.Adamax_OptChB.Name = "Adamax_OptChB";
+            this.Adamax_OptChB.Size = new System.Drawing.Size(80, 21);
+            this.Adamax_OptChB.TabIndex = 55;
+            this.Adamax_OptChB.Text = "Adamax";
+            this.Adamax_OptChB.UseVisualStyleBackColor = true;
+            // 
+            // Nadam_OptChB
+            // 
+            this.Nadam_OptChB.AutoSize = true;
+            this.Nadam_OptChB.Location = new System.Drawing.Point(9, 177);
+            this.Nadam_OptChB.Name = "Nadam_OptChB";
+            this.Nadam_OptChB.Size = new System.Drawing.Size(75, 21);
+            this.Nadam_OptChB.TabIndex = 56;
+            this.Nadam_OptChB.Text = "Nadam";
+            this.Nadam_OptChB.UseVisualStyleBackColor = true;
             // 
             // label67
             // 
@@ -537,78 +647,6 @@
             this.label11.Size = new System.Drawing.Size(97, 17);
             this.label11.TabIndex = 57;
             this.label11.Text = "Оптимизатор";
-            // 
-            // Nadam_OptChB
-            // 
-            this.Nadam_OptChB.AutoSize = true;
-            this.Nadam_OptChB.Location = new System.Drawing.Point(9, 177);
-            this.Nadam_OptChB.Name = "Nadam_OptChB";
-            this.Nadam_OptChB.Size = new System.Drawing.Size(75, 21);
-            this.Nadam_OptChB.TabIndex = 56;
-            this.Nadam_OptChB.Text = "Nadam";
-            this.Nadam_OptChB.UseVisualStyleBackColor = true;
-            // 
-            // Adamax_OptChB
-            // 
-            this.Adamax_OptChB.AutoSize = true;
-            this.Adamax_OptChB.Location = new System.Drawing.Point(9, 150);
-            this.Adamax_OptChB.Name = "Adamax_OptChB";
-            this.Adamax_OptChB.Size = new System.Drawing.Size(80, 21);
-            this.Adamax_OptChB.TabIndex = 55;
-            this.Adamax_OptChB.Text = "Adamax";
-            this.Adamax_OptChB.UseVisualStyleBackColor = true;
-            // 
-            // Adam_OptChB
-            // 
-            this.Adam_OptChB.AutoSize = true;
-            this.Adam_OptChB.Location = new System.Drawing.Point(9, 123);
-            this.Adam_OptChB.Name = "Adam_OptChB";
-            this.Adam_OptChB.Size = new System.Drawing.Size(66, 21);
-            this.Adam_OptChB.TabIndex = 54;
-            this.Adam_OptChB.Text = "Adam";
-            this.Adam_OptChB.UseVisualStyleBackColor = true;
-            // 
-            // Adadelta_OptChB
-            // 
-            this.Adadelta_OptChB.AutoSize = true;
-            this.Adadelta_OptChB.Location = new System.Drawing.Point(9, 96);
-            this.Adadelta_OptChB.Name = "Adadelta_OptChB";
-            this.Adadelta_OptChB.Size = new System.Drawing.Size(86, 21);
-            this.Adadelta_OptChB.TabIndex = 53;
-            this.Adadelta_OptChB.Text = "Adadelta";
-            this.Adadelta_OptChB.UseVisualStyleBackColor = true;
-            // 
-            // Adagrad_OptChB
-            // 
-            this.Adagrad_OptChB.AutoSize = true;
-            this.Adagrad_OptChB.Location = new System.Drawing.Point(9, 69);
-            this.Adagrad_OptChB.Name = "Adagrad_OptChB";
-            this.Adagrad_OptChB.Size = new System.Drawing.Size(84, 21);
-            this.Adagrad_OptChB.TabIndex = 52;
-            this.Adagrad_OptChB.Text = "Adagrad";
-            this.Adagrad_OptChB.UseVisualStyleBackColor = true;
-            // 
-            // RMSp_OptChB
-            // 
-            this.RMSp_OptChB.AutoSize = true;
-            this.RMSp_OptChB.Location = new System.Drawing.Point(9, 42);
-            this.RMSp_OptChB.Name = "RMSp_OptChB";
-            this.RMSp_OptChB.Size = new System.Drawing.Size(89, 21);
-            this.RMSp_OptChB.TabIndex = 51;
-            this.RMSp_OptChB.Text = "RMSprop";
-            this.RMSp_OptChB.UseVisualStyleBackColor = true;
-            // 
-            // SGD_OptChB
-            // 
-            this.SGD_OptChB.AutoSize = true;
-            this.SGD_OptChB.Checked = true;
-            this.SGD_OptChB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.SGD_OptChB.Location = new System.Drawing.Point(9, 14);
-            this.SGD_OptChB.Name = "SGD_OptChB";
-            this.SGD_OptChB.Size = new System.Drawing.Size(60, 21);
-            this.SGD_OptChB.TabIndex = 50;
-            this.SGD_OptChB.Text = "SGD";
-            this.SGD_OptChB.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
@@ -1043,7 +1081,7 @@
             // 
             this.popolationCountNUD.Location = new System.Drawing.Point(187, 50);
             this.popolationCountNUD.Minimum = new decimal(new int[] {
-            5,
+            2,
             0,
             0,
             0});
@@ -1239,7 +1277,7 @@
             this.textBox9.Location = new System.Drawing.Point(5, 551);
             this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(395, 426);
+            this.textBox9.Size = new System.Drawing.Size(796, 426);
             this.textBox9.TabIndex = 63;
             // 
             // groupBox5
@@ -1338,11 +1376,12 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(406, 551);
+            this.dataGridView1.Location = new System.Drawing.Point(1319, 479);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(396, 245);
             this.dataGridView1.TabIndex = 70;
+            this.dataGridView1.Visible = false;
             // 
             // zedGraphControl1
             // 
@@ -2050,10 +2089,11 @@
             this.DisplayModeCB.Items.AddRange(new object[] {
             "Current Epoch Graph",
             "Current Genetic Search Graph"});
-            this.DisplayModeCB.Location = new System.Drawing.Point(406, 521);
+            this.DisplayModeCB.Location = new System.Drawing.Point(1319, 449);
             this.DisplayModeCB.Name = "DisplayModeCB";
             this.DisplayModeCB.Size = new System.Drawing.Size(396, 24);
             this.DisplayModeCB.TabIndex = 78;
+            this.DisplayModeCB.Visible = false;
             // 
             // checkBox1
             // 
@@ -2071,11 +2111,12 @@
             this.groupBox6.Controls.Add(this.checkBox3);
             this.groupBox6.Controls.Add(this.checkBox2);
             this.groupBox6.Controls.Add(this.checkBox1);
-            this.groupBox6.Location = new System.Drawing.Point(406, 802);
+            this.groupBox6.Location = new System.Drawing.Point(1319, 730);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(396, 175);
             this.groupBox6.TabIndex = 80;
             this.groupBox6.TabStop = false;
+            this.groupBox6.Visible = false;
             // 
             // checkBox4
             // 
@@ -2616,44 +2657,6 @@
             this.label51.Text = "chromosome output";
             this.label51.Visible = false;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.SGD_OptChB);
-            this.groupBox2.Controls.Add(this.RMSp_OptChB);
-            this.groupBox2.Controls.Add(this.Adagrad_OptChB);
-            this.groupBox2.Controls.Add(this.Adadelta_OptChB);
-            this.groupBox2.Controls.Add(this.Adam_OptChB);
-            this.groupBox2.Controls.Add(this.Adamax_OptChB);
-            this.groupBox2.Controls.Add(this.Nadam_OptChB);
-            this.groupBox2.Location = new System.Drawing.Point(6, 92);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(125, 202);
-            this.groupBox2.TabIndex = 48;
-            this.groupBox2.TabStop = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.mean_squared_errorChB);
-            this.groupBox3.Controls.Add(this.cosine_proximityChB);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.poissonChB);
-            this.groupBox3.Controls.Add(this.mean_absolute_errorChB);
-            this.groupBox3.Controls.Add(this.kullback_leibler_divergenceChB);
-            this.groupBox3.Controls.Add(this.mean_absolute_percentage_errorChB);
-            this.groupBox3.Controls.Add(this.binary_crossentropyChB);
-            this.groupBox3.Controls.Add(this.squared_hingeChB);
-            this.groupBox3.Controls.Add(this.sparse_categorical_crossentropyChB);
-            this.groupBox3.Controls.Add(this.mean_squared_logarithmic_errorChB);
-            this.groupBox3.Controls.Add(this.categorical_crossentropyChB);
-            this.groupBox3.Controls.Add(this.hingeChB);
-            this.groupBox3.Controls.Add(this.logcoshChB);
-            this.groupBox3.Controls.Add(this.categorical_hingeChB);
-            this.groupBox3.Location = new System.Drawing.Point(137, 92);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(252, 202);
-            this.groupBox3.TabIndex = 48;
-            this.groupBox3.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2704,6 +2707,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mutateRateNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchSizeNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.geneticEpochsNUD)).EndInit();
@@ -2760,10 +2767,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2772,7 +2775,7 @@
         #endregion
         private System.Windows.Forms.TextBox minConstSpeedTB;
         private System.Windows.Forms.TextBox maxConstSpeedTB;
-        private System.Windows.Forms.CheckBox checkBox19;
+        private System.Windows.Forms.CheckBox constSpeedChB;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkBox20;
         private System.Windows.Forms.NumericUpDown numericUpDown10;

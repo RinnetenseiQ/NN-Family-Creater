@@ -30,7 +30,7 @@ namespace NN_Family_Creater
         public float assessment;
 
         public float accuracy;
-        public float paramsCount;
+        public int paramsCount;
 
         public ConvolutionalChromosome(NetworkRandomParams nrp, ConvRandomParams crp, DenseRandomParams drp, Random random)
         {
@@ -40,8 +40,8 @@ namespace NN_Family_Creater
             this.drp = drp;
             convPart = new ConvStructure(crp, random);
             densePart = new DenseStructure(drp, random);
-
-            trainConstSpeed = Convert.ToSingle(random.Next((int)(nrp.trainConstSpeedRange[0] * 1000), (int)(nrp.trainConstSpeedRange[1] * 1000))) / 1000;
+            if (nrp.notRandomSpeed) trainConstSpeed = nrp.trainConstSpeedRange[0];
+            else trainConstSpeed = Convert.ToSingle(random.Next((int)(nrp.trainConstSpeedRange[0] * 1000), (int)(nrp.trainConstSpeedRange[1] * 1000))) / 1000;
             optimizer = nrp.optimizers[random.Next(nrp.optimizers.Count)];
             loss_function = nrp.loss_functions[random.Next(nrp.loss_functions.Count)];
         }

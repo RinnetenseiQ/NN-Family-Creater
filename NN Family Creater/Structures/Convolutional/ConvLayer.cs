@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NN_Family_Creater
@@ -25,7 +26,6 @@ namespace NN_Family_Creater
         {
             this.random = random;
             this.filters = filters;
-            random = new Random();
             slidingWindow = new int[2];
 
             dropoutExist = random.Next(100) < 10 ? true : false;
@@ -35,7 +35,7 @@ namespace NN_Family_Creater
 
             activationIndex = random.Next(crp.convActIndexesRange);
 
-            squareSlidingWindow = random.Next(100) <= 50 ? true : false;
+            squareSlidingWindow = random.Next(100) <= 20 ? true : false;
             if (squareSlidingWindow)
             {
                 slidingWindow[0] = random.Next(2, crp.slidingWindowsRange[0]);
@@ -47,6 +47,7 @@ namespace NN_Family_Creater
                 if (slidingWindow[0] > 1) slidingWindow[1] = random.Next(1, crp.slidingWindowsRange[1]);
                 else slidingWindow[1] = random.Next(2, crp.slidingWindowsRange[1]);
             }
+            //Thread.Sleep(1);
         }
 
         public ConvLayer(ConvLayer cLayerToCopy)

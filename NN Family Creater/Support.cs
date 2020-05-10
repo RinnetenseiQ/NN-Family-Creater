@@ -65,11 +65,24 @@ namespace NN_Family_Creater
 
         public static void UpdateAssesment(List<ConvolutionalChromosome> chrList)
         {
+
             float minParamsCount = chrList[0].paramsCount; //локальная переменная для хранения минимальной памяти
+
             for (int i = 1; i < chrList.Count; i++)
-                if (chrList[i].paramsCount < minParamsCount) minParamsCount = chrList[i].paramsCount; // цикл поиска минимума
+            {
+                if(minParamsCount != 0)
+                {
+                    if (chrList[i].paramsCount < minParamsCount && chrList[i].paramsCount != 0) minParamsCount = chrList[i].paramsCount; // цикл поиска минимума
+                }
+            
+            }
+                 
             for (int i = 0; i < chrList.Count; i++)
-                chrList[i].assessment = (chrList[i].accuracy / 100.0f) + (minParamsCount / chrList[i].paramsCount); // цикл расчета оценки
+            {
+                if (chrList[i].accuracy == 0 || chrList[i].paramsCount == 0) chrList[i].assessment = 0;
+                else chrList[i].assessment = chrList[i].accuracy + (minParamsCount / chrList[i].paramsCount); // цикл расчета оценки
+            }
+                
         } // расчет оценки сети
 
 
