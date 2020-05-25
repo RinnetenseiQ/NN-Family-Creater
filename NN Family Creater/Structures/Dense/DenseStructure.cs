@@ -8,15 +8,19 @@ namespace NN_Family_Creater
 {
     public class DenseStructure
     {
-        Random random;
+        public readonly NetworkRandomParams nrp;
+        public readonly DenseRandomParams drp;
+        public Random random;
         public int denseLayersNumb;
-        public List<DenseLayer> denseLayer;
+        public List<DenseLayer> denseLayers;
         public bool sameActivations;
 
-        public DenseStructure(DenseRandomParams drp, Random random)
+        public DenseStructure(NetworkRandomParams nrp, DenseRandomParams drp, Random random)
         {
+            this.nrp = nrp;
+            this.drp = drp;
             this.random = random;
-
+            
             sameActivations = random.Next(100) < 10 ? true : false;
             int abserber = 0;
             if (sameActivations)
@@ -25,24 +29,42 @@ namespace NN_Family_Creater
             }
 
             denseLayersNumb = random.Next(1, drp.denseLayersNumbRange);
-            denseLayer = new List<DenseLayer>(denseLayersNumb);
-            for (int i = 0; i < denseLayer.Capacity; i++)
+            denseLayers = new List<DenseLayer>(denseLayersNumb);
+            //int neurons = (int)Math.Pow(2, drp.firstDenseNeuronsRange);
+
+            int powIndex = 0;
+
+            for (int i = 0; i < denseLayers.Capacity; i++)
             {
-                int neurons;
-                if (i == 0) neurons = random.Next(drp.firstDenseNeuronsRange / 3, drp.firstDenseNeuronsRange);
-                else neurons = random.Next(denseLayer[i - 1].neurons / 3, denseLayer[i - 1].neurons);
-                denseLayer.Add(new DenseLayer(drp, random, neurons));
+                int neurons = 0;
+
+                if (i == 0) powIndex = random.Next(Support.GetPow2(nrp.networkOutputNumb), drp.firstDenseNeuronsRange);
+                else powIndex += random.Next(0, 2);
+                neurons = (int)Math.Pow(2, powIndex);
+                denseLayers.Insert(0, new DenseLayer(drp, random, neurons));
+                //if (i == 0) powIndex = random.Next(7, drp.firstDenseNeuronsRange);
+                //else powIndex = 
+
+                //do
+                //{
+                //    if (i == 0) neurons = random.Next(drp.firstDenseNeuronsRange / 3, drp.firstDenseNeuronsRange);
+                //    else neurons = random.Next(denseLayer[i - 1].neurons / 3, denseLayer[i - 1].neurons);
+                //} while (nrp.networkOutputNumb > neurons);
+               
+                //denseLayer.Add(new DenseLayer(drp, random, neurons));
 
                 if (sameActivations)
                 {
-                    denseLayer[denseLayer.Count - 1].activationIndex = abserber;
+                    //denseLayer[denseLayer.Count - 1].activationIndex = abserber;
+                    denseLayers[0].activationIndex = abserber;
+
                 }
             }
         }
 
         public DenseStructure(List<int> denseActivationIndexes, List<int> neurons, List<int> denseDropoutIndexes, List<int> dropoutRates)
         {
-            denseLayer = new List<DenseLayer>();
+            denseLayers = new List<DenseLayer>();
             denseLayersNumb = denseActivationIndexes.Count;
             for(int i = 0, counter = 0; i < denseLayersNumb; i++)
             {
@@ -59,7 +81,7 @@ namespace NN_Family_Creater
                     dropoutExist = false;
                     dropoutRate = 0;
                 }
-                denseLayer.Add(new DenseLayer(denseActivationIndexes[i], neurons[i], dropoutExist, dropoutRate));
+                denseLayers.Add(new DenseLayer(denseActivationIndexes[i], neurons[i], dropoutExist, dropoutRate));
             }
         } // конструктор для инициализации объекта DenseStructure по полям объекта ConvolutionalNetwork
   
@@ -67,22 +89,25 @@ namespace NN_Family_Creater
         {
             //if (random.Next(100) < mutateRate) denseLayersNumb = random.Next(1, denseLayerNumbRange);
             if (random.Next(100) < mutateRate) denseLayersNumb = random.Next(1, drp.denseLayersNumbRange);
-            if(denseLayersNumb >= denseLayer.Count)
+            if(denseLayersNumb >= denseLayers.Count)
             {
-                denseLayer.Capacity = denseLayersNumb;
-                while(denseLayer.Count != denseLayer.Capacity)
+                denseLayers.Capacity = denseLayersNumb;
+                int powIndex = Support.GetPow2(denseLayers[denseLayers.Count - 1].neurons);
+                while (denseLayers.Count != denseLayers.Capacity)
                 {
-                    int neurons = random.Next(denseLayer[denseLayer.Count - 1].neurons / 3, denseLayer[denseLayer.Count - 1].neurons);
+                    powIndex += random.Next(0, 2);
+                    //int neurons = random.Next(denseLayers[denseLayers.Count - 1].neurons / 3, denseLayers[denseLayers.Count - 1].neurons);
+                    int neurons = (int)Math.Pow(2, powIndex);
                     //denseLayer.Add(new DenseLayer(activationsIndexesRange, neurons, dropoutRateRange));
-                    denseLayer.Add(new DenseLayer(drp, random, neurons));
+                    denseLayers.Insert(0, new DenseLayer(drp, random, neurons));
 
-                    if(sameActivations) denseLayer[denseLayer.Count - 1].activationIndex = denseLayer[0].activationIndex;
+                    if(sameActivations) denseLayers[0].activationIndex = denseLayers[1].activationIndex;
                 }
             }
             else
             {
-                denseLayer.RemoveRange(denseLayersNumb, denseLayer.Capacity - denseLayersNumb);
-                denseLayer.Capacity = denseLayersNumb;
+                denseLayers.RemoveRange(0, denseLayers.Capacity - denseLayersNumb); // перепроверить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                denseLayers.Capacity = denseLayersNumb;
             }
         }
         
@@ -95,18 +120,18 @@ namespace NN_Family_Creater
                     sameActivations = !sameActivations;
                     if (sameActivations)
                     {
-                        int abserberIndex = random.Next(denseLayer.Count);
-                        for(int i = 0; i < denseLayer.Count; i++)
+                        int abserberIndex = random.Next(denseLayers.Count);
+                        for(int i = 0; i < denseLayers.Count; i++)
                         {
-                            denseLayer[i].activationIndex = denseLayer[abserberIndex].activationIndex;
+                            denseLayers[i].activationIndex = denseLayers[abserberIndex].activationIndex;
                         }
                     }
                 }
                 else
                 {
-                    for(int i = 0; i < denseLayer.Count; i++)
+                    for(int i = 0; i < denseLayers.Count; i++)
                     {
-                        denseLayer[i].MutateActivation(drp, mutateRate);
+                        denseLayers[i].MutateActivation(drp, mutateRate);
                     }
                 }
             }
@@ -116,15 +141,26 @@ namespace NN_Family_Creater
         {
             if(random.Next(100) < mutateRate)
             {
-                if(random.Next(100) < 10)
+                //if(random.Next(100) < 10)
+                //{
+                //    for(int i = 0; i < denseLayers.Count; i++)
+                //    {
+                //        if (i == 0) denseLayers[0].neurons = random.Next(drp.firstDenseNeuronsRange / 3, drp.firstDenseNeuronsRange);
+                //        else denseLayers[i].neurons = random.Next(denseLayers[i - 1].neurons / 3, denseLayers[i - 1].neurons);
+                //    }
+                //}
+                ////else
+                int mutateIndex = random.Next(0, denseLayers.Count);
+                int powIndex = 0;
+                
+                while(mutateIndex != -1)
                 {
-                    for(int i = 0; i < denseLayer.Count; i++)
-                    {
-                        if (i == 0) denseLayer[0].neurons = random.Next(drp.firstDenseNeuronsRange / 3, drp.firstDenseNeuronsRange);
-                        else denseLayer[i].neurons = random.Next(denseLayer[i - 1].neurons / 3, denseLayer[i - 1].neurons);
-                    }
+                    if (mutateIndex != (denseLayers.Count - 1)) powIndex = Support.GetPow2(denseLayers[mutateIndex + 1].neurons);
+                    else powIndex = drp.firstDenseNeuronsRange;
+                    powIndex += random.Next(0, 2);
+                    denseLayers[mutateIndex].neurons = (int)Math.Pow(2, powIndex);
+                    mutateIndex--;
                 }
-                //else
             }
         }
         
@@ -134,18 +170,18 @@ namespace NN_Family_Creater
             {
                 if (random.Next(100) < 10)
                 {
-                    if (denseLayer[0].dropoutExist) for (int i = 0; i < denseLayer.Count; i++)
+                    if (denseLayers[0].dropoutExist) for (int i = 0; i < denseLayers.Count; i++)
                         {
-                            denseLayer[i].dropoutExist = false;
-                            denseLayer[i].dropoutRate = 0;
+                            denseLayers[i].dropoutExist = false;
+                            denseLayers[i].dropoutRate = 0;
                         }
-                    else for (int i = 0; i < denseLayer.Count; i++)
+                    else for (int i = 0; i < denseLayers.Count; i++)
                         {
-                            denseLayer[i].dropoutExist = true;
-                            denseLayer[i].dropoutRate = random.Next(10, drp.denseDropRange);
+                            denseLayers[i].dropoutExist = true;
+                            denseLayers[i].dropoutRate = random.Next(10, drp.denseDropRange);
                         }
                 }
-                else for (int i = 0; i < denseLayer.Count; i++) denseLayer[i].MutateDropout(drp, mutateRate);
+                else for (int i = 0; i < denseLayers.Count; i++) denseLayers[i].MutateDropout(drp, mutateRate);
             }
         }
     }

@@ -31,10 +31,10 @@ namespace NN_Family_Creater
             int powRandomValue = 0;
             for (int i = 0; i < convLayers.Capacity; i++) 
             {
-                if (i == 0) powRandomValue = random.Next(1, crp.firstConvPowFilters + 1);
+                if (i == 0) powRandomValue = random.Next(1, crp.firstConvPowFilters);
                 else powRandomValue += random.Next(0, 2);
                 int filters = (int)Math.Pow(2, powRandomValue);
-                convLayers.Add(new ConvLayer(crp, random, filters)); // создаются разные, но в листе получаются одинаковые
+                convLayers.Add(new ConvLayer(crp, random, filters)); 
             }
 
             if (sameSlidingWindowsSize) // тут уже одинаковые
@@ -89,32 +89,57 @@ namespace NN_Family_Creater
             }
         } // создание объекта по ConvolutionalNetwork
 
-        public void MutateLayersNumb(ConvRandomParams crp, int mutateRate)
+        public void MutateFilters(ConvRandomParams crp, int mutateRate)
         {
-            if (random.Next(100) < mutateRate) convLayersNumb = random.Next(1, crp.convLayersNumbRange);
-
-            if(convLayersNumb >= convLayers.Count)
+            if(random.Next(100) < mutateRate)
             {
-                convLayers.Capacity = convLayersNumb;
-                while(convLayers.Count != convLayers.Capacity) // проверить условие!!
-                {
-                    int filters = random.Next(crp.firstConvPowFilters, crp.firstConvPowFilters + crp.firstConvPowFilters * convLayers.Count); //переделать!?
-                    convLayers.Add(new ConvLayer(crp, random, filters));
+                int mutateIndex = random.Next(0, convLayers.Count);
+                int powIndex = 0;
 
-                    if (sameSlidingWindowsSize) convLayers[convLayers.Count - 1].slidingWindow = convLayers[0].slidingWindow;
-                    if (sameActivations) convLayers[convLayers.Count - 1].activationIndex = convLayers[0].activationIndex;
-                    if (allSquareSlidingWindows)
-                    {
-                        if (convLayers[convLayers.Count - 1].slidingWindow[0] > 1) convLayers[convLayers.Count - 1].slidingWindow[1] = convLayers[convLayers.Count - 1].slidingWindow[0];
-                        else convLayers[convLayers.Count - 1].slidingWindow[0] = convLayers[convLayers.Count - 1].slidingWindow[1];
-                    }
+                while (mutateIndex != convLayers.Count)
+                {
+                    if (mutateIndex != 0) powIndex = Support.GetPow2(convLayers[mutateIndex - 1].filters);
+                    else powIndex = crp.firstConvPowFilters;
+                    powIndex += random.Next(0, 2);
+                    convLayers[mutateIndex].filters = (int)Math.Pow(2, powIndex);
+                    mutateIndex++;
                 }
             }
-            else
+        }
+
+        public void MutateLayersNumb(ConvRandomParams crp, int mutateRate)
+        {
+            if (random.Next(100) < mutateRate)
             {
-                convLayers.RemoveRange(convLayersNumb, convLayers.Capacity - convLayersNumb);
-                convLayers.Capacity = convLayersNumb;
+                convLayersNumb = random.Next(1, crp.convLayersNumbRange);
+                if (convLayersNumb >= convLayers.Count)
+                {
+                    convLayers.Capacity = convLayersNumb;
+                    int powIndex = Support.GetPow2(convLayers[convLayers.Count - 1].filters);
+                    while (convLayers.Count != convLayers.Capacity) // проверить условие!!
+                    {
+                        powIndex += random.Next(0, 2);
+                        //int filters = random.Next(crp.firstConvPowFilters, crp.firstConvPowFilters + crp.firstConvPowFilters * convLayers.Count); //переделать!?
+                        int filters = (int)Math.Pow(2, powIndex);
+                        convLayers.Add(new ConvLayer(crp, random, filters));
+
+                        if (sameSlidingWindowsSize) convLayers[convLayers.Count - 1].slidingWindow = convLayers[0].slidingWindow;
+                        if (sameActivations) convLayers[convLayers.Count - 1].activationIndex = convLayers[0].activationIndex;
+                        if (allSquareSlidingWindows)
+                        {
+                            if (convLayers[convLayers.Count - 1].slidingWindow[0] > 1) convLayers[convLayers.Count - 1].slidingWindow[1] = convLayers[convLayers.Count - 1].slidingWindow[0];
+                            else convLayers[convLayers.Count - 1].slidingWindow[0] = convLayers[convLayers.Count - 1].slidingWindow[1];
+                        }
+                    }
+                }
+                else
+                {
+                    convLayers.RemoveRange(convLayersNumb, convLayers.Capacity - convLayersNumb);
+                    convLayers.Capacity = convLayersNumb;
+                }
             }
+
+            
 
         }
 

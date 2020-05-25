@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO;
 using Newtonsoft.Json;
+using ZedGraph;
 
 namespace NN_Family_Creater
 {
     class Support
     {
+        public static PointPairList pointAssesList = new PointPairList();
+        public static PointPairList pointParamsList = new PointPairList();
+
         public static int[] Selection(int totalCount, int copyPart, int crossPart, int mutatePart)
         {
             
@@ -80,23 +85,144 @@ namespace NN_Family_Creater
             for (int i = 0; i < chrList.Count; i++)
             {
                 if (chrList[i].accuracy == 0 || chrList[i].paramsCount == 0) chrList[i].assessment = 0;
-                else chrList[i].assessment = chrList[i].accuracy + (minParamsCount / chrList[i].paramsCount); // цикл расчета оценки
+                else chrList[i].assessment = chrList[i].accuracy + chrList[i].accuracy*(minParamsCount / chrList[i].paramsCount); // цикл расчета оценки
             }
                 
         } // расчет оценки сети
 
-
-        public static void MutateConvChr(ConvRandomParams crp, DenseRandomParams drp, 
-                                          int mutateRate)
+        public static string CreateDateTimeDirectory(string path, int mode)
         {
-            if (new Random().Next(100) < mutateRate)
-            {
-                if (new Random().Next(100) < 5)
-                {
-                    //TO DOOOOOOOOOOOOOO  new Chromosome
+            string configure;
+            if (mode == 0) configure = "dd-MM-yyyy";
+            else configure = "HH-mm-ss";
+            DirectoryInfo di;
+            di = Directory.CreateDirectory(@"C:\keras\folder");
+            string directory = path + @"\" + di.CreationTime.ToString(configure);
+            if (!Directory.Exists(directory)) Directory.Move(@"C:\keras\folder", directory);
+            else Directory.Delete(@"C:\keras\folder");
+            return directory;
+        }
 
-                }
-            }
+        public static void DrawAssesGraph(ZedGraphControl zedGraph, int currEpoch, int maxEpoch, float assessment, int curChromosome)
+        {
+            // Получим панель для рисования
+            GraphPane pane = zedGraph.GraphPane;
+
+            // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
+            pane.CurveList.Clear();
+
+            // Создадим список точек
+            //PointPairList list = new PointPairList();
+
+            // Интервал, в котором будут лежать точки
+        
+
+            // Заполняем список точек
+
+            pointAssesList.Add(currEpoch, assessment);
+            // !!!
+            // Создадим кривую с названием "Scatter".
+            // Обводка ромбиков будут рисоваться голубым цветом (Color.Blue),
+            // Опорные точки - ромбики (SymbolType.Diamond)
+            LineItem myCurve = pane.AddCurve("Convolutional network", pointAssesList, Color.Blue, SymbolType.Diamond);
+
+            // !!!
+            // У кривой линия будет невидимой
+            myCurve.Line.IsVisible = false;
+
+            // !!!
+            // Цвет заполнения отметок (ромбиков) - голубой
+            myCurve.Symbol.Fill.Color = Color.Blue;
+
+            // !!!
+            // Тип заполнения - сплошная заливка
+            myCurve.Symbol.Fill.Type = FillType.Solid;
+
+            // !!!
+            // Размер ромбиков
+            myCurve.Symbol.Size = 7;
+
+
+            // Устанавливаем интересующий нас интервал по оси X
+            pane.XAxis.Scale.Min = -5;
+            pane.XAxis.Scale.Max = maxEpoch + 5;
+            pane.XAxis.Title.Text = "Epoch";
+
+            // Устанавливаем интересующий нас интервал по оси Y
+            pane.YAxis.Scale.Min = -0.2;
+            pane.YAxis.Scale.Max = 2;
+            pane.YAxis.Title.Text = "Assessment";
+
+            // Вызываем метод AxisChange (), чтобы обновить данные об осях.
+            // В противном случае на рисунке будет показана только часть графика,
+            // которая умещается в интервалы по осям, установленные по умолчанию
+            zedGraph.AxisChange();
+
+            // Обновляем график
+            zedGraph.Invalidate();
+        }
+
+        public static void DrawParamsGraph(ZedGraphControl zedGraph, float accuracy, int paramsCount, int maxParams)
+        {
+            GraphPane pane = zedGraph.GraphPane;
+
+            // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
+            pane.CurveList.Clear();
+
+            // Создадим список точек
+            //PointPairList list = new PointPairList();
+
+            // Интервал, в котором будут лежать точки
+
+
+            // Заполняем список точек
+
+            pointParamsList.Add(paramsCount, accuracy);
+            // !!!
+            // Создадим кривую с названием "Scatter".
+            // Обводка ромбиков будут рисоваться голубым цветом (Color.Blue),
+            // Опорные точки - ромбики (SymbolType.Diamond)
+            LineItem myCurve = pane.AddCurve("Convolutional network", pointParamsList, Color.Blue, SymbolType.Diamond);
+
+            // !!!
+            // У кривой линия будет невидимой
+            myCurve.Line.IsVisible = false;
+
+            // !!!
+            // Цвет заполнения отметок (ромбиков) - голубой
+            myCurve.Symbol.Fill.Color = Color.Blue;
+
+            // !!!
+            // Тип заполнения - сплошная заливка
+            myCurve.Symbol.Fill.Type = FillType.Solid;
+
+            // !!!
+            // Размер ромбиков
+            myCurve.Symbol.Size = 7;
+
+
+            // Устанавливаем интересующий нас интервал по оси X
+            pane.XAxis.Scale.Min = -(maxParams/10);
+            pane.XAxis.Scale.Max = maxParams + maxParams/2;
+            pane.XAxis.Title.Text = "Params";
+
+            // Устанавливаем интересующий нас интервал по оси Y
+            pane.YAxis.Scale.Min = - 0.2;
+            pane.YAxis.Scale.Max = 1;
+            pane.YAxis.Title.Text = "Accuracy";
+            // Вызываем метод AxisChange (), чтобы обновить данные об осях.
+            // В противном случае на рисунке будет показана только часть графика,
+            // которая умещается в интервалы по осям, установленные по умолчанию
+            zedGraph.AxisChange();
+
+            // Обновляем график
+            zedGraph.Invalidate();
+        }
+
+        public static int GetPow2(int x)
+        {
+            int result = (int)Math.Ceiling(Math.Log(x, 2));
+            return result;
         }
 
 

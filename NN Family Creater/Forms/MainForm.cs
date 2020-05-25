@@ -11,12 +11,18 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
+using System.Security.Permissions;
+using ZedGraph;
 
 namespace NN_Family_Creater
 {
+
+    [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
+    
     public partial class Form1 : Form
     {
         public Thread worker;
+        public Process p;
 
         List<String> convActivations;
         List<String> denseActivations;
@@ -27,18 +33,21 @@ namespace NN_Family_Creater
         List<ConvolutionalChromosome> population;
         List<ConvolutionalNetwork> eliteChromosomes;
 
-        ConvRandomParams crp;
-        DenseRandomParams drp;
-        NetworkRandomParams nrp;
-
         static Random random;
 
+        private ImageList imageList;
+
+        private Queue<GeneticProgramm> geneticProgramms;
+
+        //Queue<List<Control>> queueProgress;
         Form propertyWindow;
         Form nnCollectionsWindow;
         Form aboutWindow;
         Form predsWindow;
 
-        
+
+        private int currentTask = 0;
+        private int allTasks = 0;
 
         public float tempAccuracy;
         public int tempParameters;
@@ -50,10 +59,13 @@ namespace NN_Family_Creater
             InitializeUserElements();
             InitializeProperties();
 
+            geneticProgramms = new Queue<GeneticProgramm>();
 
-               
             random = new Random();
             instance = this;
+            //queueProgress = new Queue<List<Control>>();
+            curTaskLabel.Text = currentTask.ToString();
+            allTasksLabel.Text = allTasks.ToString();
 
         }
 
@@ -63,9 +75,13 @@ namespace NN_Family_Creater
             switch (comboBox2.SelectedIndex)
             {
                 case 0:
-                    //Task.Run(TrainConvolutionalNN());
-                    worker = new Thread(new ThreadStart(TrainConvolutionalNN));
-                    worker.Start();
+                    //worker = new Thread(new ThreadStart(TrainConvolutionalNN));
+                    //worker.Start();
+                    geneticProgramms.Enqueue(CollectConv_NN_Params());
+                    BackgroundQueue.QueueTask(TrainConvolutionalNN);
+                    allTasks++;
+                    allTasksLabel.Text = allTasks.ToString();
+
                     //var task = new Task(() => TrainConvolutionalNN());
                     //task.Start();
                     break;
@@ -84,7 +100,7 @@ namespace NN_Family_Creater
 
 
 
-        public void CollectConv_NN_Params()
+        public GeneticProgramm CollectConv_NN_Params()
         {
             convActivations = new List<string>();
             if (reluConvChb.Checked) convActivations.Add("relu");
@@ -117,6 +133,11 @@ namespace NN_Family_Creater
 
             loss_functions = new List<string>();
             if (categorical_crossentropyChB.Checked) loss_functions.Add("categorical_crossentropy");
+            NetworkRandomParams nrp;
+            ConvRandomParams crp;
+            DenseRandomParams drp;
+            GeneticProgramm gp;
+            
 
             nrp = new NetworkRandomParams(constSpeedChB.Checked, new float[2] {float.Parse(minConstSpeedTB.Text, System.Globalization.CultureInfo.InvariantCulture),
                                                         float.Parse(maxConstSpeedTB.Text, System.Globalization.CultureInfo.InvariantCulture)},
@@ -136,62 +157,87 @@ namespace NN_Family_Creater
                                              denseActivations,
                                              denseDropoutChB.Checked,
                                         (int)denseDropoutNUD.Value);
+            gp = new GeneticProgramm(nrp, crp, drp, (int)geneticEpochsNUD.Value, new[] { (int)copySelNUD.Value, (int)crossSelNUD.Value, (int)mutateRateNUD.Value },
+                                     (int)popolationCountNUD.Value, (int)mutateRateNUD.Value, (float)accPriorityNUD.Value, (float)memPriorityNUD.Value);
+            return gp;
         }
-
+        [STAThread]
         public static void TrainConvolutionalNN()
         {
-            //if (instance.InvokeRequired)
-            //{
-            //    //instance.Invoke(new Action<object>(TrainConvolutionalNN), new object[] { });
+            Support.pointParamsList.Clear();
+            Support.pointAssesList.Clear();
+            instance.currentTask++;
+            instance.Invoke(new Action((() =>
+            {
+                instance.curTaskLabel.Text = instance.currentTask.ToString();
 
-            //    instance.Invoke(new Action(TrainConvolution));
-            //    return;
-            //}
-            
+                instance.currentTaskPB.Minimum = 0;
+                instance.currentTaskPB.Maximum = (int)instance.geneticEpochsNUD.Value;
+                instance.currentTaskPB.Value = 0;
+                instance.currentTaskPB.Step = 1;
+            })));
 
-            instance.CollectConv_NN_Params();
-            instance.Invoke(new Action(instance.textBox9.Clear));
+               
+
+            string dateDirectory = Support.CreateDateTimeDirectory(@"C:\keras\Directory\reports", 0);
+            string timeDirectory = Support.CreateDateTimeDirectory(dateDirectory, 1);
+            File.Create(timeDirectory + @"\report.txt").Close();
+
+            int maxParams = 0;
+            GeneticProgramm gp = instance.geneticProgramms.Dequeue();
+            if (!instance.genDontClearChB.Checked) instance.Invoke(new Action(instance.textBox9.Clear));
             instance.population = new List<ConvolutionalChromosome>((int)instance.popolationCountNUD.Value);
             
             while (instance.population.Count != instance.population.Capacity)
             {
-                instance.population.Add(new ConvolutionalChromosome(instance.nrp, instance.crp, instance.drp, random));
+                instance.population.Add(new ConvolutionalChromosome(gp, random));
                 instance.population[instance.population.Count - 1].name = "Chromosome " + instance.population.Count.ToString();
-                //UpdateAssesmentParams(population[population.Count - 1]);
-                //instance.UpdateAssesmentParams(instance.population[instance.population.Count - 1]);
-
             }
 
             for (int i = 0; i < instance.population.Count; i++)
             {
+                instance.tempAccuracy = instance.tempParameters = 0;
+                instance.writeAdds(0, i);
                 instance.UpdateAssesmentParams(instance.population[i]);
+                if (instance.population[i].paramsCount > maxParams) maxParams = instance.population[i].paramsCount;
+                Support.DrawParamsGraph(instance.ParamsZedGraph, instance.population[i].accuracy, instance.population[i].paramsCount, maxParams);
             }
 
             Support.UpdateAssesment(instance.population);
+            for (int z = 0; z < instance.population.Count; z++)
+            {
+                Support.DrawAssesGraph(instance.AssesGenZedGraph, 0, instance.population[z]._gp._genEpochs, instance.population[z].assessment, z);
+            }
 
             instance.population.Sort(new ChromosomeComparer2());
             instance.eliteChromosomes.Add(new ConvolutionalNetwork(instance.population[0]));
-
-            /////
             instance.writeConvGeneticOutput(0);
-            //instance.textBox9.AppendText("Epoch 0" + Environment.NewLine);
-            //for (int v = 0; v < instance.population.Count; v++) instance.textBox9.AppendText(instance.population[v].assessment + ":" + instance.population[v].accuracy + "/" + instance.population[v].paramsCount + " ");
-            //instance.textBox9.AppendText(Environment.NewLine + "---------------------------" + Environment.NewLine);
+            File.WriteAllLines(timeDirectory + @"\report.txt", instance.textBox9.Lines);
 
-            // train
+            // Evolve
 
             for (int i = 1; i <= instance.geneticEpochsNUD.Value; i++)
             {
                 for (int m = 1; m < instance.population.Count; m++)
                 {
-                    if (instance.population[m].assessment == 0) instance.population[m] = new ConvolutionalChromosome(instance.nrp, instance.crp, instance.drp, random);
+                    if (instance.population[m].assessment == 0)
+                    {
+                        string buff = instance.population[m].name;
+                        instance.population[m] = new ConvolutionalChromosome(gp, random);
+                        instance.population[m].name = buff;
+                    }
                     else
                     {
-                        if (new Random().Next() < 5) instance.population[m] = new ConvolutionalChromosome(instance.nrp, instance.crp, instance.drp, random);
+                        if (new Random().Next() < 5)
+                        {
+                            string buff = instance.population[m].name;
+                            instance.population[m] = new ConvolutionalChromosome(gp, random);
+                            instance.population[m].name = buff;
+                        }
                         else
                         {
-                            instance.population[m].MutateConvolutional(instance.crp, (int)instance.mutateRateNUD.Value);
-                            instance.population[m].MutateDense(instance.drp, (int)instance.denseDropoutNUD.Value);
+                            instance.population[m].MutateConvolutional(gp._crp, (int)instance.mutateRateNUD.Value);
+                            instance.population[m].MutateDense(gp._drp, (int)instance.denseDropoutNUD.Value);
                         }
                     }
                 }
@@ -200,18 +246,46 @@ namespace NN_Family_Creater
                 for (int n = 1; n < instance.population.Count; n++)
                 {
                     instance.population[n].assessment = instance.population[n].accuracy = instance.population[n].paramsCount = 0;
+                    instance.tempAccuracy = instance.tempParameters = 0;
+                    instance.writeAdds(i, n);
                     instance.UpdateAssesmentParams(instance.population[n]);
+                    if (instance.population[n].paramsCount > maxParams) maxParams = instance.population[n].paramsCount;
+                    Support.DrawParamsGraph(instance.ParamsZedGraph, instance.population[n].accuracy, instance.population[n].paramsCount, maxParams);
                 }
                 
-                Support.UpdateAssesment(instance.population); 
+                Support.UpdateAssesment(instance.population);
+                for (int z = 0; z < instance.population.Count; z++)
+                {
+                    Support.DrawAssesGraph(instance.AssesGenZedGraph, i, instance.population[z]._gp._genEpochs, instance.population[z].assessment, z);
+                }
 
 
                 //population.Sort(new ChromosomeComparer((float)memPriorityNUD.Value, (float)accPriorityNUD.Value));
                 instance.population.Sort(new ChromosomeComparer2());
                 instance.eliteChromosomes.Add(new ConvolutionalNetwork(instance.population[0]));
                 instance.writeConvGeneticOutput(i);
-               
+                File.WriteAllLines(timeDirectory + @"\report.txt", instance.textBox9.Lines);
+                instance.Invoke(new Action(instance.currentTaskPB.PerformStep));
             }
+ 
+            Image image = new Bitmap(instance.AssesGenZedGraph.GetImage());
+            image.Save(timeDirectory + @"\asses.png");
+            image = new Bitmap(instance.ParamsZedGraph.GetImage());
+            image.Save(timeDirectory + @"\params.png");
+        }
+
+
+        
+
+        public void writeAdds(int epoch, int iter)
+        {
+            instance.Invoke(new Action((() =>
+            {
+                instance.ErrorTB.AppendText("Epoch - " + epoch.ToString() + " | " + "Progress iteration - " + (iter + 1).ToString() + " | " + instance.population[iter].name +
+                                            "-----------------------------------------------------------------" + Environment.NewLine + Environment.NewLine);
+                instance.chrOutTB.AppendText("Epoch - " + epoch.ToString() + " | " + "Progress iteration - " + (iter + 1).ToString() + " | " + instance.population[iter].name +
+                                             "-----------------------------------------------------------------" + Environment.NewLine + Environment.NewLine);
+            })));
         }
 
         public void writeConvGeneticOutput(int iter)
@@ -254,26 +328,62 @@ namespace NN_Family_Creater
                     }
                     instance.textBox9.AppendText(Environment.NewLine);
                     instance.textBox9.AppendText("Dense Neurons: ");
-                    for (int t = 0; t < instance.population[r].densePart.denseLayer.Count; t++)
+                    for (int t = 0; t < instance.population[r].densePart.denseLayers.Count; t++)
                     {
-                        instance.textBox9.AppendText(instance.population[r].densePart.denseLayer[t].neurons.ToString() + " ");
+                        instance.textBox9.AppendText(instance.population[r].densePart.denseLayers[t].neurons.ToString() + " ");
                     }
                     instance.textBox9.AppendText(Environment.NewLine);
                     instance.textBox9.AppendText("Dense Activations: ");
-                    for (int t = 0; t < instance.population[r].densePart.denseLayer.Count; t++)
+                    for (int t = 0; t < instance.population[r].densePart.denseLayers.Count; t++)
                     {
-                        instance.textBox9.AppendText(instance.population[r].drp.denseActivations[instance.population[r].densePart.denseLayer[t].activationIndex] + " ");
+                        instance.textBox9.AppendText(instance.population[r].drp.denseActivations[instance.population[r].densePart.denseLayers[t].activationIndex] + " ");
                     }
                     instance.textBox9.AppendText(Environment.NewLine);
                     instance.textBox9.AppendText("Dense dropouts: ");
-                    for (int t = 0; t < instance.population[r].densePart.denseLayer.Count; t++)
+                    for (int t = 0; t < instance.population[r].densePart.denseLayers.Count; t++)
                     {
-                        instance.textBox9.AppendText(instance.population[r].densePart.denseLayer[t].dropoutRate.ToString() + " ");
+                        instance.textBox9.AppendText(instance.population[r].densePart.denseLayers[t].dropoutRate.ToString() + " ");
                     }
                     if (r != (instance.population.Count - 1)) instance.textBox9.AppendText(Environment.NewLine + Environment.NewLine);
                 }
                 instance.textBox9.AppendText(Environment.NewLine + "----------------------------------------------------------------------------" + Environment.NewLine);
             }));
+        }
+
+        public void AddProgressBar()
+        {
+            Bitmap progressBarBitmap = new Bitmap(
+                this.imageList.ImageSize.Width,
+                this.imageList.ImageSize.Height);
+            this.imageList.Images.Add(progressBarBitmap);
+            ProgressBar progressBar = new ProgressBar();
+            progressBar.MinimumSize = this.imageList.ImageSize;
+            progressBar.MaximumSize = this.imageList.ImageSize;
+            progressBar.Size = this.imageList.ImageSize;
+
+            // probably create also some BackgroundWorker here with information about
+            // this particular progressBar
+
+            ListViewItem lvi = new ListViewItem(
+                new[] { "column1", "column2" },
+                this.listView1.Items.Count);
+
+            lvi.UseItemStyleForSubItems = true;
+            this.listView1.Items.Add(lvi);
+            //lvi.Tag = /* some convenient info class to refer back to related objects */
+
+
+        }
+
+        public void RefreshPB(ProgressBar progressBar, Bitmap progressBarBitmap)
+        {
+            //int previousProgress = progressBar.Value;
+            //progressBar.Value = ...
+            //if (progressBar.Value != previousProgress)
+            //{
+            //    progressBar.DrawToBitmap(progressBarBitmap, bounds);
+            //    progressBarImageList.Images[index] = progressBarBitmap;
+            //}
         }
 
         public void TrainLSTM_NN()
@@ -311,40 +421,38 @@ namespace NN_Family_Creater
             aboutWindow = new AboutForm();
             predsWindow = new PredictionForm();
             eliteChromosomes = new List<ConvolutionalNetwork>();
+
+            imageList = new ImageList();
             /// To initialize elite networks list from ConfigEditor
 
             //////// GB
             convWithoutGenGB.Location = ConvModelGB.Location;
-
             GANModelGB.Location = ConvModelGB.Location;
             ganWithoutGB.Location = ConvModelGB.Location;
-
             LSTMModelGB.Location = ConvModelGB.Location;
             lstmWithoutGB.Location = ConvModelGB.Location;
-
             PercModelGB.Location = ConvModelGB.Location;
             percWithoutGB.Location = ConvModelGB.Location;
-
-
             convWithoutGenGB.Size = ConvModelGB.Size;
-
             GANModelGB.Size = ConvModelGB.Size;
             ganWithoutGB.Size = ConvModelGB.Size;
-
             LSTMModelGB.Size = ConvModelGB.Size;
             lstmWithoutGB.Size = ConvModelGB.Size;
-
             PercModelGB.Size = ConvModelGB.Size;
             percWithoutGB.Size = ConvModelGB.Size;
-
             UpdateGeneticsGB.Size = geneticGB.Size;
             UpdateGeneticsGB.Location = geneticGB.Location;
-
-
             ErrorTB.Location = textBox9.Location;
             ErrorTB.Size = textBox9.Size;
             chrOutTB.Location = textBox9.Location;
             chrOutTB.Size = textBox9.Size;
+            errDontClearChB.Location = genDontClearChB.Location;
+            chrDontClearChB.Location = genDontClearChB.Location;
+            ParamsZedGraph.Location = AssesGenZedGraph.Location;
+            ParamsZedGraph.Size = AssesGenZedGraph.Size;
+            
+
+            //QueueGB
             //////////
 
 
@@ -365,6 +473,8 @@ namespace NN_Family_Creater
             comboBox2.SelectedIndex = 0;
             DisplayModeCB.DropDownStyle = ComboBoxStyle.DropDownList;
             DisplayModeCB.SelectedIndex = 0;
+            ZedGraphCB.DropDownStyle = ComboBoxStyle.DropDownList;
+            ZedGraphCB.SelectedIndex = 0;
         }
 
         public void InitializeProperties()
@@ -530,13 +640,30 @@ namespace NN_Family_Creater
 
         private void pauseQueryBtn_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void testButton_Click(object sender, EventArgs e)
         {
-            //string dataPath = String.Concat()
-            ConvolutionalNetwork.CreateConvBatFile("convolutional_v742.py", @"C:\keras\Directory\scripts\convolutional\genetic\elites", datasetPathTB.Text + @"\showplaces", modelsPathTB.Text, labelsPathTB.Text, plotsPathTB.Text);
+            AddProgressBar();
+
+            //List<Control> tempControlList = new List<Control>();
+            //tempControlList.Add(new TextBox());
+            //tempControlList.Add(new ProgressBar());
+            //tempControlList.Add(new Button());
+
+            //tempControlList[0].Size = new Size(100, 22);
+            //tempControlList[0].Location = new Point(3, 13 + 23*queueProgress.Count);
+
+            //tempControlList[1].Size = new Size(153, 23);
+            //tempControlList[1].Location = new Point(tempControlList[0].Location.X + tempControlList[0].Size.Width, 13 + 23 * queueProgress.Count);
+
+            //tempControlList[2].Size = new Size(29, 23);
+            //tempControlList[2].Location = new Point(tempControlList[1].Location.X + tempControlList[1].Size.Width, 13 + 23 * queueProgress.Count);
+
+            //queueProgress.Enqueue(tempControlList);
+
+            //for (int i = 0; i < 3; i++) QueueGB.Controls.Add(tempControlList[i]);
         }
 
         private void createScriptsBtn_Click(object sender, EventArgs e)
@@ -593,38 +720,22 @@ namespace NN_Family_Creater
         }
 
 
-
         ///////////////////////////////////////////////////////
         // new Process
-        
-
         public void UpdateAssesmentParams(ConvolutionalChromosome chromosome)
-        {
-            //ThreadParam param = (ThreadParam)par;
-            //if (param.form1.InvokeRequired)
-            //{
-            //    param.form1.Invoke(new Action<object>(UpdateAssesmentParams), new object[] { par });
-            //    return;
-            //}
-            
-            
+        {    
             instance.Invoke(new Action(() => {
-                instance.ErrorTB.Clear();
-                instance.chrOutTB.Clear();
+                if(!instance.errDontClearChB.Checked) instance.ErrorTB.Clear();
+                if (!instance.chrDontClearChB.Checked) instance.chrOutTB.Clear();
             }));
             ConvolutionalNetwork temp_net = new ConvolutionalNetwork(chromosome);
             ConvolutionalNetwork.CreateNetworkScript(temp_net, chromosome.crp.convActivations, chromosome.drp.denseActivations);
             ConvolutionalNetwork.CreateConvBatFile("temp_convolution.py", @"C:\keras\Directory\scripts\convolutional\genetic", datasetPathTB.Text, modelsPathTB.Text, labelsPathTB.Text, plotsPathTB.Text);
 
             createConvBatProcess();
-            //Thread.CurrentThread.Suspend();
-            
-            //instance.worker.Suspend();
-
 
             chromosome.accuracy = instance.tempAccuracy;
             chromosome.paramsCount = instance.tempParameters;
-
         }
 
         void OutputHandler(object sendingProcess, DataReceivedEventArgs consoleLine)
@@ -652,8 +763,6 @@ namespace NN_Family_Creater
                     getParamsCountToMainProcess(totalParamsString);
                 }
             }
-
-            //s.Add(consoleLine.Data + Environment.NewLine);
         }
 
         void ErrorHandler(object sendingProcess, DataReceivedEventArgs consoleLine)
@@ -663,12 +772,6 @@ namespace NN_Family_Creater
 
         public void getAccuracyToMainProcess(string acc)
         {
-            //if (InvokeRequired)
-            //{
-            //    this.Invoke(new Action<string>(getAccuracyToMainProcess), new object[] { acc });
-            //    return;
-            //}
-            
             instance.Invoke(new Action(() => {
                 instance.tempAccuracy = float.Parse(acc, System.Globalization.CultureInfo.InvariantCulture);
             }));
@@ -676,11 +779,6 @@ namespace NN_Family_Creater
 
         public void getParamsCountToMainProcess(string parameters)
         {
-            //if (InvokeRequired)
-            //{
-            //    this.Invoke(new Action<string>(getAccuracyToMainProcess), new object[] { parameters });
-            //    return;
-            //}
             instance.Invoke(new Action(() => {
                 instance.tempParameters = int.Parse(parameters);
             }));
@@ -707,19 +805,15 @@ namespace NN_Family_Creater
                 return;
             }
 
-            //instance.ErrorTB.AppendText(data + Environment.NewLine);
             instance.Invoke(new Action(() => {
                 instance.ErrorTB.AppendText(data + Environment.NewLine);
             }));
         }
-        public void processExited(object sender, System.EventArgs e)
-        {
-            Thread.CurrentThread.Resume();
-            //instance.worker.Resume();
-        }
+
         public void createConvBatProcess()
         {
-            Process p = new Process()
+            
+            p = new Process()
             {
                 StartInfo = new ProcessStartInfo()
                 {
@@ -727,7 +821,8 @@ namespace NN_Family_Creater
                     Arguments = @"/c C:\keras\Directory\scripts\convolutional\temp_train.bat",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
-                    UseShellExecute = false
+                    UseShellExecute = false,
+                    CreateNoWindow = true
                 }
 
             };
@@ -739,26 +834,7 @@ namespace NN_Family_Creater
             p.BeginOutputReadLine();
             p.BeginErrorReadLine();
 
-
             p.WaitForExit();
-            //p.Exited += new EventHandler(processExited);
-
-            //while (!p.HasExited)
-            //{
-            //    // Discard cached information about the process.
-            //    p.Refresh();
-
-            //    // Just a little check!
-            //    //Console.WriteLine("Physical Memory Usage: " + process.WorkingSet64.ToString());
-
-            //    Thread.Sleep(500);
-            //}
-
-            //do
-            //{
-            //    Thread.Sleep(1000);
-            //}
-            //while (!p.HasExited);
         }
 
         ///////////////////////////////////////////////////////
@@ -766,18 +842,15 @@ namespace NN_Family_Creater
 
         private void trainQueryBtn_ClickAsync(object sender, EventArgs e)
         {
-            textBox9.Clear();
-            ErrorTB.Clear();
-            chrOutTB.Clear();
-            CollectConv_NN_Params();
-            ConvolutionalChromosome chr = new ConvolutionalChromosome(nrp, crp, drp, random);
-            ConvolutionalNetwork cnn = new ConvolutionalNetwork(chr);
-            ConvolutionalNetwork.CreateNetworkScript(cnn, convActivations, denseActivations);
-            ConvolutionalNetwork.CreateConvBatFile("temp_convolution.py", @"C:\keras\Directory\scripts\convolutional\genetic", datasetPathTB.Text, modelsPathTB.Text, labelsPathTB.Text, plotsPathTB.Text);
-
-            createConvBatProcess();
-
-
+            //textBox9.Clear();
+            //ErrorTB.Clear();
+            //chrOutTB.Clear();
+            //CollectConv_NN_Params();
+            //ConvolutionalChromosome chr = new ConvolutionalChromosome(gp, nrp, crp, drp, random);
+            //ConvolutionalNetwork cnn = new ConvolutionalNetwork(chr);
+            //ConvolutionalNetwork.CreateNetworkScript(cnn, convActivations, denseActivations);
+            //ConvolutionalNetwork.CreateConvBatFile("temp_convolution.py", @"C:\keras\Directory\scripts\convolutional\genetic", datasetPathTB.Text, modelsPathTB.Text, labelsPathTB.Text, plotsPathTB.Text);
+            //createConvBatProcess();
         }
 
         private void coutModeCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -785,19 +858,19 @@ namespace NN_Family_Creater
             switch (coutModeCB.SelectedIndex)
             {
                 case 0:
-                    ErrorTB.Visible = false;
-                    textBox9.Visible = true;
-                    chrOutTB.Visible = false;
+                    ErrorTB.Visible = false; errDontClearChB.Visible = false;
+                    textBox9.Visible = true; genDontClearChB.Visible = true;
+                    chrOutTB.Visible = false; chrDontClearChB.Visible = false;
                     break;
                 case 1:
-                    ErrorTB.Visible = true;
-                    textBox9.Visible = false;
-                    chrOutTB.Visible = false;
+                    ErrorTB.Visible = true; errDontClearChB.Visible = true;
+                    textBox9.Visible = false; genDontClearChB.Visible = false;
+                    chrOutTB.Visible = false; chrDontClearChB.Visible = false;
                     break;
                 case 2:
-                    ErrorTB.Visible = false;
-                    textBox9.Visible = false;
-                    chrOutTB.Visible = true;
+                    ErrorTB.Visible = false; errDontClearChB.Visible = false;
+                    textBox9.Visible = false; genDontClearChB.Visible = false;
+                    chrOutTB.Visible = true; chrDontClearChB.Visible = true;
                     break;
             }
         }
@@ -830,6 +903,38 @@ namespace NN_Family_Creater
                 e.KeyChar == 63)
             {
                 e.Handled = true;
+            }
+        }
+
+
+        
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //p.Kill();
+            //p.Close();
+            //Environment.FailFast("ok");
+            //p.WaitForExit();
+            //worker.Abort();
+            
+            worker.Abort();
+            p.Kill();
+            p.Close();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
+        private void ZedGraphCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (ZedGraphCB.SelectedIndex)
+            {
+                case 0:
+                    AssesGenZedGraph.Visible = true;
+                    ParamsZedGraph.Visible = false;
+                    break;
+                case 1:
+                    AssesGenZedGraph.Visible = false;
+                    ParamsZedGraph.Visible = true;
+                    break;
             }
         }
     }

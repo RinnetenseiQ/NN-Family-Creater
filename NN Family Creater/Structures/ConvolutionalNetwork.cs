@@ -23,11 +23,12 @@ namespace NN_Family_Creater
 
         public int batchSize;
         public int networkLearningEpochs;
+        
 
         public float trainConstSpeed;
         public string optimizer;
         public string loss_finction;
-        public int outputNumb;
+        public int outputs;
 
 
         public ConvolutionalNetwork(ConvolutionalChromosome chromosome)
@@ -35,7 +36,7 @@ namespace NN_Family_Creater
             trainConstSpeed = chromosome.trainConstSpeed;
             optimizer = chromosome.optimizer;
             loss_finction = chromosome.loss_function;
-            outputNumb = chromosome.nrp.networkOutputNumb;
+            outputs = chromosome.nrp.networkOutputNumb;
 
             batchSize = chromosome.nrp.batchSize;
             networkLearningEpochs = chromosome.nrp.epochs;
@@ -63,14 +64,14 @@ namespace NN_Family_Creater
                 }
             }
 
-            for (int i = 0; i < chromosome.densePart.denseLayer.Count; i++)
+            for (int i = 0; i < chromosome.densePart.denseLayers.Count; i++)
             {
-                denseActivationIndexes.Add(chromosome.densePart.denseLayer[i].activationIndex);
-                neurons.Add(chromosome.densePart.denseLayer[i].neurons);
-                if (chromosome.densePart.denseLayer[i].dropoutExist)
+                denseActivationIndexes.Add(chromosome.densePart.denseLayers[i].activationIndex);
+                neurons.Add(chromosome.densePart.denseLayers[i].neurons);
+                if (chromosome.densePart.denseLayers[i].dropoutExist)
                 {
                     denseDropoutIndexes.Add(i);
-                    denseDropoutRates.Add(chromosome.densePart.denseLayer[i].dropoutRate);
+                    denseDropoutRates.Add(chromosome.densePart.denseLayers[i].dropoutRate);
                 }
             }
         }
@@ -131,23 +132,25 @@ namespace NN_Family_Creater
                 //MessageBox.Show(ex.Message);
             }
 
-            InsertConvNetworkCode(path + fileName, 72, network, convActivations, denseActivations);
+            InsertConvNetworkCode(path + fileName, 75, network, convActivations, denseActivations);
             //Properties.Settings.Default.convScriptNumber++;
             //ConfigEditor.Config.Write("convScriptNumber", Properties.Settings.Default.convScriptNumber);
         }
 
         public static void InsertConvNetworkCode(String path, int line, ConvolutionalNetwork network, List<String> convActivations, List<String> denseActivations)
         {
+            string loss_function = "\"categorical_crossentropy\"";
+            if (network.outputs == 2) loss_function = "\"binary_crossentropy\"";
+
             string init_lr = network.trainConstSpeed.ToString();
             init_lr = init_lr.Replace(",", ".");
             string code = "";
             for (int i = 0; i < network.filters.Count; i++)
             {
                 if (i == 0) code += "model.add(ZeroPadding2D((1, 1), input_shape = (128, 128, 3)))" + Environment.NewLine;
-                else code += "model.add(ZeroPadding2D((1, 1)))" + Environment.NewLine;
                 code += "model.add(Conv2D(" + network.filters[i].ToString() + ", kernel_size = (" +
                         network.slidingWindows[i][0].ToString() + ", " + network.slidingWindows[i][1].ToString() +
-                        "), strides = (1, 1), activation = '" + convActivations[network.convActivationIndexes[i]] + "'))" + Environment.NewLine;
+                        "), strides = (1, 1), padding='same', activation = '" + convActivations[network.convActivationIndexes[i]] + "'))" + Environment.NewLine;
                 code += "model.add(MaxPooling2D(pool_size = (2, 2), strides = (2, 2)))" + Environment.NewLine;
             }
             code += "model.add(Flatten())" + Environment.NewLine;
@@ -167,11 +170,20 @@ namespace NN_Family_Creater
                 }
                 
             }
-            code += "model.add(Dense(len(lb.classes_), activation = \"softmax\"))" + Environment.NewLine;
+            if(network.outputs == 2) code += "model.add(Dense(2, activation = \"softmax\"))" + Environment.NewLine;
+            else code += "model.add(Dense(len(lb.classes_), activation = \"softmax\"))" + Environment.NewLine;
             code += "INIT_LR = " + init_lr + Environment.NewLine + 
                     "EPOCHS = " + network.networkLearningEpochs.ToString() + Environment.NewLine + 
-                    "BS = " + network.batchSize.ToString() + Environment.NewLine;
+                    "BS = " + network.batchSize.ToString() + Environment.NewLine + Environment.NewLine;
+            code += "print(\"[INFO] training network...\")" + Environment.NewLine;
+            code += "opt = SGD(lr=INIT_LR)" + Environment.NewLine;
+            code += "model.compile(loss=" + loss_function + ", optimizer=opt, metrics=[\"accuracy\"])" + Environment.NewLine;
+            //code += "" + Environment.NewLine;
             Support.insertLineToFile(path, line, code);
+
+            string forBinaryCode = "trainY = to_categorical(trainY)" + Environment.NewLine + 
+                                   "testY = to_categorical(testY)" + Environment.NewLine;
+            if (network.outputs == 2) Support.insertLineToFile(path, 66, forBinaryCode);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace NN_Family_Creater
 {
     public class ConvolutionalChromosome
     {
+        public readonly GeneticProgramm _gp;
         Random random;
 
         public string name;
@@ -32,14 +33,15 @@ namespace NN_Family_Creater
         public float accuracy;
         public int paramsCount;
 
-        public ConvolutionalChromosome(NetworkRandomParams nrp, ConvRandomParams crp, DenseRandomParams drp, Random random)
+        public ConvolutionalChromosome(GeneticProgramm gp, Random random)
         {
+            _gp = gp;
             this.random = random;
-            this.nrp = nrp;
-            this.crp = crp;
-            this.drp = drp;
+            this.nrp = gp._nrp;
+            this.crp = gp._crp;
+            this.drp = gp._drp;
             convPart = new ConvStructure(crp, random);
-            densePart = new DenseStructure(drp, random);
+            densePart = new DenseStructure(nrp, drp, random);
             if (nrp.notRandomSpeed) trainConstSpeed = nrp.trainConstSpeedRange[0];
             else trainConstSpeed = Convert.ToSingle(random.Next((int)(nrp.trainConstSpeedRange[0] * 1000), (int)(nrp.trainConstSpeedRange[1] * 1000))) / 1000;
             optimizer = nrp.optimizers[random.Next(nrp.optimizers.Count)];
@@ -80,7 +82,7 @@ namespace NN_Family_Creater
             {
                 if (random.Next(100) < 5)
                 {
-                    densePart = new DenseStructure(drp, random);
+                    densePart = new DenseStructure(nrp, drp, random);
                 }
                 else
                 {

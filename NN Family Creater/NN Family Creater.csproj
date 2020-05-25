@@ -55,7 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NetworkRandomParams.cs" />
+    <Compile Include="BackgroundQueue.cs" />
+    <Compile Include="GeneticProgramm.cs" />
+    <Compile Include="Structures\NetworkRandomParams.cs" />
     <Compile Include="Structures\ConvolutionalNetwork.cs" />
     <Compile Include="Structures\Dense\DenseRandomParams.cs" />
     <Compile Include="Structures\Convolutional\ConvRandomParams.cs" />
