@@ -169,8 +169,6 @@
             this.reluConvChb = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.denseDropoutNUD = new System.Windows.Forms.NumericUpDown();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
             this.PReLUConvChB = new System.Windows.Forms.CheckBox();
             this.PReLUDenseChB = new System.Windows.Forms.CheckBox();
             this.TReLUConvChB = new System.Windows.Forms.CheckBox();
@@ -256,6 +254,12 @@
             this.curTaskLabel = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
             this.allTasksLabel = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label36 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -304,6 +308,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // minConstSpeedTB
@@ -313,7 +322,7 @@
             this.minConstSpeedTB.Size = new System.Drawing.Size(45, 22);
             this.minConstSpeedTB.TabIndex = 1;
             this.minConstSpeedTB.Text = "0.01";
-            this.minConstSpeedTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.minConstSpeedTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox1_KeyPress);
             // 
             // maxConstSpeedTB
             // 
@@ -322,7 +331,7 @@
             this.maxConstSpeedTB.Size = new System.Drawing.Size(45, 22);
             this.maxConstSpeedTB.TabIndex = 2;
             this.maxConstSpeedTB.Text = "0.700";
-            this.maxConstSpeedTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
+            this.maxConstSpeedTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox2_KeyPress);
             // 
             // constSpeedChB
             // 
@@ -335,7 +344,7 @@
             this.constSpeedChB.TabIndex = 40;
             this.constSpeedChB.Text = "Const";
             this.constSpeedChB.UseVisualStyleBackColor = true;
-            this.constSpeedChB.CheckedChanged += new System.EventHandler(this.checkBox19_CheckedChanged);
+            this.constSpeedChB.CheckedChanged += new System.EventHandler(this.CheckBox19_CheckedChanged);
             // 
             // label9
             // 
@@ -366,7 +375,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(121, 99);
+            this.label12.Location = new System.Drawing.Point(138, 99);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(0, 17);
             this.label12.TabIndex = 47;
@@ -387,7 +396,7 @@
             this.groupBox1.Location = new System.Drawing.Point(5, 53);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(395, 300);
+            this.groupBox1.Size = new System.Drawing.Size(418, 300);
             this.groupBox1.TabIndex = 49;
             this.groupBox1.TabStop = false;
             // 
@@ -408,9 +417,9 @@
             this.groupBox3.Controls.Add(this.hingeChB);
             this.groupBox3.Controls.Add(this.logcoshChB);
             this.groupBox3.Controls.Add(this.categorical_hingeChB);
-            this.groupBox3.Location = new System.Drawing.Point(137, 92);
+            this.groupBox3.Location = new System.Drawing.Point(134, 92);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(252, 202);
+            this.groupBox3.Size = new System.Drawing.Size(278, 202);
             this.groupBox3.TabIndex = 48;
             this.groupBox3.TabStop = false;
             // 
@@ -427,7 +436,7 @@
             // cosine_proximityChB
             // 
             this.cosine_proximityChB.AutoSize = true;
-            this.cosine_proximityChB.Location = new System.Drawing.Point(112, 148);
+            this.cosine_proximityChB.Location = new System.Drawing.Point(129, 148);
             this.cosine_proximityChB.Name = "cosine_proximityChB";
             this.cosine_proximityChB.Size = new System.Drawing.Size(130, 21);
             this.cosine_proximityChB.TabIndex = 72;
@@ -477,7 +486,7 @@
             // binary_crossentropyChB
             // 
             this.binary_crossentropyChB.AutoSize = true;
-            this.binary_crossentropyChB.Location = new System.Drawing.Point(112, 94);
+            this.binary_crossentropyChB.Location = new System.Drawing.Point(129, 94);
             this.binary_crossentropyChB.Name = "binary_crossentropyChB";
             this.binary_crossentropyChB.Size = new System.Drawing.Size(126, 21);
             this.binary_crossentropyChB.TabIndex = 69;
@@ -487,7 +496,7 @@
             // squared_hingeChB
             // 
             this.squared_hingeChB.AutoSize = true;
-            this.squared_hingeChB.Location = new System.Drawing.Point(112, 121);
+            this.squared_hingeChB.Location = new System.Drawing.Point(129, 121);
             this.squared_hingeChB.Name = "squared_hingeChB";
             this.squared_hingeChB.Size = new System.Drawing.Size(121, 21);
             this.squared_hingeChB.TabIndex = 62;
@@ -497,7 +506,7 @@
             // sparse_categorical_crossentropyChB
             // 
             this.sparse_categorical_crossentropyChB.AutoSize = true;
-            this.sparse_categorical_crossentropyChB.Location = new System.Drawing.Point(112, 67);
+            this.sparse_categorical_crossentropyChB.Location = new System.Drawing.Point(129, 67);
             this.sparse_categorical_crossentropyChB.Name = "sparse_categorical_crossentropyChB";
             this.sparse_categorical_crossentropyChB.Size = new System.Drawing.Size(135, 21);
             this.sparse_categorical_crossentropyChB.TabIndex = 68;
@@ -519,7 +528,7 @@
             this.categorical_crossentropyChB.AutoSize = true;
             this.categorical_crossentropyChB.Checked = true;
             this.categorical_crossentropyChB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.categorical_crossentropyChB.Location = new System.Drawing.Point(112, 40);
+            this.categorical_crossentropyChB.Location = new System.Drawing.Point(129, 40);
             this.categorical_crossentropyChB.Name = "categorical_crossentropyChB";
             this.categorical_crossentropyChB.Size = new System.Drawing.Size(126, 21);
             this.categorical_crossentropyChB.TabIndex = 67;
@@ -539,7 +548,7 @@
             // logcoshChB
             // 
             this.logcoshChB.AutoSize = true;
-            this.logcoshChB.Location = new System.Drawing.Point(112, 12);
+            this.logcoshChB.Location = new System.Drawing.Point(129, 12);
             this.logcoshChB.Name = "logcoshChB";
             this.logcoshChB.Size = new System.Drawing.Size(79, 21);
             this.logcoshChB.TabIndex = 66;
@@ -549,7 +558,7 @@
             // categorical_hingeChB
             // 
             this.categorical_hingeChB.AutoSize = true;
-            this.categorical_hingeChB.Location = new System.Drawing.Point(112, 175);
+            this.categorical_hingeChB.Location = new System.Drawing.Point(129, 175);
             this.categorical_hingeChB.Name = "categorical_hingeChB";
             this.categorical_hingeChB.Size = new System.Drawing.Size(104, 21);
             this.categorical_hingeChB.TabIndex = 65;
@@ -567,7 +576,7 @@
             this.groupBox2.Controls.Add(this.Nadam_OptChB);
             this.groupBox2.Location = new System.Drawing.Point(6, 92);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(125, 202);
+            this.groupBox2.Size = new System.Drawing.Size(122, 202);
             this.groupBox2.TabIndex = 48;
             this.groupBox2.TabStop = false;
             // 
@@ -725,7 +734,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(222, 26);
+            this.label14.Location = new System.Drawing.Point(247, 25);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(55, 17);
             this.label14.TabIndex = 53;
@@ -756,7 +765,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(553, 28);
+            this.label15.Location = new System.Drawing.Point(576, 28);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(76, 17);
             this.label15.TabIndex = 55;
@@ -765,7 +774,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(920, 29);
+            this.label16.Location = new System.Drawing.Point(967, 29);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(57, 17);
             this.label16.TabIndex = 56;
@@ -773,17 +782,11 @@
             // 
             // geneticGB
             // 
-            this.geneticGB.Controls.Add(this.createScriptsBtn);
-            this.geneticGB.Controls.Add(this.testButton);
+            this.geneticGB.Controls.Add(this.groupBox10);
             this.geneticGB.Controls.Add(this.networkNameTB);
             this.geneticGB.Controls.Add(this.button9);
             this.geneticGB.Controls.Add(this.label38);
-            this.geneticGB.Controls.Add(this.label35);
-            this.geneticGB.Controls.Add(this.label34);
             this.geneticGB.Controls.Add(this.predsBtn);
-            this.geneticGB.Controls.Add(this.memPriorityNUD);
-            this.geneticGB.Controls.Add(this.accPriorityNUD);
-            this.geneticGB.Controls.Add(this.label33);
             this.geneticGB.Controls.Add(this.label31);
             this.geneticGB.Controls.Add(this.mutateRateNUD);
             this.geneticGB.Controls.Add(this.button1);
@@ -803,7 +806,7 @@
             this.geneticGB.Controls.Add(this.label18);
             this.geneticGB.Controls.Add(this.popolationCountNUD);
             this.geneticGB.Controls.Add(this.label17);
-            this.geneticGB.Location = new System.Drawing.Point(808, 53);
+            this.geneticGB.Location = new System.Drawing.Point(855, 53);
             this.geneticGB.Name = "geneticGB";
             this.geneticGB.Size = new System.Drawing.Size(296, 468);
             this.geneticGB.TabIndex = 57;
@@ -811,7 +814,7 @@
             // 
             // createScriptsBtn
             // 
-            this.createScriptsBtn.Location = new System.Drawing.Point(103, 410);
+            this.createScriptsBtn.Location = new System.Drawing.Point(1503, 434);
             this.createScriptsBtn.Name = "createScriptsBtn";
             this.createScriptsBtn.Size = new System.Drawing.Size(84, 23);
             this.createScriptsBtn.TabIndex = 72;
@@ -821,7 +824,7 @@
             // 
             // testButton
             // 
-            this.testButton.Location = new System.Drawing.Point(6, 411);
+            this.testButton.Location = new System.Drawing.Point(1503, 401);
             this.testButton.Name = "testButton";
             this.testButton.Size = new System.Drawing.Size(80, 23);
             this.testButton.TabIndex = 71;
@@ -835,7 +838,7 @@
             this.networkNameTB.Name = "networkNameTB";
             this.networkNameTB.Size = new System.Drawing.Size(172, 22);
             this.networkNameTB.TabIndex = 61;
-            this.networkNameTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.networkNameTB_KeyPress);
+            this.networkNameTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NetworkNameTB_KeyPress);
             // 
             // button9
             // 
@@ -859,7 +862,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(227, 215);
+            this.label35.Location = new System.Drawing.Point(99, 67);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(55, 17);
             this.label35.TabIndex = 59;
@@ -868,7 +871,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(142, 215);
+            this.label34.Location = new System.Drawing.Point(14, 67);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(68, 17);
             this.label34.TabIndex = 58;
@@ -882,12 +885,12 @@
             this.predsBtn.TabIndex = 62;
             this.predsBtn.Text = "Predict";
             this.predsBtn.UseVisualStyleBackColor = true;
-            this.predsBtn.Click += new System.EventHandler(this.button8_Click);
+            this.predsBtn.Click += new System.EventHandler(this.Button8_Click);
             // 
             // memPriorityNUD
             // 
             this.memPriorityNUD.DecimalPlaces = 1;
-            this.memPriorityNUD.Location = new System.Drawing.Point(219, 244);
+            this.memPriorityNUD.Location = new System.Drawing.Point(91, 96);
             this.memPriorityNUD.Name = "memPriorityNUD";
             this.memPriorityNUD.Size = new System.Drawing.Size(63, 22);
             this.memPriorityNUD.TabIndex = 57;
@@ -900,7 +903,7 @@
             // accPriorityNUD
             // 
             this.accPriorityNUD.DecimalPlaces = 1;
-            this.accPriorityNUD.Location = new System.Drawing.Point(144, 244);
+            this.accPriorityNUD.Location = new System.Drawing.Point(16, 96);
             this.accPriorityNUD.Name = "accPriorityNUD";
             this.accPriorityNUD.Size = new System.Drawing.Size(66, 22);
             this.accPriorityNUD.TabIndex = 56;
@@ -913,7 +916,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(17, 246);
+            this.label33.Location = new System.Drawing.Point(26, 43);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(117, 17);
             this.label33.TabIndex = 55;
@@ -941,7 +944,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(237, 320);
+            this.label25.Location = new System.Drawing.Point(237, 378);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(27, 17);
             this.label25.TabIndex = 16;
@@ -949,7 +952,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(20, 317);
+            this.textBox4.Location = new System.Drawing.Point(20, 375);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(207, 22);
             this.textBox4.TabIndex = 15;
@@ -993,7 +996,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(233, 352);
+            this.label20.Location = new System.Drawing.Point(233, 410);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(32, 17);
             this.label20.TabIndex = 9;
@@ -1001,7 +1004,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(20, 347);
+            this.textBox3.Location = new System.Drawing.Point(20, 405);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(207, 22);
             this.textBox3.TabIndex = 8;
@@ -1118,7 +1121,7 @@
             // 
             // learningEpochsNUD
             // 
-            this.learningEpochsNUD.Location = new System.Drawing.Point(300, 24);
+            this.learningEpochsNUD.Location = new System.Drawing.Point(337, 24);
             this.learningEpochsNUD.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1158,13 +1161,13 @@
             this.groupBox4.Controls.Add(this.learningEpochsNUD);
             this.groupBox4.Location = new System.Drawing.Point(5, 348);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(395, 173);
+            this.groupBox4.Size = new System.Drawing.Size(418, 173);
             this.groupBox4.TabIndex = 58;
             this.groupBox4.TabStop = false;
             // 
             // openPlotsFolderBtn
             // 
-            this.openPlotsFolderBtn.Location = new System.Drawing.Point(300, 140);
+            this.openPlotsFolderBtn.Location = new System.Drawing.Point(337, 140);
             this.openPlotsFolderBtn.Name = "openPlotsFolderBtn";
             this.openPlotsFolderBtn.Size = new System.Drawing.Size(75, 23);
             this.openPlotsFolderBtn.TabIndex = 66;
@@ -1176,7 +1179,7 @@
             // 
             this.plotsPathTB.Location = new System.Drawing.Point(113, 140);
             this.plotsPathTB.Name = "plotsPathTB";
-            this.plotsPathTB.Size = new System.Drawing.Size(181, 22);
+            this.plotsPathTB.Size = new System.Drawing.Size(218, 22);
             this.plotsPathTB.TabIndex = 65;
             // 
             // label29
@@ -1190,7 +1193,7 @@
             // 
             // openLabelsFolderBtn
             // 
-            this.openLabelsFolderBtn.Location = new System.Drawing.Point(300, 112);
+            this.openLabelsFolderBtn.Location = new System.Drawing.Point(337, 112);
             this.openLabelsFolderBtn.Name = "openLabelsFolderBtn";
             this.openLabelsFolderBtn.Size = new System.Drawing.Size(75, 23);
             this.openLabelsFolderBtn.TabIndex = 63;
@@ -1202,7 +1205,7 @@
             // 
             this.modelsPathTB.Location = new System.Drawing.Point(113, 83);
             this.modelsPathTB.Name = "modelsPathTB";
-            this.modelsPathTB.Size = new System.Drawing.Size(181, 22);
+            this.modelsPathTB.Size = new System.Drawing.Size(218, 22);
             this.modelsPathTB.TabIndex = 62;
             // 
             // label28
@@ -1225,7 +1228,7 @@
             // 
             // openModelsFolderBtn
             // 
-            this.openModelsFolderBtn.Location = new System.Drawing.Point(300, 82);
+            this.openModelsFolderBtn.Location = new System.Drawing.Point(337, 82);
             this.openModelsFolderBtn.Name = "openModelsFolderBtn";
             this.openModelsFolderBtn.Size = new System.Drawing.Size(75, 23);
             this.openModelsFolderBtn.TabIndex = 59;
@@ -1237,12 +1240,12 @@
             // 
             this.labelsPathTB.Location = new System.Drawing.Point(113, 112);
             this.labelsPathTB.Name = "labelsPathTB";
-            this.labelsPathTB.Size = new System.Drawing.Size(181, 22);
+            this.labelsPathTB.Size = new System.Drawing.Size(218, 22);
             this.labelsPathTB.TabIndex = 58;
             // 
             // openDatasetFolderBtn
             // 
-            this.openDatasetFolderBtn.Location = new System.Drawing.Point(300, 54);
+            this.openDatasetFolderBtn.Location = new System.Drawing.Point(337, 54);
             this.openDatasetFolderBtn.Name = "openDatasetFolderBtn";
             this.openDatasetFolderBtn.Size = new System.Drawing.Size(75, 23);
             this.openDatasetFolderBtn.TabIndex = 57;
@@ -1254,7 +1257,7 @@
             // 
             this.datasetPathTB.Location = new System.Drawing.Point(113, 54);
             this.datasetPathTB.Name = "datasetPathTB";
-            this.datasetPathTB.Size = new System.Drawing.Size(181, 22);
+            this.datasetPathTB.Size = new System.Drawing.Size(218, 22);
             this.datasetPathTB.TabIndex = 56;
             // 
             // label26
@@ -1284,14 +1287,14 @@
             this.button3.TabIndex = 61;
             this.button3.Text = "Stop";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // textBox9
             // 
             this.textBox9.Location = new System.Drawing.Point(5, 551);
             this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(796, 426);
+            this.textBox9.Size = new System.Drawing.Size(843, 426);
             this.textBox9.TabIndex = 63;
             // 
             // QueueGB
@@ -1303,7 +1306,7 @@
             this.QueueGB.Controls.Add(this.trainQueryBtn);
             this.QueueGB.Controls.Add(this.pauseQueryBtn);
             this.QueueGB.Controls.Add(this.button3);
-            this.QueueGB.Location = new System.Drawing.Point(1110, 53);
+            this.QueueGB.Location = new System.Drawing.Point(1157, 53);
             this.QueueGB.Name = "QueueGB";
             this.QueueGB.Size = new System.Drawing.Size(303, 468);
             this.QueueGB.TabIndex = 65;
@@ -1353,12 +1356,12 @@
             this.trainQueryBtn.TabIndex = 62;
             this.trainQueryBtn.Text = "Start";
             this.trainQueryBtn.UseVisualStyleBackColor = true;
-            this.trainQueryBtn.Click += new System.EventHandler(this.trainQueryBtn_ClickAsync);
+            this.trainQueryBtn.Click += new System.EventHandler(this.TrainQueryBtn_ClickAsync);
             // 
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(1211, 29);
+            this.label32.Location = new System.Drawing.Point(1258, 29);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(66, 17);
             this.label32.TabIndex = 66;
@@ -1390,14 +1393,14 @@
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
             this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.настройкиToolStripMenuItem.Text = "Настройки";
-            this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem_Click);
+            this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.НастройкиToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
             this.справкаToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.справкаToolStripMenuItem.Text = "Справка";
-            this.справкаToolStripMenuItem.Click += new System.EventHandler(this.справкаToolStripMenuItem_Click);
+            this.справкаToolStripMenuItem.Click += new System.EventHandler(this.СправкаToolStripMenuItem_Click);
             // 
             // историяToolStripMenuItem
             // 
@@ -1412,7 +1415,7 @@
             this.коллекцияСетейToolStripMenuItem.Name = "коллекцияСетейToolStripMenuItem";
             this.коллекцияСетейToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.коллекцияСетейToolStripMenuItem.Text = "Коллекция сетей";
-            this.коллекцияСетейToolStripMenuItem.Click += new System.EventHandler(this.коллекцияСетейToolStripMenuItem_Click);
+            this.коллекцияСетейToolStripMenuItem.Click += new System.EventHandler(this.КоллекцияСетейToolStripMenuItem_Click);
             // 
             // coutModeCB
             // 
@@ -1423,9 +1426,9 @@
             "Current Chromosome Output"});
             this.coutModeCB.Location = new System.Drawing.Point(5, 521);
             this.coutModeCB.Name = "coutModeCB";
-            this.coutModeCB.Size = new System.Drawing.Size(395, 24);
+            this.coutModeCB.Size = new System.Drawing.Size(418, 24);
             this.coutModeCB.TabIndex = 69;
-            this.coutModeCB.SelectedIndexChanged += new System.EventHandler(this.coutModeCB_SelectedIndexChanged);
+            this.coutModeCB.SelectedIndexChanged += new System.EventHandler(this.CoutModeCB_SelectedIndexChanged);
             // 
             // dataGridView1
             // 
@@ -1442,7 +1445,7 @@
             this.AssesGenZedGraph.IsEnableHZoom = false;
             this.AssesGenZedGraph.IsEnableVZoom = false;
             this.AssesGenZedGraph.IsEnableWheelZoom = false;
-            this.AssesGenZedGraph.Location = new System.Drawing.Point(808, 551);
+            this.AssesGenZedGraph.Location = new System.Drawing.Point(855, 551);
             this.AssesGenZedGraph.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.AssesGenZedGraph.Name = "AssesGenZedGraph";
             this.AssesGenZedGraph.ScrollGrace = 0D;
@@ -1452,7 +1455,7 @@
             this.AssesGenZedGraph.ScrollMinX = 0D;
             this.AssesGenZedGraph.ScrollMinY = 0D;
             this.AssesGenZedGraph.ScrollMinY2 = 0D;
-            this.AssesGenZedGraph.Size = new System.Drawing.Size(974, 425);
+            this.AssesGenZedGraph.Size = new System.Drawing.Size(927, 425);
             this.AssesGenZedGraph.TabIndex = 72;
             // 
             // comboBox2
@@ -1463,11 +1466,11 @@
             "LSTM NN",
             "Perceptron NN",
             "GAN NN"});
-            this.comboBox2.Location = new System.Drawing.Point(645, 25);
+            this.comboBox2.Location = new System.Drawing.Point(668, 25);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(157, 24);
+            this.comboBox2.Size = new System.Drawing.Size(180, 24);
             this.comboBox2.TabIndex = 73;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.ComboBox2_SelectedIndexChanged);
             // 
             // GANModelGB
             // 
@@ -1501,7 +1504,7 @@
             // sigmoidConvChb
             // 
             this.sigmoidConvChb.AutoSize = true;
-            this.sigmoidConvChb.Location = new System.Drawing.Point(271, 377);
+            this.sigmoidConvChb.Location = new System.Drawing.Point(287, 113);
             this.sigmoidConvChb.Name = "sigmoidConvChb";
             this.sigmoidConvChb.Size = new System.Drawing.Size(18, 17);
             this.sigmoidConvChb.TabIndex = 22;
@@ -1510,7 +1513,7 @@
             // eluConvChb
             // 
             this.eluConvChb.AutoSize = true;
-            this.eluConvChb.Location = new System.Drawing.Point(147, 308);
+            this.eluConvChb.Location = new System.Drawing.Point(11, 44);
             this.eluConvChb.Name = "eluConvChb";
             this.eluConvChb.Size = new System.Drawing.Size(18, 17);
             this.eluConvChb.TabIndex = 23;
@@ -1519,7 +1522,7 @@
             // softsignConvChb
             // 
             this.softsignConvChb.AutoSize = true;
-            this.softsignConvChb.Location = new System.Drawing.Point(271, 354);
+            this.softsignConvChb.Location = new System.Drawing.Point(287, 90);
             this.softsignConvChb.Name = "softsignConvChb";
             this.softsignConvChb.Size = new System.Drawing.Size(18, 17);
             this.softsignConvChb.TabIndex = 21;
@@ -1528,7 +1531,7 @@
             // seluConvChb
             // 
             this.seluConvChb.AutoSize = true;
-            this.seluConvChb.Location = new System.Drawing.Point(147, 331);
+            this.seluConvChb.Location = new System.Drawing.Point(11, 67);
             this.seluConvChb.Name = "seluConvChb";
             this.seluConvChb.Size = new System.Drawing.Size(18, 17);
             this.seluConvChb.TabIndex = 24;
@@ -1537,7 +1540,7 @@
             // lReluConvChb
             // 
             this.lReluConvChb.AutoSize = true;
-            this.lReluConvChb.Location = new System.Drawing.Point(147, 354);
+            this.lReluConvChb.Location = new System.Drawing.Point(11, 90);
             this.lReluConvChb.Name = "lReluConvChb";
             this.lReluConvChb.Size = new System.Drawing.Size(18, 17);
             this.lReluConvChb.TabIndex = 20;
@@ -1546,7 +1549,7 @@
             // softplusConvChb
             // 
             this.softplusConvChb.AutoSize = true;
-            this.softplusConvChb.Location = new System.Drawing.Point(271, 285);
+            this.softplusConvChb.Location = new System.Drawing.Point(287, 21);
             this.softplusConvChb.Name = "softplusConvChb";
             this.softplusConvChb.Size = new System.Drawing.Size(18, 17);
             this.softplusConvChb.TabIndex = 25;
@@ -1555,7 +1558,7 @@
             // softmaxConvChb
             // 
             this.softmaxConvChb.AutoSize = true;
-            this.softmaxConvChb.Location = new System.Drawing.Point(271, 308);
+            this.softmaxConvChb.Location = new System.Drawing.Point(287, 44);
             this.softmaxConvChb.Name = "softmaxConvChb";
             this.softmaxConvChb.Size = new System.Drawing.Size(18, 17);
             this.softmaxConvChb.TabIndex = 19;
@@ -1564,7 +1567,7 @@
             // tanhConvChb
             // 
             this.tanhConvChb.AutoSize = true;
-            this.tanhConvChb.Location = new System.Drawing.Point(271, 331);
+            this.tanhConvChb.Location = new System.Drawing.Point(287, 67);
             this.tanhConvChb.Name = "tanhConvChb";
             this.tanhConvChb.Size = new System.Drawing.Size(18, 17);
             this.tanhConvChb.TabIndex = 26;
@@ -1573,7 +1576,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(31, 325);
+            this.label6.Location = new System.Drawing.Point(161, 42);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 34);
             this.label6.TabIndex = 18;
@@ -1582,7 +1585,7 @@
             // reluDenseChb
             // 
             this.reluDenseChb.AutoSize = true;
-            this.reluDenseChb.Location = new System.Drawing.Point(171, 283);
+            this.reluDenseChb.Location = new System.Drawing.Point(35, 19);
             this.reluDenseChb.Name = "reluDenseChb";
             this.reluDenseChb.Size = new System.Drawing.Size(66, 21);
             this.reluDenseChb.TabIndex = 27;
@@ -1592,16 +1595,16 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(122, 83);
+            this.label5.Location = new System.Drawing.Point(2, 50);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(139, 51);
             this.label5.TabIndex = 17;
-            this.label5.Text = "        Нейронов\r\n(степень фильтров)\r\n     первого слоя";
+            this.label5.Text = "          Степень\r\nфильтров нейронов\r\n      первого слоя";
             // 
             // softmaxDenseChb
             // 
             this.softmaxDenseChb.AutoSize = true;
-            this.softmaxDenseChb.Location = new System.Drawing.Point(295, 306);
+            this.softmaxDenseChb.Location = new System.Drawing.Point(311, 42);
             this.softmaxDenseChb.Name = "softmaxDenseChb";
             this.softmaxDenseChb.Size = new System.Drawing.Size(80, 21);
             this.softmaxDenseChb.TabIndex = 28;
@@ -1610,7 +1613,7 @@
             // 
             // DenseNeuronsNUD
             // 
-            this.DenseNeuronsNUD.Location = new System.Drawing.Point(286, 97);
+            this.DenseNeuronsNUD.Location = new System.Drawing.Point(33, 69);
             this.DenseNeuronsNUD.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1622,7 +1625,7 @@
             0,
             0});
             this.DenseNeuronsNUD.Name = "DenseNeuronsNUD";
-            this.DenseNeuronsNUD.Size = new System.Drawing.Size(68, 22);
+            this.DenseNeuronsNUD.Size = new System.Drawing.Size(58, 22);
             this.DenseNeuronsNUD.TabIndex = 16;
             this.DenseNeuronsNUD.Value = new decimal(new int[] {
             6,
@@ -1633,7 +1636,7 @@
             // lReluDenseChb
             // 
             this.lReluDenseChb.AutoSize = true;
-            this.lReluDenseChb.Location = new System.Drawing.Point(171, 352);
+            this.lReluDenseChb.Location = new System.Drawing.Point(35, 88);
             this.lReluDenseChb.Name = "lReluDenseChb";
             this.lReluDenseChb.Size = new System.Drawing.Size(74, 21);
             this.lReluDenseChb.TabIndex = 29;
@@ -1643,7 +1646,7 @@
             // softsignDenseChb
             // 
             this.softsignDenseChb.AutoSize = true;
-            this.softsignDenseChb.Location = new System.Drawing.Point(295, 352);
+            this.softsignDenseChb.Location = new System.Drawing.Point(311, 88);
             this.softsignDenseChb.Name = "softsignDenseChb";
             this.softsignDenseChb.Size = new System.Drawing.Size(83, 21);
             this.softsignDenseChb.TabIndex = 30;
@@ -1652,7 +1655,7 @@
             // 
             // ConvFiltersNUD
             // 
-            this.ConvFiltersNUD.Location = new System.Drawing.Point(34, 97);
+            this.ConvFiltersNUD.Location = new System.Drawing.Point(34, 69);
             this.ConvFiltersNUD.Name = "ConvFiltersNUD";
             this.ConvFiltersNUD.Size = new System.Drawing.Size(58, 22);
             this.ConvFiltersNUD.TabIndex = 14;
@@ -1667,7 +1670,7 @@
             this.sigmoidDenseChb.AutoSize = true;
             this.sigmoidDenseChb.Checked = true;
             this.sigmoidDenseChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.sigmoidDenseChb.Location = new System.Drawing.Point(295, 375);
+            this.sigmoidDenseChb.Location = new System.Drawing.Point(311, 111);
             this.sigmoidDenseChb.Name = "sigmoidDenseChb";
             this.sigmoidDenseChb.Size = new System.Drawing.Size(80, 21);
             this.sigmoidDenseChb.TabIndex = 31;
@@ -1676,26 +1679,26 @@
             // 
             // slidingWindow2NUD
             // 
-            this.slidingWindow2NUD.Location = new System.Drawing.Point(80, 205);
+            this.slidingWindow2NUD.Location = new System.Drawing.Point(6, 184);
             this.slidingWindow2NUD.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.slidingWindow2NUD.Name = "slidingWindow2NUD";
-            this.slidingWindow2NUD.Size = new System.Drawing.Size(51, 22);
+            this.slidingWindow2NUD.Size = new System.Drawing.Size(49, 22);
             this.slidingWindow2NUD.TabIndex = 12;
             this.slidingWindow2NUD.Value = new decimal(new int[] {
             7,
             0,
             0,
             0});
-            this.slidingWindow2NUD.ValueChanged += new System.EventHandler(this.numericUpDown4_ValueChanged);
+            this.slidingWindow2NUD.ValueChanged += new System.EventHandler(this.NumericUpDown4_ValueChanged);
             // 
             // eluDenseChb
             // 
             this.eluDenseChb.AutoSize = true;
-            this.eluDenseChb.Location = new System.Drawing.Point(171, 306);
+            this.eluDenseChb.Location = new System.Drawing.Point(35, 42);
             this.eluDenseChb.Name = "eluDenseChb";
             this.eluDenseChb.Size = new System.Drawing.Size(57, 21);
             this.eluDenseChb.TabIndex = 32;
@@ -1704,7 +1707,7 @@
             // 
             // slidingWindow1NUD
             // 
-            this.slidingWindow1NUD.Location = new System.Drawing.Point(6, 205);
+            this.slidingWindow1NUD.Location = new System.Drawing.Point(6, 161);
             this.slidingWindow1NUD.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1727,7 +1730,7 @@
             // seluDenseChb
             // 
             this.seluDenseChb.AutoSize = true;
-            this.seluDenseChb.Location = new System.Drawing.Point(171, 329);
+            this.seluDenseChb.Location = new System.Drawing.Point(35, 65);
             this.seluDenseChb.Name = "seluDenseChb";
             this.seluDenseChb.Size = new System.Drawing.Size(66, 21);
             this.seluDenseChb.TabIndex = 33;
@@ -1737,16 +1740,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 185);
+            this.label4.Location = new System.Drawing.Point(61, 163);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 17);
+            this.label4.Size = new System.Drawing.Size(53, 34);
             this.label4.TabIndex = 10;
-            this.label4.Text = "sliding window";
+            this.label4.Text = "sliding \r\nwindow";
             // 
             // softplusDenseChb
             // 
             this.softplusDenseChb.AutoSize = true;
-            this.softplusDenseChb.Location = new System.Drawing.Point(295, 283);
+            this.softplusDenseChb.Location = new System.Drawing.Point(311, 19);
             this.softplusDenseChb.Name = "softplusDenseChb";
             this.softplusDenseChb.Size = new System.Drawing.Size(82, 21);
             this.softplusDenseChb.TabIndex = 34;
@@ -1756,7 +1759,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(147, 46);
+            this.label3.Location = new System.Drawing.Point(32, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 34);
             this.label3.TabIndex = 9;
@@ -1765,7 +1768,7 @@
             // tanhDenseChb
             // 
             this.tanhDenseChb.AutoSize = true;
-            this.tanhDenseChb.Location = new System.Drawing.Point(295, 329);
+            this.tanhDenseChb.Location = new System.Drawing.Point(311, 65);
             this.tanhDenseChb.Name = "tanhDenseChb";
             this.tanhDenseChb.Size = new System.Drawing.Size(63, 21);
             this.tanhDenseChb.TabIndex = 35;
@@ -1774,14 +1777,14 @@
             // 
             // DenseLayersNumbNUD
             // 
-            this.DenseLayersNumbNUD.Location = new System.Drawing.Point(286, 55);
+            this.DenseLayersNumbNUD.Location = new System.Drawing.Point(33, 21);
             this.DenseLayersNumbNUD.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.DenseLayersNumbNUD.Name = "DenseLayersNumbNUD";
-            this.DenseLayersNumbNUD.Size = new System.Drawing.Size(68, 22);
+            this.DenseLayersNumbNUD.Size = new System.Drawing.Size(58, 22);
             this.DenseLayersNumbNUD.TabIndex = 8;
             this.DenseLayersNumbNUD.Value = new decimal(new int[] {
             8,
@@ -1792,7 +1795,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(164, 148);
+            this.label7.Location = new System.Drawing.Point(41, 120);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(59, 17);
             this.label7.TabIndex = 36;
@@ -1800,14 +1803,14 @@
             // 
             // ConvLayersNumbNUD
             // 
-            this.ConvLayersNumbNUD.Location = new System.Drawing.Point(30, 55);
+            this.ConvLayersNumbNUD.Location = new System.Drawing.Point(34, 21);
             this.ConvLayersNumbNUD.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.ConvLayersNumbNUD.Name = "ConvLayersNumbNUD";
-            this.ConvLayersNumbNUD.Size = new System.Drawing.Size(72, 22);
+            this.ConvLayersNumbNUD.Size = new System.Drawing.Size(58, 22);
             this.ConvLayersNumbNUD.TabIndex = 7;
             this.ConvLayersNumbNUD.Value = new decimal(new int[] {
             8,
@@ -1829,7 +1832,7 @@
             this.reluConvChb.AutoSize = true;
             this.reluConvChb.Checked = true;
             this.reluConvChb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.reluConvChb.Location = new System.Drawing.Point(147, 285);
+            this.reluConvChb.Location = new System.Drawing.Point(11, 21);
             this.reluConvChb.Name = "reluConvChb";
             this.reluConvChb.Size = new System.Drawing.Size(18, 17);
             this.reluConvChb.TabIndex = 4;
@@ -1851,14 +1854,14 @@
             0,
             0,
             0});
-            this.denseDropoutNUD.Location = new System.Drawing.Point(295, 149);
+            this.denseDropoutNUD.Location = new System.Drawing.Point(42, 118);
             this.denseDropoutNUD.Minimum = new decimal(new int[] {
             10,
             0,
             0,
             0});
             this.denseDropoutNUD.Name = "denseDropoutNUD";
-            this.denseDropoutNUD.Size = new System.Drawing.Size(46, 22);
+            this.denseDropoutNUD.Size = new System.Drawing.Size(58, 22);
             this.denseDropoutNUD.TabIndex = 38;
             this.denseDropoutNUD.Value = new decimal(new int[] {
             30,
@@ -1866,28 +1869,10 @@
             0,
             0});
             // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(347, 151);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(20, 17);
-            this.label36.TabIndex = 39;
-            this.label36.Text = "%";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(61, 207);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(14, 17);
-            this.label37.TabIndex = 40;
-            this.label37.Text = "x";
-            // 
             // PReLUConvChB
             // 
             this.PReLUConvChB.AutoSize = true;
-            this.PReLUConvChB.Location = new System.Drawing.Point(147, 377);
+            this.PReLUConvChB.Location = new System.Drawing.Point(11, 113);
             this.PReLUConvChB.Name = "PReLUConvChB";
             this.PReLUConvChB.Size = new System.Drawing.Size(18, 17);
             this.PReLUConvChB.TabIndex = 41;
@@ -1896,7 +1881,7 @@
             // PReLUDenseChB
             // 
             this.PReLUDenseChB.AutoSize = true;
-            this.PReLUDenseChB.Location = new System.Drawing.Point(171, 375);
+            this.PReLUDenseChB.Location = new System.Drawing.Point(35, 111);
             this.PReLUDenseChB.Name = "PReLUDenseChB";
             this.PReLUDenseChB.Size = new System.Drawing.Size(75, 21);
             this.PReLUDenseChB.TabIndex = 42;
@@ -1906,7 +1891,7 @@
             // TReLUConvChB
             // 
             this.TReLUConvChB.AutoSize = true;
-            this.TReLUConvChB.Location = new System.Drawing.Point(147, 400);
+            this.TReLUConvChB.Location = new System.Drawing.Point(11, 136);
             this.TReLUConvChB.Name = "TReLUConvChB";
             this.TReLUConvChB.Size = new System.Drawing.Size(18, 17);
             this.TReLUConvChB.TabIndex = 43;
@@ -1915,7 +1900,7 @@
             // ThReLUDenseChB
             // 
             this.ThReLUDenseChB.AutoSize = true;
-            this.ThReLUDenseChB.Location = new System.Drawing.Point(171, 398);
+            this.ThReLUDenseChB.Location = new System.Drawing.Point(35, 134);
             this.ThReLUDenseChB.Name = "ThReLUDenseChB";
             this.ThReLUDenseChB.Size = new System.Drawing.Size(75, 21);
             this.ThReLUDenseChB.TabIndex = 44;
@@ -1924,57 +1909,22 @@
             // 
             // ConvModelGB
             // 
-            this.ConvModelGB.Controls.Add(this.convDropoutChB);
-            this.ConvModelGB.Controls.Add(this.denseDropoutChB);
-            this.ConvModelGB.Controls.Add(this.convDropoutNUD);
-            this.ConvModelGB.Controls.Add(this.ThReLUDenseChB);
-            this.ConvModelGB.Controls.Add(this.TReLUConvChB);
-            this.ConvModelGB.Controls.Add(this.softplusConvChb);
-            this.ConvModelGB.Controls.Add(this.PReLUDenseChB);
-            this.ConvModelGB.Controls.Add(this.sigmoidConvChb);
-            this.ConvModelGB.Controls.Add(this.PReLUConvChB);
-            this.ConvModelGB.Controls.Add(this.softsignConvChb);
-            this.ConvModelGB.Controls.Add(this.label37);
-            this.ConvModelGB.Controls.Add(this.softmaxConvChb);
-            this.ConvModelGB.Controls.Add(this.label36);
-            this.ConvModelGB.Controls.Add(this.tanhConvChb);
-            this.ConvModelGB.Controls.Add(this.denseDropoutNUD);
-            this.ConvModelGB.Controls.Add(this.softmaxDenseChb);
+            this.ConvModelGB.Controls.Add(this.groupBox9);
+            this.ConvModelGB.Controls.Add(this.groupBox8);
+            this.ConvModelGB.Controls.Add(this.groupBox7);
+            this.ConvModelGB.Controls.Add(this.groupBox5);
             this.ConvModelGB.Controls.Add(this.label1);
-            this.ConvModelGB.Controls.Add(this.softsignDenseChb);
-            this.ConvModelGB.Controls.Add(this.reluConvChb);
-            this.ConvModelGB.Controls.Add(this.sigmoidDenseChb);
             this.ConvModelGB.Controls.Add(this.label2);
-            this.ConvModelGB.Controls.Add(this.softplusDenseChb);
-            this.ConvModelGB.Controls.Add(this.tanhDenseChb);
-            this.ConvModelGB.Controls.Add(this.ConvLayersNumbNUD);
-            this.ConvModelGB.Controls.Add(this.label7);
-            this.ConvModelGB.Controls.Add(this.DenseLayersNumbNUD);
-            this.ConvModelGB.Controls.Add(this.label3);
-            this.ConvModelGB.Controls.Add(this.label4);
-            this.ConvModelGB.Controls.Add(this.seluDenseChb);
-            this.ConvModelGB.Controls.Add(this.slidingWindow1NUD);
-            this.ConvModelGB.Controls.Add(this.eluDenseChb);
-            this.ConvModelGB.Controls.Add(this.slidingWindow2NUD);
-            this.ConvModelGB.Controls.Add(this.ConvFiltersNUD);
-            this.ConvModelGB.Controls.Add(this.lReluDenseChb);
-            this.ConvModelGB.Controls.Add(this.DenseNeuronsNUD);
-            this.ConvModelGB.Controls.Add(this.label5);
-            this.ConvModelGB.Controls.Add(this.reluDenseChb);
-            this.ConvModelGB.Controls.Add(this.label6);
-            this.ConvModelGB.Controls.Add(this.lReluConvChb);
-            this.ConvModelGB.Controls.Add(this.seluConvChb);
-            this.ConvModelGB.Controls.Add(this.eluConvChb);
-            this.ConvModelGB.Location = new System.Drawing.Point(406, 53);
+            this.ConvModelGB.Location = new System.Drawing.Point(429, 53);
             this.ConvModelGB.Name = "ConvModelGB";
-            this.ConvModelGB.Size = new System.Drawing.Size(396, 468);
+            this.ConvModelGB.Size = new System.Drawing.Size(419, 468);
             this.ConvModelGB.TabIndex = 50;
             this.ConvModelGB.TabStop = false;
             // 
             // convDropoutChB
             // 
             this.convDropoutChB.AutoSize = true;
-            this.convDropoutChB.Location = new System.Drawing.Point(20, 149);
+            this.convDropoutChB.Location = new System.Drawing.Point(20, 121);
             this.convDropoutChB.Name = "convDropoutChB";
             this.convDropoutChB.Size = new System.Drawing.Size(18, 17);
             this.convDropoutChB.TabIndex = 47;
@@ -1983,7 +1933,7 @@
             // denseDropoutChB
             // 
             this.denseDropoutChB.AutoSize = true;
-            this.denseDropoutChB.Location = new System.Drawing.Point(271, 152);
+            this.denseDropoutChB.Location = new System.Drawing.Point(18, 121);
             this.denseDropoutChB.Name = "denseDropoutChB";
             this.denseDropoutChB.Size = new System.Drawing.Size(18, 17);
             this.denseDropoutChB.TabIndex = 46;
@@ -1996,14 +1946,14 @@
             0,
             0,
             0});
-            this.convDropoutNUD.Location = new System.Drawing.Point(44, 146);
+            this.convDropoutNUD.Location = new System.Drawing.Point(44, 118);
             this.convDropoutNUD.Minimum = new decimal(new int[] {
             10,
             0,
             0,
             0});
             this.convDropoutNUD.Name = "convDropoutNUD";
-            this.convDropoutNUD.Size = new System.Drawing.Size(48, 22);
+            this.convDropoutNUD.Size = new System.Drawing.Size(58, 22);
             this.convDropoutNUD.TabIndex = 45;
             this.convDropoutNUD.Value = new decimal(new int[] {
             50,
@@ -2250,13 +2200,13 @@
             // withoutGenChB
             // 
             this.withoutGenChB.AutoSize = true;
-            this.withoutGenChB.Location = new System.Drawing.Point(406, 28);
+            this.withoutGenChB.Location = new System.Drawing.Point(429, 28);
             this.withoutGenChB.Name = "withoutGenChB";
             this.withoutGenChB.Size = new System.Drawing.Size(131, 21);
             this.withoutGenChB.TabIndex = 85;
             this.withoutGenChB.Text = "Without Genetic";
             this.withoutGenChB.UseVisualStyleBackColor = true;
-            this.withoutGenChB.CheckedChanged += new System.EventHandler(this.withoutGenChB_CheckedChanged);
+            this.withoutGenChB.CheckedChanged += new System.EventHandler(this.WithoutGenChB_CheckedChanged);
             // 
             // label46
             // 
@@ -2328,7 +2278,7 @@
             // upgradePopulationChB
             // 
             this.upgradePopulationChB.AutoSize = true;
-            this.upgradePopulationChB.Location = new System.Drawing.Point(809, 27);
+            this.upgradePopulationChB.Location = new System.Drawing.Point(856, 27);
             this.upgradePopulationChB.Name = "upgradePopulationChB";
             this.upgradePopulationChB.Size = new System.Drawing.Size(85, 21);
             this.upgradePopulationChB.TabIndex = 90;
@@ -2719,7 +2669,7 @@
             // genDontClearChB
             // 
             this.genDontClearChB.AutoSize = true;
-            this.genDontClearChB.Location = new System.Drawing.Point(412, 523);
+            this.genDontClearChB.Location = new System.Drawing.Point(429, 523);
             this.genDontClearChB.Name = "genDontClearChB";
             this.genDontClearChB.Size = new System.Drawing.Size(100, 21);
             this.genDontClearChB.TabIndex = 96;
@@ -2729,7 +2679,7 @@
             // errDontClearChB
             // 
             this.errDontClearChB.AutoSize = true;
-            this.errDontClearChB.Location = new System.Drawing.Point(518, 523);
+            this.errDontClearChB.Location = new System.Drawing.Point(535, 523);
             this.errDontClearChB.Name = "errDontClearChB";
             this.errDontClearChB.Size = new System.Drawing.Size(100, 21);
             this.errDontClearChB.TabIndex = 97;
@@ -2740,7 +2690,7 @@
             // chrDontClearChB
             // 
             this.chrDontClearChB.AutoSize = true;
-            this.chrDontClearChB.Location = new System.Drawing.Point(622, 523);
+            this.chrDontClearChB.Location = new System.Drawing.Point(639, 523);
             this.chrDontClearChB.Name = "chrDontClearChB";
             this.chrDontClearChB.Size = new System.Drawing.Size(100, 21);
             this.chrDontClearChB.TabIndex = 98;
@@ -2770,23 +2720,23 @@
             this.ZedGraphCB.Items.AddRange(new object[] {
             "Assesments - Epoch",
             "Accuracy - Params"});
-            this.ZedGraphCB.Location = new System.Drawing.Point(808, 523);
+            this.ZedGraphCB.Location = new System.Drawing.Point(855, 523);
             this.ZedGraphCB.Name = "ZedGraphCB";
-            this.ZedGraphCB.Size = new System.Drawing.Size(405, 24);
+            this.ZedGraphCB.Size = new System.Drawing.Size(397, 24);
             this.ZedGraphCB.TabIndex = 100;
             this.ZedGraphCB.SelectedIndexChanged += new System.EventHandler(this.ZedGraphCB_SelectedIndexChanged);
             // 
             // currentTaskPB
             // 
-            this.currentTaskPB.Location = new System.Drawing.Point(1295, 523);
+            this.currentTaskPB.Location = new System.Drawing.Point(1323, 523);
             this.currentTaskPB.Name = "currentTaskPB";
-            this.currentTaskPB.Size = new System.Drawing.Size(487, 24);
+            this.currentTaskPB.Size = new System.Drawing.Size(459, 24);
             this.currentTaskPB.TabIndex = 101;
             // 
             // curTaskLabel
             // 
             this.curTaskLabel.AutoSize = true;
-            this.curTaskLabel.Location = new System.Drawing.Point(1219, 526);
+            this.curTaskLabel.Location = new System.Drawing.Point(1258, 527);
             this.curTaskLabel.Name = "curTaskLabel";
             this.curTaskLabel.Size = new System.Drawing.Size(16, 17);
             this.curTaskLabel.TabIndex = 102;
@@ -2795,7 +2745,7 @@
             // label68
             // 
             this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(1241, 526);
+            this.label68.Location = new System.Drawing.Point(1280, 527);
             this.label68.Name = "label68";
             this.label68.Size = new System.Drawing.Size(12, 17);
             this.label68.TabIndex = 103;
@@ -2804,11 +2754,103 @@
             // allTasksLabel
             // 
             this.allTasksLabel.AutoSize = true;
-            this.allTasksLabel.Location = new System.Drawing.Point(1259, 526);
+            this.allTasksLabel.Location = new System.Drawing.Point(1298, 527);
             this.allTasksLabel.Name = "allTasksLabel";
             this.allTasksLabel.Size = new System.Drawing.Size(16, 17);
             this.allTasksLabel.TabIndex = 104;
             this.allTasksLabel.Text = "0";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.convDropoutChB);
+            this.groupBox5.Controls.Add(this.ConvLayersNumbNUD);
+            this.groupBox5.Controls.Add(this.ConvFiltersNUD);
+            this.groupBox5.Controls.Add(this.convDropoutNUD);
+            this.groupBox5.Controls.Add(this.label4);
+            this.groupBox5.Controls.Add(this.slidingWindow2NUD);
+            this.groupBox5.Controls.Add(this.slidingWindow1NUD);
+            this.groupBox5.Location = new System.Drawing.Point(6, 52);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(125, 238);
+            this.groupBox5.TabIndex = 48;
+            this.groupBox5.TabStop = false;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.DenseLayersNumbNUD);
+            this.groupBox7.Controls.Add(this.denseDropoutChB);
+            this.groupBox7.Controls.Add(this.DenseNeuronsNUD);
+            this.groupBox7.Controls.Add(this.denseDropoutNUD);
+            this.groupBox7.Location = new System.Drawing.Point(284, 52);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(129, 238);
+            this.groupBox7.TabIndex = 105;
+            this.groupBox7.TabStop = false;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.label3);
+            this.groupBox8.Controls.Add(this.label5);
+            this.groupBox8.Controls.Add(this.label7);
+            this.groupBox8.Location = new System.Drawing.Point(135, 52);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(145, 160);
+            this.groupBox8.TabIndex = 105;
+            this.groupBox8.TabStop = false;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label6);
+            this.groupBox9.Controls.Add(this.eluConvChb);
+            this.groupBox9.Controls.Add(this.seluConvChb);
+            this.groupBox9.Controls.Add(this.ThReLUDenseChB);
+            this.groupBox9.Controls.Add(this.lReluConvChb);
+            this.groupBox9.Controls.Add(this.TReLUConvChB);
+            this.groupBox9.Controls.Add(this.reluDenseChb);
+            this.groupBox9.Controls.Add(this.softplusConvChb);
+            this.groupBox9.Controls.Add(this.lReluDenseChb);
+            this.groupBox9.Controls.Add(this.PReLUDenseChB);
+            this.groupBox9.Controls.Add(this.eluDenseChb);
+            this.groupBox9.Controls.Add(this.sigmoidConvChb);
+            this.groupBox9.Controls.Add(this.seluDenseChb);
+            this.groupBox9.Controls.Add(this.PReLUConvChB);
+            this.groupBox9.Controls.Add(this.tanhDenseChb);
+            this.groupBox9.Controls.Add(this.softsignConvChb);
+            this.groupBox9.Controls.Add(this.softplusDenseChb);
+            this.groupBox9.Controls.Add(this.softmaxConvChb);
+            this.groupBox9.Controls.Add(this.sigmoidDenseChb);
+            this.groupBox9.Controls.Add(this.tanhConvChb);
+            this.groupBox9.Controls.Add(this.reluConvChb);
+            this.groupBox9.Controls.Add(this.softmaxDenseChb);
+            this.groupBox9.Controls.Add(this.softsignDenseChb);
+            this.groupBox9.Location = new System.Drawing.Point(6, 290);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(408, 172);
+            this.groupBox9.TabIndex = 105;
+            this.groupBox9.TabStop = false;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.label36);
+            this.groupBox10.Controls.Add(this.label34);
+            this.groupBox10.Controls.Add(this.label33);
+            this.groupBox10.Controls.Add(this.accPriorityNUD);
+            this.groupBox10.Controls.Add(this.memPriorityNUD);
+            this.groupBox10.Controls.Add(this.label35);
+            this.groupBox10.Location = new System.Drawing.Point(6, 215);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(284, 154);
+            this.groupBox10.TabIndex = 105;
+            this.groupBox10.TabStop = false;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(106, 11);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(58, 17);
+            this.label36.TabIndex = 0;
+            this.label36.Text = "Оценка";
             // 
             // Form1
             // 
@@ -2818,7 +2860,9 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
             this.Controls.Add(this.allTasksLabel);
+            this.Controls.Add(this.createScriptsBtn);
             this.Controls.Add(this.label68);
+            this.Controls.Add(this.testButton);
             this.Controls.Add(this.curTaskLabel);
             this.Controls.Add(this.currentTaskPB);
             this.Controls.Add(this.ZedGraphCB);
@@ -2930,6 +2974,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3039,8 +3093,6 @@
         private System.Windows.Forms.CheckBox reluConvChb;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown denseDropoutNUD;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Label label37;
         private System.Windows.Forms.CheckBox PReLUConvChB;
         private System.Windows.Forms.CheckBox PReLUDenseChB;
         private System.Windows.Forms.CheckBox TReLUConvChB;
@@ -3163,6 +3215,12 @@
         private System.Windows.Forms.Label curTaskLabel;
         private System.Windows.Forms.Label label68;
         private System.Windows.Forms.Label allTasksLabel;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Label label36;
     }
 }
 

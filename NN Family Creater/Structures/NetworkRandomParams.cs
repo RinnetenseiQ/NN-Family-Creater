@@ -11,6 +11,9 @@ namespace NN_Family_Creater
         public readonly bool notRandomSpeed;
         public readonly float[] trainConstSpeedRange;
         public readonly string datasetPath;
+        public readonly string _modelPath;
+        public readonly string _labelPath;
+        public readonly string _plotPath;
         public readonly string networkName;
         public readonly int networkOutputNumb;
         public readonly List<string> optimizers;
@@ -19,6 +22,7 @@ namespace NN_Family_Creater
         public readonly int batchSize;
 
         public NetworkRandomParams(bool notRandomSpeed, float[] trainConstSpeedRange, string datasetPath, 
+                                   string modelPath, string labelPath, string plotPath,
                                    string networkName, List<string> optimizers,
                                    List<string> loss_functions, int epochs,
                                    int batchSize)
@@ -26,6 +30,9 @@ namespace NN_Family_Creater
             this.notRandomSpeed = notRandomSpeed;
             this.trainConstSpeedRange = trainConstSpeedRange;
             this.datasetPath = datasetPath;
+            _modelPath = modelPath;
+            _labelPath = labelPath;
+            _plotPath = plotPath;
             this.networkName = networkName;
             this.optimizers = optimizers;
             this.loss_functions = loss_functions;

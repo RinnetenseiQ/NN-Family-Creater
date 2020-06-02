@@ -10,6 +10,8 @@ namespace NN_Family_Creater
 {
     public class ConvolutionalNetwork
     {
+        public readonly int epoch;
+        public readonly string networkName;
         public List<int[]> slidingWindows;
         public List<int> convActivationIndexes;
         public List<int> filters;
@@ -31,8 +33,10 @@ namespace NN_Family_Creater
         public int outputs;
 
 
-        public ConvolutionalNetwork(ConvolutionalChromosome chromosome)
+        public ConvolutionalNetwork(ConvolutionalChromosome chromosome, int epoch, string networkName)
         {
+            this.epoch = epoch;
+            this.networkName = networkName;
             trainConstSpeed = chromosome.trainConstSpeed;
             optimizer = chromosome.optimizer;
             loss_finction = chromosome.loss_function;
@@ -76,32 +80,36 @@ namespace NN_Family_Creater
             }
         }
 
-        public static void CreateConvBatFile(string scriptName, string scriptsPath, string datasetPath, string modelPath, string labelPath, string plotPath)
+        public static void CreateConvBatFile(string scriptName, string scriptsPath, string datasetPath, string modelPath, string labelPath, string plotPath, string networkName, int epoch, int mode)
         {
+            string modeDir = string.Empty;
+            if (mode == 0) modeDir = @"\genetic\";
+            else if (mode == 1) modeDir = @"\custom\";
             DirectoryInfo di; 
             // добавить безопасность созданию директорий
             // Models Directory
             di = Directory.CreateDirectory(@"C:\keras\folder");
-            string currentModelsDirectory = modelPath + @"\" + di.CreationTime.ToString("dd-MM-yyyy");
+            string currentModelsDirectory = modelPath + modeDir + di.CreationTime.ToString("MM-dd-yyyy");
             if(!Directory.Exists(currentModelsDirectory)) Directory.Move(@"C:\keras\folder", currentModelsDirectory);
             else Directory.Delete(@"C:\keras\folder");
             // Labels Directory
             di = Directory.CreateDirectory(@"C:\keras\folder");
-            string currentLabelsDirectory = labelPath + @"\" + di.CreationTime.ToString("dd-MM-yyyy");
+            string currentLabelsDirectory = labelPath + modeDir + di.CreationTime.ToString("MM-dd-yyyy");
             if (!Directory.Exists(currentLabelsDirectory)) Directory.Move(@"C:\keras\folder", currentLabelsDirectory);
             else Directory.Delete(@"C:\keras\folder");
             // Plots Directory
             di = Directory.CreateDirectory(@"C:\keras\folder");
-            string currentPlotsDirectory = plotPath + @"\" + di.CreationTime.ToString("dd-MM-yyyy");
+            string currentPlotsDirectory = plotPath + modeDir + di.CreationTime.ToString("MM-dd-yyyy");
             if (!Directory.Exists(currentPlotsDirectory)) Directory.Move(@"C:\keras\folder", currentPlotsDirectory);
             else Directory.Delete(@"C:\keras\folder");
 
             string time = File.GetLastWriteTime(scriptsPath + @"\" + scriptName).ToString("HH-mm-ss");
-            string currentTask = new DirectoryInfo(datasetPath).Name; 
-
+            string filenamePart = epoch + "-ep_" + networkName + "_" + time;
+            //string currentTask = networkName; 
+            
             string code = @"C:\Users\Rinnetensei\Anaconda3\envs\keras\python.exe " + scriptsPath + @"\" + scriptName + " -d " +
-                            datasetPath + " -m " + currentModelsDirectory + @"\" + currentTask + "_" + time + "_m_genetic -l " + currentLabelsDirectory + @"\" +
-                            currentTask + time + "_l_genetic -p " + currentPlotsDirectory + @"\" + currentTask + time + "_p_genetic.png";
+                            datasetPath + " -m " + currentModelsDirectory + @"\" + filenamePart + "_m -l " + currentLabelsDirectory + @"\" +
+                            filenamePart + "_l -p " + currentPlotsDirectory + @"\" + filenamePart + "_p.png";
 
             try
             {

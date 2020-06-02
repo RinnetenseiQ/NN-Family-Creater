@@ -93,7 +93,7 @@ namespace NN_Family_Creater
         public static string CreateDateTimeDirectory(string path, int mode)
         {
             string configure;
-            if (mode == 0) configure = "dd-MM-yyyy";
+            if (mode == 0) configure = "MM-dd-yyyy";
             else configure = "HH-mm-ss";
             DirectoryInfo di;
             di = Directory.CreateDirectory(@"C:\keras\folder");
