@@ -11,6 +11,7 @@ namespace NN_Family_Creater
     public class ConvolutionalNetwork
     {
         public readonly int epoch;
+        public int indexNumber;
         public readonly string networkName;
         public List<int[]> slidingWindows;
         public List<int> convActivationIndexes;
@@ -29,17 +30,18 @@ namespace NN_Family_Creater
 
         public float trainConstSpeed;
         public string optimizer;
-        public string loss_finction;
+        public string loss_function;
         public int outputs;
 
 
         public ConvolutionalNetwork(ConvolutionalChromosome chromosome, int epoch, string networkName)
         {
             this.epoch = epoch;
+            indexNumber = chromosome.indexNumber;
             this.networkName = networkName;
             trainConstSpeed = chromosome.trainConstSpeed;
             optimizer = chromosome.optimizer;
-            loss_finction = chromosome.loss_function;
+            loss_function = chromosome.loss_function;
             outputs = chromosome.nrp.networkOutputNumb;
 
             batchSize = chromosome.nrp.batchSize;
@@ -80,7 +82,7 @@ namespace NN_Family_Creater
             }
         }
 
-        public static void CreateConvBatFile(string scriptName, string scriptsPath, string datasetPath, string modelPath, string labelPath, string plotPath, string networkName, int epoch, int mode)
+        public static void CreateConvBatFile(string scriptName, string scriptsPath, string datasetPath, string modelPath, string labelPath, string plotPath, string networkName, int epoch, int indexNumber, int mode)
         {
             string modeDir = string.Empty;
             if (mode == 0) modeDir = @"\genetic\";
@@ -104,7 +106,7 @@ namespace NN_Family_Creater
             else Directory.Delete(@"C:\keras\folder");
 
             string time = File.GetLastWriteTime(scriptsPath + @"\" + scriptName).ToString("HH-mm-ss");
-            string filenamePart = epoch + "-ep_" + networkName + "_" + time;
+            string filenamePart = epoch + "-ep_" + indexNumber + "chr_" + networkName + "_" + time;
             //string currentTask = networkName; 
             
             string code = @"C:\Users\Rinnetensei\Anaconda3\envs\keras\python.exe " + scriptsPath + @"\" + scriptName + " -d " +
@@ -185,7 +187,7 @@ namespace NN_Family_Creater
                     "BS = " + network.batchSize.ToString() + Environment.NewLine + Environment.NewLine;
             code += "print(\"[INFO] training network...\")" + Environment.NewLine;
             code += "opt = SGD(lr=INIT_LR)" + Environment.NewLine;
-            code += "model.compile(loss=" + loss_function + ", optimizer=opt, metrics=[\"accuracy\"])" + Environment.NewLine;
+            code += "model.compile(loss=" + loss_function + ", optimizer=opt, metrics=[\"acc\"])" + Environment.NewLine;
             //code += "" + Environment.NewLine;
             Support.insertLineToFile(path, line, code);
 

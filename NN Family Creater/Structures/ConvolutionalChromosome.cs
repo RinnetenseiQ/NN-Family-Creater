@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NN_Family_Creater
 {
@@ -13,6 +9,7 @@ namespace NN_Family_Creater
         Random random;
 
         public string name;
+        public int indexNumber;
 
         public float trainConstSpeed;
         public string optimizer;
@@ -37,9 +34,9 @@ namespace NN_Family_Creater
         {
             _gp = gp;
             this.random = random;
-            this.nrp = gp._nrp;
-            this.crp = gp._crp;
-            this.drp = gp._drp;
+            nrp = gp._nrp;
+            crp = gp._crp;
+            drp = gp._drp;
             convPart = new ConvStructure(crp, random);
             densePart = new DenseStructure(nrp, drp, random);
             if (nrp.notRandomSpeed) trainConstSpeed = nrp.trainConstSpeedRange[0];
@@ -123,13 +120,84 @@ namespace NN_Family_Creater
             // TO DO assessment rules
 
             if ((b.paramsCount - a.paramsCount > 0) && (b.accuracy - a.accuracy < 0)) return 1;
-            else if ((b.paramsCount - a.paramsCount < 0) && (b.accuracy - a.accuracy > 0)) return -1;
-            else if ((b.paramsCount - a.paramsCount == 0) && (b.accuracy - a.accuracy == 0)) return 0;
-            else if ((b.paramsCount - MemoryCoef * a.paramsCount > 0) && (b.accuracy - AccuracyCoef * a.accuracy > 0)) return 1;
-            else if ((b.paramsCount - MemoryCoef * a.paramsCount < 0) && (b.accuracy - AccuracyCoef * a.accuracy < 0)) return -1;
-            else return 0; //
+            if ((b.paramsCount - a.paramsCount < 0) && (b.accuracy - a.accuracy > 0)) return -1;
+            if ((b.paramsCount - a.paramsCount == 0) && (b.accuracy - a.accuracy == 0)) return 0;
+            if ((b.paramsCount - MemoryCoef * a.paramsCount > 0) && (b.accuracy - AccuracyCoef * a.accuracy > 0)) return 1;
+            if ((b.paramsCount - MemoryCoef * a.paramsCount < 0) && (b.accuracy - AccuracyCoef * a.accuracy < 0)) return -1;
+            return 0; //
 
             //return b.assessment - a.assessment;
+        }
+    }
+
+    class ChromosomeComparer3 : IComparer<ConvolutionalChromosome>
+    {
+        public float a;
+        public float b;
+
+        public ChromosomeComparer3(float a, float b)
+        {
+            this.a = a;
+            this.b = b;
+        }
+        public int Compare(ConvolutionalChromosome x, ConvolutionalChromosome y)
+        {
+            float result = (a * (x.accuracy - y.accuracy) - (b * (x.paramsCount - y.paramsCount)));
+            if (result < 0) return -1;
+            if (result > 0) return 1;
+            return 0;
+            
+        }
+    }
+
+    class ChromosomeComparer4 : IComparer<ConvolutionalChromosome>
+    {
+        public int percent;
+
+        public ChromosomeComparer4(int percent)
+        {
+            this.percent = percent;
+        }
+        public int Compare(ConvolutionalChromosome x, ConvolutionalChromosome y)
+        {
+            float paramPercent;
+            float thresholdValue;
+            if (x.accuracy != y.accuracy) thresholdValue = Math.Abs(percent * 100 * (x.accuracy - y.accuracy));
+            else thresholdValue = percent;
+
+            if (x.accuracy == y.accuracy)
+            {
+                if (x.paramsCount < y.paramsCount) return -1;
+                if (x.paramsCount == y.paramsCount) return 0;
+                return 1;
+            }
+
+            if (x.accuracy > y.accuracy)
+            {
+                paramPercent = (float)x.paramsCount / y.paramsCount;
+                if (paramPercent < 1) return -1; //не уверен насчет возвращаемых значений
+                paramPercent -= 1;
+                paramPercent *= 100;
+                if (paramPercent < thresholdValue) return -1;
+                if (paramPercent == thresholdValue) return 0;
+                return 1;
+
+
+            }
+
+            if(x.accuracy < y.accuracy)
+            {
+                paramPercent = (float) y.paramsCount / x.paramsCount;
+                if (paramPercent < 1) return 1;
+                paramPercent -= 1;
+                paramPercent *= 100;
+                if (paramPercent < thresholdValue) return 1;
+                if (paramPercent == thresholdValue) return 0;
+                return -1;
+
+            }
+
+            return 0;
         }
     }
 
@@ -139,8 +207,8 @@ namespace NN_Family_Creater
         public int Compare(ConvolutionalChromosome x, ConvolutionalChromosome y)
         {
             if (x.assessment - y.assessment > 0) return -1;
-            else if (x.assessment - y.assessment < 0) return 1;
-            else return 0; // переделать!!!!
+            if (x.assessment - y.assessment < 0) return 1;
+            return 0; // переделать!!!!
         }
     }
 }

@@ -219,6 +219,65 @@ namespace NN_Family_Creater
             zedGraph.Invalidate();
         }
 
+        public static void DrawAccGraph(ZedGraphControl zedGraph, int currEpoch, int maxEpoch, float accuracy)
+        {
+            // Получим панель для рисования
+            GraphPane pane = zedGraph.GraphPane;
+
+            // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
+            pane.CurveList.Clear();
+
+            // Создадим список точек
+            //PointPairList list = new PointPairList();
+
+            // Интервал, в котором будут лежать точки
+
+
+            // Заполняем список точек
+
+            pointAssesList.Add(currEpoch, accuracy);
+            // !!!
+            // Создадим кривую с названием "Scatter".
+            // Обводка ромбиков будут рисоваться голубым цветом (Color.Blue),
+            // Опорные точки - ромбики (SymbolType.Diamond)
+            LineItem myCurve = pane.AddCurve("Convolutional network", pointAssesList, Color.Blue, SymbolType.Diamond);
+
+            // !!!
+            // У кривой линия будет невидимой
+            myCurve.Line.IsVisible = false;
+
+            // !!!
+            // Цвет заполнения отметок (ромбиков) - голубой
+            myCurve.Symbol.Fill.Color = Color.Blue;
+
+            // !!!
+            // Тип заполнения - сплошная заливка
+            myCurve.Symbol.Fill.Type = FillType.Solid;
+
+            // !!!
+            // Размер ромбиков
+            myCurve.Symbol.Size = 7;
+
+
+            // Устанавливаем интересующий нас интервал по оси X
+            pane.XAxis.Scale.Min = -5;
+            pane.XAxis.Scale.Max = maxEpoch + 5;
+            pane.XAxis.Title.Text = "Epoch";
+
+            // Устанавливаем интересующий нас интервал по оси Y
+            pane.YAxis.Scale.Min = -0.2;
+            pane.YAxis.Scale.Max = 1;
+            pane.YAxis.Title.Text = "Accuracy";
+
+            // Вызываем метод AxisChange (), чтобы обновить данные об осях.
+            // В противном случае на рисунке будет показана только часть графика,
+            // которая умещается в интервалы по осям, установленные по умолчанию
+            zedGraph.AxisChange();
+
+            // Обновляем график
+            zedGraph.Invalidate();
+        }
+
         public static int GetPow2(int x)
         {
             int result = (int)Math.Ceiling(Math.Log(x, 2));

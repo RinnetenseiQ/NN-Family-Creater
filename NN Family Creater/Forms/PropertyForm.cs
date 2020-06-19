@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,23 @@ namespace NN_Family_Creater
         {
             Properties.Settings.Default.DirectoryPath = directoryPathTB.Text;
             ConfigEditor.Config.Write("DirectoryPath", Properties.Settings.Default.DirectoryPath);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            string path = directoryPathTB.Text + @"\keras\Directory";
+            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(path + @"\datasets");
+            Directory.CreateDirectory(path + @"\models\genetic");
+            Directory.CreateDirectory(path + @"\models\custom");
+            Directory.CreateDirectory(path + @"\labels\genetic");
+            Directory.CreateDirectory(path + @"\labels\custom");
+            Directory.CreateDirectory(path + @"\plots\genetic");
+            Directory.CreateDirectory(path + @"\plots\custom");
+            Directory.CreateDirectory(path + @"\plots\custom");
+            Directory.CreateDirectory(path + @"\reports");
+            Directory.CreateDirectory(path + @"\scripts\convolutional\genetic");
+            Directory.CreateDirectory(path + @"\scripts\convolutional\custom");
         }
     }
 }

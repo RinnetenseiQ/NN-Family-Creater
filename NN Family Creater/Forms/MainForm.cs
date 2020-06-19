@@ -154,6 +154,7 @@ namespace NN_Family_Creater
                 instance.curTaskLabel.Text = instance.currentTask.ToString();
                 instance.AssesGenZedGraph.Invalidate();
                 instance.ParamsZedGraph.Invalidate();
+                instance.accZG.Invalidate();
 
                 instance.currentTaskPB.Minimum = 0;
                 instance.currentTaskPB.Maximum = (int)instance.geneticEpochsNUD.Value + 1;
@@ -170,12 +171,13 @@ namespace NN_Family_Creater
             int maxParams = 0;
             GeneticProgramm gp = instance.geneticProgramms.Dequeue();
             if (!instance.genDontClearChB.Checked) instance.Invoke(new Action(instance.textBox9.Clear));
-            instance.population = new List<ConvolutionalChromosome>((int)instance.popolationCountNUD.Value);
+            instance.population = new List<ConvolutionalChromosome>(gp._populationSize);
             
             while (instance.population.Count != instance.population.Capacity)
             {
                 instance.population.Add(new ConvolutionalChromosome(gp, random));
                 instance.population[instance.population.Count - 1].name = "Chromosome " + instance.population.Count.ToString();
+                instance.population[instance.population.Count - 1].indexNumber = instance.population.Count;
             }
 
             for (int i = 0; i < instance.population.Count; i++)
@@ -185,6 +187,7 @@ namespace NN_Family_Creater
                 instance.UpdateAssessmentParams(instance.population[i], gp, 0);
                 if (instance.population[i].paramsCount > maxParams) maxParams = instance.population[i].paramsCount;
                 Support.DrawParamsGraph(instance.ParamsZedGraph, instance.population[i].accuracy, instance.population[i].paramsCount, maxParams);
+                Support.DrawAccGraph(instance.accZG, 0, instance.population[0]._gp._genEpochs, instance.population[i].accuracy);
             }
 
             Support.UpdateAssesment(instance.population);
@@ -192,15 +195,15 @@ namespace NN_Family_Creater
             {
                 Support.DrawAssesGraph(instance.AssesGenZedGraph, 0, instance.population[z]._gp._genEpochs, instance.population[z].assessment, z);
             }
-
-            instance.population.Sort(new ChromosomeComparer2());
+            instance.population.Sort(new ChromosomeComparer4((int)instance.percentNUD.Value));
+            //instance.population.Sort(new ChromosomeComparer2());
             //instance.eliteChromosomes.Add(new ConvolutionalNetwork(instance.population[0]));
             instance.WriteConvGeneticOutput(0);
             File.WriteAllLines(timeDirectory + @"\report.txt", instance.textBox9.Lines);
             instance.Invoke(new Action(instance.currentTaskPB.PerformStep));
             // Evolve
 
-            for (int i = 1; i <= instance.geneticEpochsNUD.Value; i++)
+            for (int i = 1; i <= gp._genEpochs; i++)
             {
                 for (int m = 1; m < instance.population.Count; m++)
                 {
@@ -219,8 +222,8 @@ namespace NN_Family_Creater
                         }
                         else
                         {
-                            instance.population[m].MutateConvolutional(gp._crp, (int)instance.mutateRateNUD.Value);
-                            instance.population[m].MutateDense(gp._drp, (int)instance.denseDropoutNUD.Value);
+                            instance.population[m].MutateConvolutional(gp._crp, gp._mutateRate);
+                            instance.population[m].MutateDense(gp._drp, gp._mutateRate);
                         }
                     }
                 }
@@ -242,9 +245,9 @@ namespace NN_Family_Creater
                     Support.DrawAssesGraph(instance.AssesGenZedGraph, i, instance.population[z]._gp._genEpochs, instance.population[z].assessment, z);
                 }
 
-
+                instance.population.Sort(new ChromosomeComparer4((int)instance.percentNUD.Value));
                 //population.Sort(new ChromosomeComparer((float)memPriorityNUD.Value, (float)accPriorityNUD.Value));
-                instance.population.Sort(new ChromosomeComparer2());
+                //instance.population.Sort(new ChromosomeComparer2());
                 //instance.eliteChromosomes.Add(new ConvolutionalNetwork(instance.population[0]));
                 instance.WriteConvGeneticOutput(i);
                 File.WriteAllLines(timeDirectory + @"\report.txt", instance.textBox9.Lines);
@@ -255,6 +258,8 @@ namespace NN_Family_Creater
             image.Save(timeDirectory + @"\asses.png");
             image = new Bitmap(instance.ParamsZedGraph.GetImage());
             image.Save(timeDirectory + @"\params.png");
+            image = new Bitmap(instance.accZG.GetImage());
+            image.Save(timeDirectory + @"\acc.png");
         }
 
 
@@ -437,6 +442,13 @@ namespace NN_Family_Creater
             chrDontClearChB.Location = genDontClearChB.Location;
             ParamsZedGraph.Location = AssesGenZedGraph.Location;
             ParamsZedGraph.Size = AssesGenZedGraph.Size;
+            accZG.Location = AssesGenZedGraph.Location;
+            accZG.Size = AssesGenZedGraph.Size;
+            
+            PriorityEstimGB.Location = PercentEstimGB.Location;
+            PriorityEstimGB.Size = PercentEstimGB.Size;
+            AssessFuncGB.Location = PercentEstimGB.Location;
+            AssessFuncGB.Size = PercentEstimGB.Size;
             
 
             //QueueGB
@@ -462,6 +474,8 @@ namespace NN_Family_Creater
             DisplayModeCB.SelectedIndex = 0;
             ZedGraphCB.DropDownStyle = ComboBoxStyle.DropDownList;
             ZedGraphCB.SelectedIndex = 0;
+            EstimatorCB.DropDownStyle = ComboBoxStyle.DropDownList;
+            EstimatorCB.SelectedIndex = 0;
         }
 
         public void InitializeProperties()
@@ -631,7 +645,20 @@ namespace NN_Family_Creater
 
         private void testButton_Click(object sender, EventArgs e)
         {
-            AddProgressBar();
+            textBox9.Clear();
+            List<Test> testlist = new List<Test>();
+            for (int i = 0; i < 10; i++)
+            {
+                testlist.Add(new Test(random));
+            }
+            Test.UpdateAssses(testlist);
+            testlist.Sort(new TestComparer(25));
+
+            foreach (var iter in testlist)
+            {
+
+                textBox9.AppendText(iter.assessment.ToString() + " - " + iter.accuracy.ToString() + "  |   " + iter.paramsCount + Environment.NewLine);
+            }
 
             //List<Control> tempControlList = new List<Control>();
             //tempControlList.Add(new TextBox());
@@ -702,7 +729,8 @@ namespace NN_Family_Creater
             }));
             ConvolutionalNetwork tempNet = new ConvolutionalNetwork(chromosome, epoch, gp._nrp.networkName);
             ConvolutionalNetwork.CreateNetworkScript(tempNet, chromosome.crp.convActivations, chromosome.drp.denseActivations);
-            ConvolutionalNetwork.CreateConvBatFile("temp_convolution.py", @"C:\keras\Directory\scripts\convolutional\genetic", gp._nrp.datasetPath, gp._nrp._modelPath, gp._nrp._labelPath, gp._nrp._plotPath, gp._nrp.networkName, epoch, 0);
+            ConvolutionalNetwork.CreateConvBatFile("temp_convolution.py", @"C:\keras\Directory\scripts\convolutional\genetic", gp._nrp.datasetPath, 
+                                                   gp._nrp._modelPath, gp._nrp._labelPath, gp._nrp._plotPath, gp._nrp.networkName, epoch, chromosome.indexNumber, 0);
 
             CreateConvBatProcess();
 
@@ -871,11 +899,11 @@ namespace NN_Family_Creater
         {
             
             
-            worker.Abort();
-            p.Kill();
-            p.Close();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            //worker.Abort();
+            //p.Kill();
+            //p.Close();
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
         }
 
         private void ZedGraphCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -885,10 +913,39 @@ namespace NN_Family_Creater
                 case 0:
                     AssesGenZedGraph.Visible = true;
                     ParamsZedGraph.Visible = false;
+                    accZG.Visible = false;
                     break;
                 case 1:
                     AssesGenZedGraph.Visible = false;
                     ParamsZedGraph.Visible = true;
+                    accZG.Visible = false;
+                    break;
+                case 2:
+                    AssesGenZedGraph.Visible = false;
+                    ParamsZedGraph.Visible = false;
+                    accZG.Visible = true;
+                    break;
+            }
+        }
+
+        private void EstimatorCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (EstimatorCB.SelectedIndex)
+            {
+                case 0:
+                    PercentEstimGB.Visible = true;
+                    AssessFuncGB.Visible = false;
+                    PriorityEstimGB.Visible = false;
+                    break;
+                case 1:
+                    PercentEstimGB.Visible = false;
+                    AssessFuncGB.Visible = true;
+                    PriorityEstimGB.Visible = false;
+                    break;
+                case 2:
+                    PercentEstimGB.Visible = false;
+                    AssessFuncGB.Visible = false;
+                    PriorityEstimGB.Visible = true;
                     break;
             }
         }

@@ -72,17 +72,15 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.geneticGB = new System.Windows.Forms.GroupBox();
-            this.createScriptsBtn = new System.Windows.Forms.Button();
-            this.testButton = new System.Windows.Forms.Button();
+            this.EstimatorCB = new System.Windows.Forms.ComboBox();
+            this.PercentEstimGB = new System.Windows.Forms.GroupBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.percentNUD = new System.Windows.Forms.NumericUpDown();
             this.networkNameTB = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
             this.label38 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
             this.predsBtn = new System.Windows.Forms.Button();
-            this.memPriorityNUD = new System.Windows.Forms.NumericUpDown();
-            this.accPriorityNUD = new System.Windows.Forms.NumericUpDown();
-            this.label33 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
@@ -100,6 +98,12 @@
             this.label18 = new System.Windows.Forms.Label();
             this.popolationCountNUD = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.accPriorityNUD = new System.Windows.Forms.NumericUpDown();
+            this.memPriorityNUD = new System.Windows.Forms.NumericUpDown();
+            this.label35 = new System.Windows.Forms.Label();
+            this.createScriptsBtn = new System.Windows.Forms.Button();
+            this.testButton = new System.Windows.Forms.Button();
             this.learningEpochsNUD = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.openPlotsFolderBtn = new System.Windows.Forms.Button();
@@ -174,8 +178,12 @@
             this.TReLUConvChB = new System.Windows.Forms.CheckBox();
             this.ThReLUDenseChB = new System.Windows.Forms.CheckBox();
             this.ConvModelGB = new System.Windows.Forms.GroupBox();
-            this.convDropoutChB = new System.Windows.Forms.CheckBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.denseDropoutChB = new System.Windows.Forms.CheckBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.convDropoutChB = new System.Windows.Forms.CheckBox();
             this.convDropoutNUD = new System.Windows.Forms.NumericUpDown();
             this.LSTMModelGB = new System.Windows.Forms.GroupBox();
             this.label40 = new System.Windows.Forms.Label();
@@ -254,12 +262,11 @@
             this.curTaskLabel = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
             this.allTasksLabel = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.label36 = new System.Windows.Forms.Label();
+            this.accZG = new ZedGraph.ZedGraphControl();
+            this.PriorityEstimGB = new System.Windows.Forms.GroupBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.AssessFuncGB = new System.Windows.Forms.GroupBox();
+            this.label70 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -268,12 +275,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.batchSizeNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.geneticEpochsNUD)).BeginInit();
             this.geneticGB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).BeginInit();
+            this.PercentEstimGB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.percentNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mutateSelNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crossSelNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copySelNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popolationCountNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.learningEpochsNUD)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.QueueGB.SuspendLayout();
@@ -288,6 +297,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ConvLayersNumbNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.denseDropoutNUD)).BeginInit();
             this.ConvModelGB.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.convDropoutNUD)).BeginInit();
             this.LSTMModelGB.SuspendLayout();
             this.PercModelGB.SuspendLayout();
@@ -308,11 +321,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            this.groupBox5.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.groupBox9.SuspendLayout();
-            this.groupBox10.SuspendLayout();
+            this.PriorityEstimGB.SuspendLayout();
+            this.AssessFuncGB.SuspendLayout();
             this.SuspendLayout();
             // 
             // minConstSpeedTB
@@ -782,8 +792,12 @@
             // 
             // geneticGB
             // 
-            this.geneticGB.Controls.Add(this.groupBox10);
+            this.geneticGB.Controls.Add(this.EstimatorCB);
+            this.geneticGB.Controls.Add(this.PriorityEstimGB);
+            this.geneticGB.Controls.Add(this.PercentEstimGB);
+            this.geneticGB.Controls.Add(this.AssessFuncGB);
             this.geneticGB.Controls.Add(this.networkNameTB);
+            this.geneticGB.Controls.Add(this.label36);
             this.geneticGB.Controls.Add(this.button9);
             this.geneticGB.Controls.Add(this.label38);
             this.geneticGB.Controls.Add(this.predsBtn);
@@ -812,25 +826,54 @@
             this.geneticGB.TabIndex = 57;
             this.geneticGB.TabStop = false;
             // 
-            // createScriptsBtn
+            // EstimatorCB
             // 
-            this.createScriptsBtn.Location = new System.Drawing.Point(1503, 434);
-            this.createScriptsBtn.Name = "createScriptsBtn";
-            this.createScriptsBtn.Size = new System.Drawing.Size(84, 23);
-            this.createScriptsBtn.TabIndex = 72;
-            this.createScriptsBtn.Text = "Create ";
-            this.createScriptsBtn.UseVisualStyleBackColor = true;
-            this.createScriptsBtn.Click += new System.EventHandler(this.createScriptsBtn_Click);
+            this.EstimatorCB.FormattingEnabled = true;
+            this.EstimatorCB.Items.AddRange(new object[] {
+            "Params % per Accuracy % Comparer",
+            "1st estimator",
+            "Priority estimator"});
+            this.EstimatorCB.Location = new System.Drawing.Point(6, 246);
+            this.EstimatorCB.Name = "EstimatorCB";
+            this.EstimatorCB.Size = new System.Drawing.Size(284, 24);
+            this.EstimatorCB.TabIndex = 62;
+            this.EstimatorCB.SelectedIndexChanged += new System.EventHandler(this.EstimatorCB_SelectedIndexChanged);
             // 
-            // testButton
+            // PercentEstimGB
             // 
-            this.testButton.Location = new System.Drawing.Point(1503, 401);
-            this.testButton.Name = "testButton";
-            this.testButton.Size = new System.Drawing.Size(80, 23);
-            this.testButton.TabIndex = 71;
-            this.testButton.Text = "Test it!";
-            this.testButton.UseVisualStyleBackColor = true;
-            this.testButton.Click += new System.EventHandler(this.testButton_Click);
+            this.PercentEstimGB.Controls.Add(this.label37);
+            this.PercentEstimGB.Controls.Add(this.percentNUD);
+            this.PercentEstimGB.Location = new System.Drawing.Point(6, 268);
+            this.PercentEstimGB.Name = "PercentEstimGB";
+            this.PercentEstimGB.Size = new System.Drawing.Size(284, 101);
+            this.PercentEstimGB.TabIndex = 105;
+            this.PercentEstimGB.TabStop = false;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(44, 55);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(191, 34);
+            this.label37.TabIndex = 61;
+            this.label37.Text = "    % params incresment \r\nper 1%  accuracy incresment";
+            // 
+            // percentNUD
+            // 
+            this.percentNUD.Location = new System.Drawing.Point(108, 25);
+            this.percentNUD.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.percentNUD.Name = "percentNUD";
+            this.percentNUD.Size = new System.Drawing.Size(50, 22);
+            this.percentNUD.TabIndex = 60;
+            this.percentNUD.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // networkNameTB
             // 
@@ -839,6 +882,15 @@
             this.networkNameTB.Size = new System.Drawing.Size(172, 22);
             this.networkNameTB.TabIndex = 61;
             this.networkNameTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NetworkNameTB_KeyPress);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(111, 221);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(58, 17);
+            this.label36.TabIndex = 0;
+            this.label36.Text = "Оценка";
             // 
             // button9
             // 
@@ -859,24 +911,6 @@
             this.label38.TabIndex = 60;
             this.label38.Text = "Имя сети";
             // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(99, 67);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(55, 17);
-            this.label35.TabIndex = 59;
-            this.label35.Text = "память";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(14, 67);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(68, 17);
-            this.label34.TabIndex = 58;
-            this.label34.Text = "точность";
-            // 
             // predsBtn
             // 
             this.predsBtn.Location = new System.Drawing.Point(204, 439);
@@ -886,41 +920,6 @@
             this.predsBtn.Text = "Predict";
             this.predsBtn.UseVisualStyleBackColor = true;
             this.predsBtn.Click += new System.EventHandler(this.Button8_Click);
-            // 
-            // memPriorityNUD
-            // 
-            this.memPriorityNUD.DecimalPlaces = 1;
-            this.memPriorityNUD.Location = new System.Drawing.Point(91, 96);
-            this.memPriorityNUD.Name = "memPriorityNUD";
-            this.memPriorityNUD.Size = new System.Drawing.Size(63, 22);
-            this.memPriorityNUD.TabIndex = 57;
-            this.memPriorityNUD.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
-            // accPriorityNUD
-            // 
-            this.accPriorityNUD.DecimalPlaces = 1;
-            this.accPriorityNUD.Location = new System.Drawing.Point(16, 96);
-            this.accPriorityNUD.Name = "accPriorityNUD";
-            this.accPriorityNUD.Size = new System.Drawing.Size(66, 22);
-            this.accPriorityNUD.TabIndex = 56;
-            this.accPriorityNUD.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(26, 43);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(117, 17);
-            this.label33.TabIndex = 55;
-            this.label33.Text = "Приоритетность";
             // 
             // label31
             // 
@@ -1118,6 +1117,70 @@
             this.label17.Size = new System.Drawing.Size(132, 17);
             this.label17.TabIndex = 0;
             this.label17.Text = "Размер популяции";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(108, 30);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(68, 17);
+            this.label34.TabIndex = 58;
+            this.label34.Text = "точность";
+            // 
+            // accPriorityNUD
+            // 
+            this.accPriorityNUD.DecimalPlaces = 1;
+            this.accPriorityNUD.Location = new System.Drawing.Point(110, 59);
+            this.accPriorityNUD.Name = "accPriorityNUD";
+            this.accPriorityNUD.Size = new System.Drawing.Size(66, 22);
+            this.accPriorityNUD.TabIndex = 56;
+            this.accPriorityNUD.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // memPriorityNUD
+            // 
+            this.memPriorityNUD.DecimalPlaces = 1;
+            this.memPriorityNUD.Location = new System.Drawing.Point(185, 59);
+            this.memPriorityNUD.Name = "memPriorityNUD";
+            this.memPriorityNUD.Size = new System.Drawing.Size(63, 22);
+            this.memPriorityNUD.TabIndex = 57;
+            this.memPriorityNUD.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(193, 30);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(55, 17);
+            this.label35.TabIndex = 59;
+            this.label35.Text = "память";
+            // 
+            // createScriptsBtn
+            // 
+            this.createScriptsBtn.Location = new System.Drawing.Point(1479, 492);
+            this.createScriptsBtn.Name = "createScriptsBtn";
+            this.createScriptsBtn.Size = new System.Drawing.Size(84, 23);
+            this.createScriptsBtn.TabIndex = 72;
+            this.createScriptsBtn.Text = "Create ";
+            this.createScriptsBtn.UseVisualStyleBackColor = true;
+            this.createScriptsBtn.Click += new System.EventHandler(this.createScriptsBtn_Click);
+            // 
+            // testButton
+            // 
+            this.testButton.Location = new System.Drawing.Point(1479, 460);
+            this.testButton.Name = "testButton";
+            this.testButton.Size = new System.Drawing.Size(80, 23);
+            this.testButton.TabIndex = 71;
+            this.testButton.Text = "Test it!";
+            this.testButton.UseVisualStyleBackColor = true;
+            this.testButton.Click += new System.EventHandler(this.testButton_Click);
             // 
             // learningEpochsNUD
             // 
@@ -1317,7 +1380,7 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(0, 106);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(303, 321);
+            this.listView1.Size = new System.Drawing.Size(301, 321);
             this.listView1.TabIndex = 66;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Tile;
@@ -1921,14 +1984,59 @@
             this.ConvModelGB.TabIndex = 50;
             this.ConvModelGB.TabStop = false;
             // 
-            // convDropoutChB
+            // groupBox9
             // 
-            this.convDropoutChB.AutoSize = true;
-            this.convDropoutChB.Location = new System.Drawing.Point(20, 121);
-            this.convDropoutChB.Name = "convDropoutChB";
-            this.convDropoutChB.Size = new System.Drawing.Size(18, 17);
-            this.convDropoutChB.TabIndex = 47;
-            this.convDropoutChB.UseVisualStyleBackColor = true;
+            this.groupBox9.Controls.Add(this.label6);
+            this.groupBox9.Controls.Add(this.eluConvChb);
+            this.groupBox9.Controls.Add(this.seluConvChb);
+            this.groupBox9.Controls.Add(this.ThReLUDenseChB);
+            this.groupBox9.Controls.Add(this.lReluConvChb);
+            this.groupBox9.Controls.Add(this.TReLUConvChB);
+            this.groupBox9.Controls.Add(this.reluDenseChb);
+            this.groupBox9.Controls.Add(this.softplusConvChb);
+            this.groupBox9.Controls.Add(this.lReluDenseChb);
+            this.groupBox9.Controls.Add(this.PReLUDenseChB);
+            this.groupBox9.Controls.Add(this.eluDenseChb);
+            this.groupBox9.Controls.Add(this.sigmoidConvChb);
+            this.groupBox9.Controls.Add(this.seluDenseChb);
+            this.groupBox9.Controls.Add(this.PReLUConvChB);
+            this.groupBox9.Controls.Add(this.tanhDenseChb);
+            this.groupBox9.Controls.Add(this.softsignConvChb);
+            this.groupBox9.Controls.Add(this.softplusDenseChb);
+            this.groupBox9.Controls.Add(this.softmaxConvChb);
+            this.groupBox9.Controls.Add(this.sigmoidDenseChb);
+            this.groupBox9.Controls.Add(this.tanhConvChb);
+            this.groupBox9.Controls.Add(this.reluConvChb);
+            this.groupBox9.Controls.Add(this.softmaxDenseChb);
+            this.groupBox9.Controls.Add(this.softsignDenseChb);
+            this.groupBox9.Location = new System.Drawing.Point(6, 290);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(408, 172);
+            this.groupBox9.TabIndex = 105;
+            this.groupBox9.TabStop = false;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.label3);
+            this.groupBox8.Controls.Add(this.label5);
+            this.groupBox8.Controls.Add(this.label7);
+            this.groupBox8.Location = new System.Drawing.Point(135, 52);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(145, 160);
+            this.groupBox8.TabIndex = 105;
+            this.groupBox8.TabStop = false;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.DenseLayersNumbNUD);
+            this.groupBox7.Controls.Add(this.denseDropoutChB);
+            this.groupBox7.Controls.Add(this.DenseNeuronsNUD);
+            this.groupBox7.Controls.Add(this.denseDropoutNUD);
+            this.groupBox7.Location = new System.Drawing.Point(284, 52);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(129, 238);
+            this.groupBox7.TabIndex = 105;
+            this.groupBox7.TabStop = false;
             // 
             // denseDropoutChB
             // 
@@ -1938,6 +2046,30 @@
             this.denseDropoutChB.Size = new System.Drawing.Size(18, 17);
             this.denseDropoutChB.TabIndex = 46;
             this.denseDropoutChB.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.convDropoutChB);
+            this.groupBox5.Controls.Add(this.ConvLayersNumbNUD);
+            this.groupBox5.Controls.Add(this.ConvFiltersNUD);
+            this.groupBox5.Controls.Add(this.convDropoutNUD);
+            this.groupBox5.Controls.Add(this.label4);
+            this.groupBox5.Controls.Add(this.slidingWindow2NUD);
+            this.groupBox5.Controls.Add(this.slidingWindow1NUD);
+            this.groupBox5.Location = new System.Drawing.Point(6, 52);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(125, 238);
+            this.groupBox5.TabIndex = 48;
+            this.groupBox5.TabStop = false;
+            // 
+            // convDropoutChB
+            // 
+            this.convDropoutChB.AutoSize = true;
+            this.convDropoutChB.Location = new System.Drawing.Point(20, 121);
+            this.convDropoutChB.Name = "convDropoutChB";
+            this.convDropoutChB.Size = new System.Drawing.Size(18, 17);
+            this.convDropoutChB.TabIndex = 47;
+            this.convDropoutChB.UseVisualStyleBackColor = true;
             // 
             // convDropoutNUD
             // 
@@ -2719,7 +2851,8 @@
             this.ZedGraphCB.FormattingEnabled = true;
             this.ZedGraphCB.Items.AddRange(new object[] {
             "Assesments - Epoch",
-            "Accuracy - Params"});
+            "Accuracy - Params",
+            "Accuracy - Epoch"});
             this.ZedGraphCB.Location = new System.Drawing.Point(855, 523);
             this.ZedGraphCB.Name = "ZedGraphCB";
             this.ZedGraphCB.Size = new System.Drawing.Size(397, 24);
@@ -2760,97 +2893,63 @@
             this.allTasksLabel.TabIndex = 104;
             this.allTasksLabel.Text = "0";
             // 
-            // groupBox5
+            // accZG
             // 
-            this.groupBox5.Controls.Add(this.convDropoutChB);
-            this.groupBox5.Controls.Add(this.ConvLayersNumbNUD);
-            this.groupBox5.Controls.Add(this.ConvFiltersNUD);
-            this.groupBox5.Controls.Add(this.convDropoutNUD);
-            this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Controls.Add(this.slidingWindow2NUD);
-            this.groupBox5.Controls.Add(this.slidingWindow1NUD);
-            this.groupBox5.Location = new System.Drawing.Point(6, 52);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(125, 238);
-            this.groupBox5.TabIndex = 48;
-            this.groupBox5.TabStop = false;
+            this.accZG.Location = new System.Drawing.Point(1789, 693);
+            this.accZG.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.accZG.Name = "accZG";
+            this.accZG.ScrollGrace = 0D;
+            this.accZG.ScrollMaxX = 0D;
+            this.accZG.ScrollMaxY = 0D;
+            this.accZG.ScrollMaxY2 = 0D;
+            this.accZG.ScrollMinX = 0D;
+            this.accZG.ScrollMinY = 0D;
+            this.accZG.ScrollMinY2 = 0D;
+            this.accZG.Size = new System.Drawing.Size(56, 56);
+            this.accZG.TabIndex = 105;
+            this.accZG.Visible = false;
             // 
-            // groupBox7
+            // PriorityEstimGB
             // 
-            this.groupBox7.Controls.Add(this.DenseLayersNumbNUD);
-            this.groupBox7.Controls.Add(this.denseDropoutChB);
-            this.groupBox7.Controls.Add(this.DenseNeuronsNUD);
-            this.groupBox7.Controls.Add(this.denseDropoutNUD);
-            this.groupBox7.Location = new System.Drawing.Point(284, 52);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(129, 238);
-            this.groupBox7.TabIndex = 105;
-            this.groupBox7.TabStop = false;
+            this.PriorityEstimGB.Controls.Add(this.label33);
+            this.PriorityEstimGB.Controls.Add(this.label35);
+            this.PriorityEstimGB.Controls.Add(this.accPriorityNUD);
+            this.PriorityEstimGB.Controls.Add(this.label34);
+            this.PriorityEstimGB.Controls.Add(this.memPriorityNUD);
+            this.PriorityEstimGB.Location = new System.Drawing.Point(236, 215);
+            this.PriorityEstimGB.Name = "PriorityEstimGB";
+            this.PriorityEstimGB.Size = new System.Drawing.Size(33, 25);
+            this.PriorityEstimGB.TabIndex = 106;
+            this.PriorityEstimGB.TabStop = false;
+            this.PriorityEstimGB.Visible = false;
             // 
-            // groupBox8
+            // label33
             // 
-            this.groupBox8.Controls.Add(this.label3);
-            this.groupBox8.Controls.Add(this.label5);
-            this.groupBox8.Controls.Add(this.label7);
-            this.groupBox8.Location = new System.Drawing.Point(135, 52);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(145, 160);
-            this.groupBox8.TabIndex = 105;
-            this.groupBox8.TabStop = false;
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(31, 61);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(52, 17);
+            this.label33.TabIndex = 60;
+            this.label33.Text = "Priority";
             // 
-            // groupBox9
+            // AssessFuncGB
             // 
-            this.groupBox9.Controls.Add(this.label6);
-            this.groupBox9.Controls.Add(this.eluConvChb);
-            this.groupBox9.Controls.Add(this.seluConvChb);
-            this.groupBox9.Controls.Add(this.ThReLUDenseChB);
-            this.groupBox9.Controls.Add(this.lReluConvChb);
-            this.groupBox9.Controls.Add(this.TReLUConvChB);
-            this.groupBox9.Controls.Add(this.reluDenseChb);
-            this.groupBox9.Controls.Add(this.softplusConvChb);
-            this.groupBox9.Controls.Add(this.lReluDenseChb);
-            this.groupBox9.Controls.Add(this.PReLUDenseChB);
-            this.groupBox9.Controls.Add(this.eluDenseChb);
-            this.groupBox9.Controls.Add(this.sigmoidConvChb);
-            this.groupBox9.Controls.Add(this.seluDenseChb);
-            this.groupBox9.Controls.Add(this.PReLUConvChB);
-            this.groupBox9.Controls.Add(this.tanhDenseChb);
-            this.groupBox9.Controls.Add(this.softsignConvChb);
-            this.groupBox9.Controls.Add(this.softplusDenseChb);
-            this.groupBox9.Controls.Add(this.softmaxConvChb);
-            this.groupBox9.Controls.Add(this.sigmoidDenseChb);
-            this.groupBox9.Controls.Add(this.tanhConvChb);
-            this.groupBox9.Controls.Add(this.reluConvChb);
-            this.groupBox9.Controls.Add(this.softmaxDenseChb);
-            this.groupBox9.Controls.Add(this.softsignDenseChb);
-            this.groupBox9.Location = new System.Drawing.Point(6, 290);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(408, 172);
-            this.groupBox9.TabIndex = 105;
-            this.groupBox9.TabStop = false;
+            this.AssessFuncGB.Controls.Add(this.label70);
+            this.AssessFuncGB.Location = new System.Drawing.Point(189, 215);
+            this.AssessFuncGB.Name = "AssessFuncGB";
+            this.AssessFuncGB.Size = new System.Drawing.Size(38, 24);
+            this.AssessFuncGB.TabIndex = 107;
+            this.AssessFuncGB.TabStop = false;
+            this.AssessFuncGB.Visible = false;
             // 
-            // groupBox10
+            // label70
             // 
-            this.groupBox10.Controls.Add(this.label36);
-            this.groupBox10.Controls.Add(this.label34);
-            this.groupBox10.Controls.Add(this.label33);
-            this.groupBox10.Controls.Add(this.accPriorityNUD);
-            this.groupBox10.Controls.Add(this.memPriorityNUD);
-            this.groupBox10.Controls.Add(this.label35);
-            this.groupBox10.Location = new System.Drawing.Point(6, 215);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(284, 154);
-            this.groupBox10.TabIndex = 105;
-            this.groupBox10.TabStop = false;
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(106, 11);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(58, 17);
-            this.label36.TabIndex = 0;
-            this.label36.Text = "Оценка";
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(75, 44);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(111, 17);
+            this.label70.TabIndex = 0;
+            this.label70.Text = "z = x + x(minY/y)";
             // 
             // Form1
             // 
@@ -2859,6 +2958,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.accZG);
             this.Controls.Add(this.allTasksLabel);
             this.Controls.Add(this.createScriptsBtn);
             this.Controls.Add(this.label68);
@@ -2922,12 +3022,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.geneticEpochsNUD)).EndInit();
             this.geneticGB.ResumeLayout(false);
             this.geneticGB.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).EndInit();
+            this.PercentEstimGB.ResumeLayout(false);
+            this.PercentEstimGB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.percentNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mutateSelNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.crossSelNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.copySelNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popolationCountNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.learningEpochsNUD)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -2947,6 +3050,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.denseDropoutNUD)).EndInit();
             this.ConvModelGB.ResumeLayout(false);
             this.ConvModelGB.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.convDropoutNUD)).EndInit();
             this.LSTMModelGB.ResumeLayout(false);
             this.LSTMModelGB.PerformLayout();
@@ -2974,16 +3085,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
+            this.PriorityEstimGB.ResumeLayout(false);
+            this.PriorityEstimGB.PerformLayout();
+            this.AssessFuncGB.ResumeLayout(false);
+            this.AssessFuncGB.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3046,7 +3151,6 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.NumericUpDown memPriorityNUD;
         private System.Windows.Forms.NumericUpDown accPriorityNUD;
-        private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.TextBox networkNameTB;
@@ -3219,8 +3323,16 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.GroupBox PercentEstimGB;
         private System.Windows.Forms.Label label36;
+        private ZedGraph.ZedGraphControl accZG;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.NumericUpDown percentNUD;
+        private System.Windows.Forms.ComboBox EstimatorCB;
+        private System.Windows.Forms.GroupBox PriorityEstimGB;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.GroupBox AssessFuncGB;
+        private System.Windows.Forms.Label label70;
     }
 }
 
