@@ -73,9 +73,17 @@
             this.label16 = new System.Windows.Forms.Label();
             this.geneticGB = new System.Windows.Forms.GroupBox();
             this.EstimatorCB = new System.Windows.Forms.ComboBox();
+            this.PriorityEstimGB = new System.Windows.Forms.GroupBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.accPriorityNUD = new System.Windows.Forms.NumericUpDown();
+            this.label34 = new System.Windows.Forms.Label();
+            this.memPriorityNUD = new System.Windows.Forms.NumericUpDown();
             this.PercentEstimGB = new System.Windows.Forms.GroupBox();
             this.label37 = new System.Windows.Forms.Label();
             this.percentNUD = new System.Windows.Forms.NumericUpDown();
+            this.AssessFuncGB = new System.Windows.Forms.GroupBox();
+            this.label70 = new System.Windows.Forms.Label();
             this.networkNameTB = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
@@ -98,10 +106,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.popolationCountNUD = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.accPriorityNUD = new System.Windows.Forms.NumericUpDown();
-            this.memPriorityNUD = new System.Windows.Forms.NumericUpDown();
-            this.label35 = new System.Windows.Forms.Label();
             this.createScriptsBtn = new System.Windows.Forms.Button();
             this.testButton = new System.Windows.Forms.Button();
             this.learningEpochsNUD = new System.Windows.Forms.NumericUpDown();
@@ -263,10 +267,20 @@
             this.label68 = new System.Windows.Forms.Label();
             this.allTasksLabel = new System.Windows.Forms.Label();
             this.accZG = new ZedGraph.ZedGraphControl();
-            this.PriorityEstimGB = new System.Windows.Forms.GroupBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.AssessFuncGB = new System.Windows.Forms.GroupBox();
-            this.label70 = new System.Windows.Forms.Label();
+            this.callbacksGB = new System.Windows.Forms.GroupBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.LRReducerChB = new System.Windows.Forms.CheckBox();
+            this.LRShedulerChB = new System.Windows.Forms.CheckBox();
+            this.earlyStopChB = new System.Windows.Forms.CheckBox();
+            this.tensorboardChB = new System.Windows.Forms.CheckBox();
+            this.modelCPChB = new System.Windows.Forms.CheckBox();
+            this.TestTB1 = new System.Windows.Forms.TextBox();
+            this.TestTB2 = new System.Windows.Forms.TextBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
+            this.TestTB3 = new System.Windows.Forms.TextBox();
+            this.label72 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -275,14 +289,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.batchSizeNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.geneticEpochsNUD)).BeginInit();
             this.geneticGB.SuspendLayout();
+            this.PriorityEstimGB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).BeginInit();
             this.PercentEstimGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.percentNUD)).BeginInit();
+            this.AssessFuncGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mutateSelNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crossSelNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copySelNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popolationCountNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.learningEpochsNUD)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.QueueGB.SuspendLayout();
@@ -321,8 +337,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            this.PriorityEstimGB.SuspendLayout();
-            this.AssessFuncGB.SuspendLayout();
+            this.callbacksGB.SuspendLayout();
             this.SuspendLayout();
             // 
             // minConstSpeedTB
@@ -839,6 +854,73 @@
             this.EstimatorCB.TabIndex = 62;
             this.EstimatorCB.SelectedIndexChanged += new System.EventHandler(this.EstimatorCB_SelectedIndexChanged);
             // 
+            // PriorityEstimGB
+            // 
+            this.PriorityEstimGB.Controls.Add(this.label33);
+            this.PriorityEstimGB.Controls.Add(this.label35);
+            this.PriorityEstimGB.Controls.Add(this.accPriorityNUD);
+            this.PriorityEstimGB.Controls.Add(this.label34);
+            this.PriorityEstimGB.Controls.Add(this.memPriorityNUD);
+            this.PriorityEstimGB.Location = new System.Drawing.Point(236, 215);
+            this.PriorityEstimGB.Name = "PriorityEstimGB";
+            this.PriorityEstimGB.Size = new System.Drawing.Size(33, 25);
+            this.PriorityEstimGB.TabIndex = 106;
+            this.PriorityEstimGB.TabStop = false;
+            this.PriorityEstimGB.Visible = false;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(31, 61);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(52, 17);
+            this.label33.TabIndex = 60;
+            this.label33.Text = "Priority";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(193, 30);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(55, 17);
+            this.label35.TabIndex = 59;
+            this.label35.Text = "память";
+            // 
+            // accPriorityNUD
+            // 
+            this.accPriorityNUD.DecimalPlaces = 1;
+            this.accPriorityNUD.Location = new System.Drawing.Point(110, 59);
+            this.accPriorityNUD.Name = "accPriorityNUD";
+            this.accPriorityNUD.Size = new System.Drawing.Size(66, 22);
+            this.accPriorityNUD.TabIndex = 56;
+            this.accPriorityNUD.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(108, 30);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(68, 17);
+            this.label34.TabIndex = 58;
+            this.label34.Text = "точность";
+            // 
+            // memPriorityNUD
+            // 
+            this.memPriorityNUD.DecimalPlaces = 1;
+            this.memPriorityNUD.Location = new System.Drawing.Point(185, 59);
+            this.memPriorityNUD.Name = "memPriorityNUD";
+            this.memPriorityNUD.Size = new System.Drawing.Size(63, 22);
+            this.memPriorityNUD.TabIndex = 57;
+            this.memPriorityNUD.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
             // PercentEstimGB
             // 
             this.PercentEstimGB.Controls.Add(this.label37);
@@ -874,6 +956,25 @@
             0,
             0,
             0});
+            // 
+            // AssessFuncGB
+            // 
+            this.AssessFuncGB.Controls.Add(this.label70);
+            this.AssessFuncGB.Location = new System.Drawing.Point(189, 215);
+            this.AssessFuncGB.Name = "AssessFuncGB";
+            this.AssessFuncGB.Size = new System.Drawing.Size(38, 24);
+            this.AssessFuncGB.TabIndex = 107;
+            this.AssessFuncGB.TabStop = false;
+            this.AssessFuncGB.Visible = false;
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(75, 44);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(111, 17);
+            this.label70.TabIndex = 0;
+            this.label70.Text = "z = x + x(minY/y)";
             // 
             // networkNameTB
             // 
@@ -1118,55 +1219,11 @@
             this.label17.TabIndex = 0;
             this.label17.Text = "Размер популяции";
             // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(108, 30);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(68, 17);
-            this.label34.TabIndex = 58;
-            this.label34.Text = "точность";
-            // 
-            // accPriorityNUD
-            // 
-            this.accPriorityNUD.DecimalPlaces = 1;
-            this.accPriorityNUD.Location = new System.Drawing.Point(110, 59);
-            this.accPriorityNUD.Name = "accPriorityNUD";
-            this.accPriorityNUD.Size = new System.Drawing.Size(66, 22);
-            this.accPriorityNUD.TabIndex = 56;
-            this.accPriorityNUD.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
-            // memPriorityNUD
-            // 
-            this.memPriorityNUD.DecimalPlaces = 1;
-            this.memPriorityNUD.Location = new System.Drawing.Point(185, 59);
-            this.memPriorityNUD.Name = "memPriorityNUD";
-            this.memPriorityNUD.Size = new System.Drawing.Size(63, 22);
-            this.memPriorityNUD.TabIndex = 57;
-            this.memPriorityNUD.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(193, 30);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(55, 17);
-            this.label35.TabIndex = 59;
-            this.label35.Text = "память";
-            // 
             // createScriptsBtn
             // 
-            this.createScriptsBtn.Location = new System.Drawing.Point(1479, 492);
+            this.createScriptsBtn.Location = new System.Drawing.Point(1172, 488);
             this.createScriptsBtn.Name = "createScriptsBtn";
-            this.createScriptsBtn.Size = new System.Drawing.Size(84, 23);
+            this.createScriptsBtn.Size = new System.Drawing.Size(80, 23);
             this.createScriptsBtn.TabIndex = 72;
             this.createScriptsBtn.Text = "Create ";
             this.createScriptsBtn.UseVisualStyleBackColor = true;
@@ -1174,7 +1231,7 @@
             // 
             // testButton
             // 
-            this.testButton.Location = new System.Drawing.Point(1479, 460);
+            this.testButton.Location = new System.Drawing.Point(1261, 488);
             this.testButton.Name = "testButton";
             this.testButton.Size = new System.Drawing.Size(80, 23);
             this.testButton.TabIndex = 71;
@@ -1369,9 +1426,9 @@
             this.QueueGB.Controls.Add(this.trainQueryBtn);
             this.QueueGB.Controls.Add(this.pauseQueryBtn);
             this.QueueGB.Controls.Add(this.button3);
-            this.QueueGB.Location = new System.Drawing.Point(1157, 53);
+            this.QueueGB.Location = new System.Drawing.Point(1798, 842);
             this.QueueGB.Name = "QueueGB";
-            this.QueueGB.Size = new System.Drawing.Size(303, 468);
+            this.QueueGB.Size = new System.Drawing.Size(78, 98);
             this.QueueGB.TabIndex = 65;
             this.QueueGB.TabStop = false;
             // 
@@ -1424,7 +1481,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(1258, 29);
+            this.label32.Location = new System.Drawing.Point(1804, 822);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(66, 17);
             this.label32.TabIndex = 66;
@@ -1441,6 +1498,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1924, 28);
             this.menuStrip1.TabIndex = 68;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.Visible = false;
             // 
             // оПрограммеToolStripMenuItem
             // 
@@ -1539,7 +1597,7 @@
             // 
             this.GANModelGB.Controls.Add(this.label39);
             this.GANModelGB.Controls.Add(this.label30);
-            this.GANModelGB.Location = new System.Drawing.Point(1721, 170);
+            this.GANModelGB.Location = new System.Drawing.Point(1743, 170);
             this.GANModelGB.Name = "GANModelGB";
             this.GANModelGB.Size = new System.Drawing.Size(48, 40);
             this.GANModelGB.TabIndex = 74;
@@ -2096,7 +2154,7 @@
             // LSTMModelGB
             // 
             this.LSTMModelGB.Controls.Add(this.label40);
-            this.LSTMModelGB.Location = new System.Drawing.Point(1721, 77);
+            this.LSTMModelGB.Location = new System.Drawing.Point(1743, 77);
             this.LSTMModelGB.Name = "LSTMModelGB";
             this.LSTMModelGB.Size = new System.Drawing.Size(48, 40);
             this.LSTMModelGB.TabIndex = 75;
@@ -2115,7 +2173,7 @@
             // PercModelGB
             // 
             this.PercModelGB.Controls.Add(this.label41);
-            this.PercModelGB.Location = new System.Drawing.Point(1721, 124);
+            this.PercModelGB.Location = new System.Drawing.Point(1743, 125);
             this.PercModelGB.Name = "PercModelGB";
             this.PercModelGB.Size = new System.Drawing.Size(48, 40);
             this.PercModelGB.TabIndex = 76;
@@ -2136,7 +2194,7 @@
             this.convWithoutGenGB.Controls.Add(this.numericUpDown1);
             this.convWithoutGenGB.Controls.Add(this.trainConvWithout);
             this.convWithoutGenGB.Controls.Add(this.dataGridView2);
-            this.convWithoutGenGB.Location = new System.Drawing.Point(1783, 31);
+            this.convWithoutGenGB.Location = new System.Drawing.Point(1797, 31);
             this.convWithoutGenGB.Name = "convWithoutGenGB";
             this.convWithoutGenGB.Size = new System.Drawing.Size(48, 40);
             this.convWithoutGenGB.TabIndex = 77;
@@ -2322,7 +2380,7 @@
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(1500, 28);
+            this.label45.Location = new System.Drawing.Point(1718, 29);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(59, 17);
             this.label45.TabIndex = 84;
@@ -2353,7 +2411,7 @@
             // lstmWithoutGB
             // 
             this.lstmWithoutGB.Controls.Add(this.label47);
-            this.lstmWithoutGB.Location = new System.Drawing.Point(1783, 77);
+            this.lstmWithoutGB.Location = new System.Drawing.Point(1797, 77);
             this.lstmWithoutGB.Name = "lstmWithoutGB";
             this.lstmWithoutGB.Size = new System.Drawing.Size(48, 40);
             this.lstmWithoutGB.TabIndex = 87;
@@ -2372,7 +2430,7 @@
             // percWithoutGB
             // 
             this.percWithoutGB.Controls.Add(this.label48);
-            this.percWithoutGB.Location = new System.Drawing.Point(1783, 123);
+            this.percWithoutGB.Location = new System.Drawing.Point(1797, 123);
             this.percWithoutGB.Name = "percWithoutGB";
             this.percWithoutGB.Size = new System.Drawing.Size(48, 41);
             this.percWithoutGB.TabIndex = 88;
@@ -2391,7 +2449,7 @@
             // ganWithoutGB
             // 
             this.ganWithoutGB.Controls.Add(this.label49);
-            this.ganWithoutGB.Location = new System.Drawing.Point(1783, 170);
+            this.ganWithoutGB.Location = new System.Drawing.Point(1797, 170);
             this.ganWithoutGB.Name = "ganWithoutGB";
             this.ganWithoutGB.Size = new System.Drawing.Size(48, 40);
             this.ganWithoutGB.TabIndex = 89;
@@ -2447,7 +2505,7 @@
             this.UpdateGeneticsGB.Controls.Add(this.textBox5);
             this.UpdateGeneticsGB.Controls.Add(this.button4);
             this.UpdateGeneticsGB.Controls.Add(this.button2);
-            this.UpdateGeneticsGB.Location = new System.Drawing.Point(1721, 222);
+            this.UpdateGeneticsGB.Location = new System.Drawing.Point(1743, 222);
             this.UpdateGeneticsGB.Name = "UpdateGeneticsGB";
             this.UpdateGeneticsGB.Size = new System.Drawing.Size(48, 40);
             this.UpdateGeneticsGB.TabIndex = 91;
@@ -2909,47 +2967,146 @@
             this.accZG.TabIndex = 105;
             this.accZG.Visible = false;
             // 
-            // PriorityEstimGB
+            // callbacksGB
             // 
-            this.PriorityEstimGB.Controls.Add(this.label33);
-            this.PriorityEstimGB.Controls.Add(this.label35);
-            this.PriorityEstimGB.Controls.Add(this.accPriorityNUD);
-            this.PriorityEstimGB.Controls.Add(this.label34);
-            this.PriorityEstimGB.Controls.Add(this.memPriorityNUD);
-            this.PriorityEstimGB.Location = new System.Drawing.Point(236, 215);
-            this.PriorityEstimGB.Name = "PriorityEstimGB";
-            this.PriorityEstimGB.Size = new System.Drawing.Size(33, 25);
-            this.PriorityEstimGB.TabIndex = 106;
-            this.PriorityEstimGB.TabStop = false;
-            this.PriorityEstimGB.Visible = false;
+            this.callbacksGB.Controls.Add(this.checkBox5);
+            this.callbacksGB.Controls.Add(this.LRReducerChB);
+            this.callbacksGB.Controls.Add(this.LRShedulerChB);
+            this.callbacksGB.Controls.Add(this.earlyStopChB);
+            this.callbacksGB.Controls.Add(this.tensorboardChB);
+            this.callbacksGB.Controls.Add(this.modelCPChB);
+            this.callbacksGB.Location = new System.Drawing.Point(1172, 59);
+            this.callbacksGB.Name = "callbacksGB";
+            this.callbacksGB.Size = new System.Drawing.Size(277, 339);
+            this.callbacksGB.TabIndex = 106;
+            this.callbacksGB.TabStop = false;
             // 
-            // label33
+            // checkBox5
             // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(31, 61);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(52, 17);
-            this.label33.TabIndex = 60;
-            this.label33.Text = "Priority";
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(26, 178);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(98, 21);
+            this.checkBox5.TabIndex = 5;
+            this.checkBox5.Text = "checkBox5";
+            this.checkBox5.UseVisualStyleBackColor = true;
             // 
-            // AssessFuncGB
+            // LRReducerChB
             // 
-            this.AssessFuncGB.Controls.Add(this.label70);
-            this.AssessFuncGB.Location = new System.Drawing.Point(189, 215);
-            this.AssessFuncGB.Name = "AssessFuncGB";
-            this.AssessFuncGB.Size = new System.Drawing.Size(38, 24);
-            this.AssessFuncGB.TabIndex = 107;
-            this.AssessFuncGB.TabStop = false;
-            this.AssessFuncGB.Visible = false;
+            this.LRReducerChB.AutoSize = true;
+            this.LRReducerChB.Location = new System.Drawing.Point(26, 152);
+            this.LRReducerChB.Name = "LRReducerChB";
+            this.LRReducerChB.Size = new System.Drawing.Size(176, 21);
+            this.LRReducerChB.TabIndex = 4;
+            this.LRReducerChB.Text = "Reduce LR On Plateau";
+            this.LRReducerChB.UseVisualStyleBackColor = true;
             // 
-            // label70
+            // LRShedulerChB
             // 
-            this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(75, 44);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(111, 17);
-            this.label70.TabIndex = 0;
-            this.label70.Text = "z = x + x(minY/y)";
+            this.LRShedulerChB.AutoSize = true;
+            this.LRShedulerChB.Location = new System.Drawing.Point(26, 125);
+            this.LRShedulerChB.Name = "LRShedulerChB";
+            this.LRShedulerChB.Size = new System.Drawing.Size(188, 21);
+            this.LRShedulerChB.TabIndex = 3;
+            this.LRShedulerChB.Text = "Learning Rate Scheduler";
+            this.LRShedulerChB.UseVisualStyleBackColor = true;
+            // 
+            // earlyStopChB
+            // 
+            this.earlyStopChB.AutoSize = true;
+            this.earlyStopChB.Location = new System.Drawing.Point(26, 97);
+            this.earlyStopChB.Name = "earlyStopChB";
+            this.earlyStopChB.Size = new System.Drawing.Size(122, 21);
+            this.earlyStopChB.TabIndex = 2;
+            this.earlyStopChB.Text = "Early Stopping";
+            this.earlyStopChB.UseVisualStyleBackColor = true;
+            // 
+            // tensorboardChB
+            // 
+            this.tensorboardChB.AutoSize = true;
+            this.tensorboardChB.Location = new System.Drawing.Point(26, 70);
+            this.tensorboardChB.Name = "tensorboardChB";
+            this.tensorboardChB.Size = new System.Drawing.Size(117, 21);
+            this.tensorboardChB.TabIndex = 1;
+            this.tensorboardChB.Text = "Tensor Board";
+            this.tensorboardChB.UseVisualStyleBackColor = true;
+            // 
+            // modelCPChB
+            // 
+            this.modelCPChB.AutoSize = true;
+            this.modelCPChB.Location = new System.Drawing.Point(26, 47);
+            this.modelCPChB.Name = "modelCPChB";
+            this.modelCPChB.Size = new System.Drawing.Size(142, 21);
+            this.modelCPChB.TabIndex = 0;
+            this.modelCPChB.Text = "Model Checkpoint";
+            this.modelCPChB.UseVisualStyleBackColor = true;
+            // 
+            // TestTB1
+            // 
+            this.TestTB1.Location = new System.Drawing.Point(1620, 59);
+            this.TestTB1.Multiline = true;
+            this.TestTB1.Name = "TestTB1";
+            this.TestTB1.Size = new System.Drawing.Size(82, 46);
+            this.TestTB1.TabIndex = 107;
+            this.TestTB1.Visible = false;
+            // 
+            // TestTB2
+            // 
+            this.TestTB2.Location = new System.Drawing.Point(1620, 170);
+            this.TestTB2.Multiline = true;
+            this.TestTB2.Name = "TestTB2";
+            this.TestTB2.Size = new System.Drawing.Size(82, 40);
+            this.TestTB2.TabIndex = 108;
+            this.TestTB2.Visible = false;
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(1618, 32);
+            this.label69.Name = "label69";
+            this.label69.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label69.Size = new System.Drawing.Size(84, 17);
+            this.label69.TabIndex = 109;
+            this.label69.Text = "Without sort";
+            this.label69.Visible = false;
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(1620, 145);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(118, 17);
+            this.label71.TabIndex = 110;
+            this.label71.Text = "A = a + a *Pmin/P";
+            this.label71.Visible = false;
+            // 
+            // TestTB3
+            // 
+            this.TestTB3.Location = new System.Drawing.Point(1620, 280);
+            this.TestTB3.Multiline = true;
+            this.TestTB3.Name = "TestTB3";
+            this.TestTB3.Size = new System.Drawing.Size(82, 49);
+            this.TestTB3.TabIndex = 111;
+            this.TestTB3.Visible = false;
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(1632, 260);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(57, 17);
+            this.label72.TabIndex = 112;
+            this.label72.Text = "Segm A";
+            this.label72.Visible = false;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(1220, 434);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 113;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -2958,6 +3115,14 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.label72);
+            this.Controls.Add(this.TestTB3);
+            this.Controls.Add(this.label71);
+            this.Controls.Add(this.label69);
+            this.Controls.Add(this.TestTB2);
+            this.Controls.Add(this.TestTB1);
+            this.Controls.Add(this.callbacksGB);
             this.Controls.Add(this.accZG);
             this.Controls.Add(this.allTasksLabel);
             this.Controls.Add(this.createScriptsBtn);
@@ -3022,15 +3187,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.geneticEpochsNUD)).EndInit();
             this.geneticGB.ResumeLayout(false);
             this.geneticGB.PerformLayout();
+            this.PriorityEstimGB.ResumeLayout(false);
+            this.PriorityEstimGB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).EndInit();
             this.PercentEstimGB.ResumeLayout(false);
             this.PercentEstimGB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.percentNUD)).EndInit();
+            this.AssessFuncGB.ResumeLayout(false);
+            this.AssessFuncGB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mutateSelNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.crossSelNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.copySelNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popolationCountNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accPriorityNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memPriorityNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.learningEpochsNUD)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -3085,10 +3254,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            this.PriorityEstimGB.ResumeLayout(false);
-            this.PriorityEstimGB.PerformLayout();
-            this.AssessFuncGB.ResumeLayout(false);
-            this.AssessFuncGB.PerformLayout();
+            this.callbacksGB.ResumeLayout(false);
+            this.callbacksGB.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3333,6 +3500,20 @@
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.GroupBox AssessFuncGB;
         private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.GroupBox callbacksGB;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox LRReducerChB;
+        private System.Windows.Forms.CheckBox LRShedulerChB;
+        private System.Windows.Forms.CheckBox earlyStopChB;
+        private System.Windows.Forms.CheckBox tensorboardChB;
+        private System.Windows.Forms.CheckBox modelCPChB;
+        private System.Windows.Forms.TextBox TestTB1;
+        private System.Windows.Forms.TextBox TestTB2;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.TextBox TestTB3;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Button button6;
     }
 }
 

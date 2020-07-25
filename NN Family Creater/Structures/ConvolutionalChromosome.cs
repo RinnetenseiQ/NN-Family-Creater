@@ -171,7 +171,7 @@ namespace NN_Family_Creater
                 if (x.paramsCount == y.paramsCount) return 0;
                 return 1;
             }
-
+            
             if (x.accuracy > y.accuracy)
             {
                 paramPercent = (float)x.paramsCount / y.paramsCount;

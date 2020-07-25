@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.Security.Permissions;
+using System.Text;
 
 // ReSharper disable once CheckNamespace
 namespace NN_Family_Creater
@@ -116,6 +117,9 @@ namespace NN_Family_Creater
             List<String> lossFunctions = new List<string>();
             if (categorical_crossentropyChB.Checked) lossFunctions.Add("categorical_crossentropy");
 
+            List<int> callbacks_indexes = new List<int>();
+            if(modelCPChB.Checked) callbacks_indexes.Add(0);
+
 
             var nrp = new NetworkRandomParams(constSpeedChB.Checked, 
                                               new[] {float.Parse(minConstSpeedTB.Text, System.Globalization.CultureInfo.InvariantCulture),
@@ -138,7 +142,8 @@ namespace NN_Family_Creater
                                             denseDropoutChB.Checked,
                                             (int)denseDropoutNUD.Value);
             var gp = new GeneticProgramm(nrp, crp, drp, (int)geneticEpochsNUD.Value, new[] { (int)copySelNUD.Value, (int)crossSelNUD.Value, (int)mutateRateNUD.Value },
-                                        (int)popolationCountNUD.Value, (int)mutateRateNUD.Value, (float)accPriorityNUD.Value, (float)memPriorityNUD.Value);
+                                        (int)popolationCountNUD.Value, (int)mutateRateNUD.Value, (float)accPriorityNUD.Value, (float)memPriorityNUD.Value, 
+                                        EstimatorCB.SelectedIndex, (int)instance.percentNUD.Value);
 
             return gp;
         }
@@ -185,6 +190,8 @@ namespace NN_Family_Creater
                 instance.tempAccuracy = instance.tempParameters = 0;
                 instance.WriteAdds(0, i);
                 instance.UpdateAssessmentParams(instance.population[i], gp, 0);
+                File.AppendAllText(@"C:\keras\Directory\Assessment_Statistic.txt",
+                    instance.population[i].accuracy.ToString() + "_" + instance.population[i].paramsCount + Environment.NewLine);
                 if (instance.population[i].paramsCount > maxParams) maxParams = instance.population[i].paramsCount;
                 Support.DrawParamsGraph(instance.ParamsZedGraph, instance.population[i].accuracy, instance.population[i].paramsCount, maxParams);
                 Support.DrawAccGraph(instance.accZG, 0, instance.population[0]._gp._genEpochs, instance.population[i].accuracy);
@@ -195,7 +202,10 @@ namespace NN_Family_Creater
             {
                 Support.DrawAssesGraph(instance.AssesGenZedGraph, 0, instance.population[z]._gp._genEpochs, instance.population[z].assessment, z);
             }
-            instance.population.Sort(new ChromosomeComparer4((int)instance.percentNUD.Value));
+
+            instance.SortChromosome(instance.population, gp._assessmentIndex, gp._percent);
+            //instance.population = SortChromosome(instance.population, gp._assessmentIndex, gp._percent);
+            //instance.population.Sort(new ChromosomeComparer4((int)instance.percentNUD.Value));
             //instance.population.Sort(new ChromosomeComparer2());
             //instance.eliteChromosomes.Add(new ConvolutionalNetwork(instance.population[0]));
             instance.WriteConvGeneticOutput(0);
@@ -235,6 +245,8 @@ namespace NN_Family_Creater
                     instance.tempAccuracy = instance.tempParameters = 0;
                     instance.WriteAdds(i, n);
                     instance.UpdateAssessmentParams(instance.population[n], gp, i);
+                    File.AppendAllText(@"C:\keras\Directory\Assessment_Statistic.txt",
+                        instance.population[n].accuracy.ToString() + "_" + instance.population[n].paramsCount + Environment.NewLine);
                     if (instance.population[n].paramsCount > maxParams) maxParams = instance.population[n].paramsCount;
                     Support.DrawParamsGraph(instance.ParamsZedGraph, instance.population[n].accuracy, instance.population[n].paramsCount, maxParams);
                 }
@@ -245,7 +257,8 @@ namespace NN_Family_Creater
                     Support.DrawAssesGraph(instance.AssesGenZedGraph, i, instance.population[z]._gp._genEpochs, instance.population[z].assessment, z);
                 }
 
-                instance.population.Sort(new ChromosomeComparer4((int)instance.percentNUD.Value));
+                instance.SortChromosome(instance.population, gp._assessmentIndex, gp._percent);
+                //instance.population.Sort(new ChromosomeComparer4((int)instance.percentNUD.Value));
                 //population.Sort(new ChromosomeComparer((float)memPriorityNUD.Value, (float)accPriorityNUD.Value));
                 //instance.population.Sort(new ChromosomeComparer2());
                 //instance.eliteChromosomes.Add(new ConvolutionalNetwork(instance.population[0]));
@@ -262,7 +275,19 @@ namespace NN_Family_Creater
             image.Save(timeDirectory + @"\acc.png");
         }
 
-
+        public List<ConvolutionalChromosome> SortChromosome(List<ConvolutionalChromosome> poplist, int estimatorIndex, int percent)
+        {
+            switch (estimatorIndex)
+            {
+                case 0:
+                    poplist.Sort(new ChromosomeComparer4(percent));
+                    break;
+                case 1:
+                    poplist.Sort(new ChromosomeComparer2());
+                    break;
+            }
+            return poplist;
+        }
         
 
         public void WriteAdds(int epoch, int iter)
@@ -458,6 +483,9 @@ namespace NN_Family_Creater
             textBox9.ScrollBars = ScrollBars.Vertical;
             ErrorTB.ScrollBars = ScrollBars.Vertical;
             chrOutTB.ScrollBars = ScrollBars.Vertical;
+            TestTB1.ScrollBars = ScrollBars.Vertical;
+            TestTB2.ScrollBars = ScrollBars.Vertical;
+            TestTB3.ScrollBars = ScrollBars.Vertical;
             textBox9.ReadOnly = true;
             ErrorTB.ReadOnly = true;
             chrOutTB.ReadOnly = true;
@@ -645,43 +673,40 @@ namespace NN_Family_Creater
 
         private void testButton_Click(object sender, EventArgs e)
         {
-            textBox9.Clear();
-            List<Test> testlist = new List<Test>();
-            for (int i = 0; i < 10; i++)
+            List<string> stringList = new List<string>();
+            StreamReader f = new StreamReader(@"C:\keras\Directory\Assessment_Statistic.txt", Encoding.UTF8);
+            while (!f.EndOfStream)
             {
-                testlist.Add(new Test(random));
+                string s = f.ReadLine();
+                // что-нибудь делаем с прочитанной строкой s
+                stringList.Add(s);
             }
-            Test.UpdateAssses(testlist);
-            testlist.Sort(new TestComparer(25));
+            f.Close();
 
-            foreach (var iter in testlist)
+            List<Test> toSortList = new List<Test>();
+            List<Test> sortedList = new List<Test>(); 
+            List<Test> sortedList2 = new List<Test>(); 
+
+            foreach (var s in stringList) toSortList.Add(new Test(s));
+            foreach (var t in toSortList) sortedList.Add(new Test(t));
+            foreach (var t in toSortList) sortedList2.Add(new Test(t));
+            Test.UpdateAsses(sortedList);
+            Test.UpdateAsses(toSortList);
+            Test.UpdateAsses(sortedList2, 50);
+
+            sortedList.Sort(new TestComparer2());
+            sortedList2.Sort(new TestComparer2());
+            for (int i = 0; i < toSortList.Count; i++)
             {
-
-                textBox9.AppendText(iter.assessment.ToString() + " - " + iter.accuracy.ToString() + "  |   " + iter.paramsCount + Environment.NewLine);
+                TestTB1.AppendText(i + ": " + toSortList[i].accuracy + " | " + toSortList[i].paramsCount + " = " + toSortList[i].assessment + Environment.NewLine);
+                TestTB2.AppendText(i + ": " + sortedList[i].accuracy + " | " + sortedList[i].paramsCount + " = " + sortedList[i].assessment + Environment.NewLine);
+                TestTB3.AppendText(i + ": " + sortedList2[i].accuracy + " | " + sortedList2[i].paramsCount + " = " + sortedList2[i].assessment + Environment.NewLine);
             }
-
-            //List<Control> tempControlList = new List<Control>();
-            //tempControlList.Add(new TextBox());
-            //tempControlList.Add(new ProgressBar());
-            //tempControlList.Add(new Button());
-
-            //tempControlList[0].Size = new Size(100, 22);
-            //tempControlList[0].Location = new Point(3, 13 + 23*queueProgress.Count);
-
-            //tempControlList[1].Size = new Size(153, 23);
-            //tempControlList[1].Location = new Point(tempControlList[0].Location.X + tempControlList[0].Size.Width, 13 + 23 * queueProgress.Count);
-
-            //tempControlList[2].Size = new Size(29, 23);
-            //tempControlList[2].Location = new Point(tempControlList[1].Location.X + tempControlList[1].Size.Width, 13 + 23 * queueProgress.Count);
-
-            //queueProgress.Enqueue(tempControlList);
-
-            //for (int i = 0; i < 3; i++) QueueGB.Controls.Add(tempControlList[i]);
         }
 
         private void createScriptsBtn_Click(object sender, EventArgs e)
         {
-            
+ 
         }
 
         private void openModelsFolderBtn_Click(object sender, EventArgs e)

@@ -82,7 +82,7 @@ namespace NN_Family_Creater
             }
         }
 
-        public static void CreateConvBatFile(string scriptName, string scriptsPath, string datasetPath, string modelPath, string labelPath, string plotPath, string networkName, int epoch, int indexNumber, int mode)
+        public static void CreateConvBatFile(string scriptName, string scriptsPath, string datasetPath, string modelPath, string labelPath, string plotPath, string networkName, int epoch,/*AutonomicParams ap,*/ int indexNumber, int mode)
         {
             string modeDir = string.Empty;
             if (mode == 0) modeDir = @"\genetic\";
@@ -154,6 +154,9 @@ namespace NN_Family_Creater
 
             string init_lr = network.trainConstSpeed.ToString();
             init_lr = init_lr.Replace(",", ".");
+            string callbacks_str = "";
+            
+
             string code = "";
             for (int i = 0; i < network.filters.Count; i++)
             {

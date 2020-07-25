@@ -13,6 +13,8 @@ namespace NN_Family_Creater
         public int paramsCount;
         public float assessment;
 
+        
+
         public Test(Random random)
         {
             
@@ -20,7 +22,22 @@ namespace NN_Family_Creater
             paramsCount = random.Next(4000, 200000000);
         }
 
-        public static void UpdateAssses(List<Test> list)
+        public Test(string line)
+        {
+            List<string> listStrLineElements = new List<string>();
+            listStrLineElements = line.Split('_').ToList();
+            accuracy = Convert.ToSingle(listStrLineElements[0]);
+            paramsCount = Convert.ToInt32(listStrLineElements[1]);
+        }
+
+        public Test(Test t)
+        {
+            accuracy = t.accuracy;
+            paramsCount = t.paramsCount;
+            assessment = t.assessment;
+        }
+
+        public static void UpdateAsses(List<Test> list)
         {
             float minParamsCount = list[0].paramsCount; //локальная переменная для хранения минимальной памяти
 
@@ -39,9 +56,39 @@ namespace NN_Family_Creater
                 else list[i].assessment = list[i].accuracy + list[i].accuracy * (minParamsCount / list[i].paramsCount); // цикл расчета оценки
             }
         }
+
+        public static void UpdateAsses(List<Test> list, int threshold)
+        {
+            float minParamsCount = list[0].paramsCount; //локальная переменная для хранения минимальной памяти
+
+            for (int i = 1; i < list.Count; i++)
+            {
+                if (minParamsCount != 0)
+                {
+                    if (list[i].paramsCount < minParamsCount && list[i].paramsCount != 0) minParamsCount = list[i].paramsCount; // цикл поиска минимума
+                }
+
+            }
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].accuracy == 0 || list[i].paramsCount == 0) list[i].assessment = 0;
+                else if (list[i].accuracy * 100 < threshold) list[i].assessment = list[i].accuracy;
+                else list[i].assessment = list[i].accuracy + list[i].accuracy * (minParamsCount / list[i].paramsCount); // цикл расчета оценки
+            }
+        }
     }
 
-    
+    class TestComparer2 : IComparer<Test>
+    {
+        public int Compare(Test x, Test y)
+        {
+            if (x.assessment - y.assessment > 0) return -1;
+            if (x.assessment - y.assessment < 0) return 1;
+            return 0; 
+        }
+    }
+
 
     class TestComparer : IComparer<Test>
     {

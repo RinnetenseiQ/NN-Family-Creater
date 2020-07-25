@@ -17,9 +17,13 @@ namespace NN_Family_Creater
         public readonly int _mutateRate;
         public readonly float _accPriority;
         public readonly float _paramPriority;
+        public readonly int _assessmentIndex;
+        public readonly int _percent;
+       
 
         public GeneticProgramm(NetworkRandomParams nrp, ConvRandomParams crp, DenseRandomParams drp,
-                               int genEpochs, int[] selection, int populationSize, int mutateRate, float accPriority, float paramPriority)
+                               int genEpochs, int[] selection, int populationSize, int mutateRate, 
+                               float accPriority, float paramPriority, int assessmentIndex, int percent)
         {
             _nrp = nrp;
             _crp = crp;
@@ -30,6 +34,9 @@ namespace NN_Family_Creater
             _mutateRate = mutateRate;
             _accPriority = accPriority;
             _paramPriority = paramPriority;
+            _assessmentIndex = assessmentIndex;
+            _percent = percent;
+         
         }
     }
 }
